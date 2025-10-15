@@ -26,20 +26,36 @@
       border-radius: 16px;
       box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
       transition: 0.3s;
+      height: 140px; /* THẺ NHỎ GỌN */
+      min-height: 140px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 0.8rem !important; /* GIẢM Ô TRẮNG BÊN TRONG */
     }
     .subject-card:hover {
       transform: translateY(-5px);
       box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
     }
+    .subject-card h5 {
+      font-size: 1.2rem; /* CHỮ VỪA PHẢI */
+      margin-bottom: 0.5rem; /* GIẢM KHOẢNG CÁCH */
+      font-weight: 600;
+    }
     .btn-test {
       background-color: #007bff;
       color: white;
-      border-radius: 12px;
+      border-radius: 10px;
       border: none;
       transition: 0.3s;
+      font-size: 1rem;
+      padding: 6px 14px; /* NÚT NHỎ GỌN */
+      font-weight: 500;
+      margin-top: 0.3rem; /* GIẢM KHOẢNG CÁCH TRÊN NÚT */
     }
     .btn-test:hover {
       background-color: #0056b3;
+      transform: scale(1.05);
     }
     footer {
       position: fixed;
@@ -72,13 +88,25 @@
       vertical-align: middle;
     }
 
-/* Giảm riêng cột đầu tiên (cột Tiết) */
+    /* Giảm riêng cột đầu tiên (cột Tiết) */
     .table th:first-child,
     .table td:first-child {
-      width: 80px; /* tùy, có thể chỉnh 50–70px theo ý mày */
+      width: 80px;
     }
 
+    /* Đảm bảo các cột có kích thước đồng đều */
+    .col-md-4 {
+      margin-bottom: 1rem;
+      flex: 0 0 30%; /* ← THÊM DÒNG NÀY - GIẢM CHIỀU NGANG */
+      max-width: 30%; /* ← THÊM DÒNG NÀY */
+    }
 
+    /* HOẶC MUỐN NHỎ HƠN NỮA */
+    .col-md-4 {
+      margin-bottom: 1rem;
+      flex: 0 0 28%; /* ← NHỎ HƠN */
+      max-width: 28%; /* ← NHỎ HƠN */
+    }
   </style>
 </head>
 <body>
@@ -102,47 +130,60 @@
   <!-- Trang chủ -->
   <div id="home" class="container">
     <h1>12AT1</h1>
-    <div class="row g-4">
+    <div class="row g-4 justify-content-center">
       <div class="col-md-4">
-        <div class="card subject-card p-4 text-center">
+        <div class="card subject-card text-center">
           <h5>ĐỊA LÍ FULL</h5>
-          <a href="https://azota.vn/de-thi/udtjm5" class="btn btn-test mt-3">AZOTA</a>
+          <a href="https://azota.vn/de-thi/udtjm5" class="btn btn-test">AZOTA</a>
         </div>
       </div>
       <div class="col-md-4">
-        <div class="card subject-card p-4 text-center">
+        <div class="card subject-card text-center">
           <h5>ĐỊA TRẮC NGHIỆM</h5>
-          <a href="https://azota.vn/de-thi/vdbmen" class="btn btn-test mt-3">AZOTA</a>
+          <a href="https://azota.vn/de-thi/vdbmen" class="btn btn-test">AZOTA</a>
         </div>
       </div>
       <div class="col-md-4">
-        <div class="card subject-card p-4 text-center">
+        <div class="card subject-card text-center">
           <h5>ĐỊA ĐÚNG SAI</h5>
-          <a href="https://azota.vn/de-thi/dpqhqm" class="btn btn-test mt-3">AZOTA</a>
+          <a href="https://azota.vn/de-thi/dpqhqm" class="btn btn-test">AZOTA</a>
         </div>
       </div>
       <div class="col-md-4">
-        <div class="card subject-card p-4 text-center">
+        <div class="card subject-card text-center">
           <h5>TIN HỌC</h5>
-          <a href="https://azota.vn/de-thi/xen50e" class="btn btn-test mt-3">AZOTA</a>
+          <a href="https://azota.vn/de-thi/xen50e" class="btn btn-test">AZOTA</a>
         </div>
       </div>
       <div class="col-md-4">
-        <div class="card subject-card p-4 text-center">
+        <div class="card subject-card text-center">
           <h5>VẬT LÝ</h5>
-          <a href="https://azota.vn/de-thi/ytrjbv" class="btn btn-test mt-3">AZOTA</a>
+          <a href="https://azota.vn/de-thi/ytrjbv" class="btn btn-test">AZOTA</a>
         </div>
       </div>
       <div class="col-md-4">
-        <div class="card subject-card p-4 text-center">
+        <div class="card subject-card text-center">
           <h5>VẬT LÍ TRẮC NGHIỆM</h5>
-          <a href="https://azota.vn/de-thi/siqx3v" class="btn btn-test mt-3">AZOTA</a>
+          <a href="https://azota.vn/de-thi/siqx3v" class="btn btn-test">AZOTA</a>
         </div>
       </div>
       <div class="col-md-4">
-        <div class="card subject-card p-4 text-center">
-          <h5>HĐTN</h5>
-          <a href="https://azota.vn/de-thi/0mjwoj" class="btn btn-test mt-3">AZOTA</a>
+        <div class="card subject-card text-center">
+          <h5>HĐTN FULL</h5>
+          <a href="https://azota.vn/de-thi/jmfx34" class="btn btn-test">AZOTA</a>
+        </div>
+      </div>
+      <!-- THÊM 2 MÔN MỚI VÀO ĐÂY -->
+      <div class="col-md-4">
+        <div class="card subject-card text-center">
+          <h5>HĐTN CĐ 1</h5>
+          <a href="https://azota.vn/de-thi/0mjwoj" class="btn btn-test">AZOTA</a>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="card subject-card text-center">
+          <h5>HĐTN CĐ 2</h5>
+          <a href="https://azota.vn/de-thi/y48taj" class="btn btn-test">AZOTA</a>
         </div>
       </div>
     </div>
