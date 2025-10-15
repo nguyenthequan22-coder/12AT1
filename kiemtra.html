@@ -9,117 +9,34 @@
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;600&display=swap" rel="stylesheet">
   <link rel="icon" type="image/png" href="favicon.png?v=2">
-  <style>
+<style>
     body {
-      font-family: 'Be Vietnam Pro', sans-serif;
-      background-color: #f8fbff;
-      color: #0a3d62;
-      padding-top: 80px;
-      padding-bottom: 80px; /* TĂNG PADDING BOTTOM ĐỂ KHÔNG BỊ FOOTER ĐÈ */
+        font-family: 'Be Vietnam Pro', sans-serif;
+        background-color: #f8fbff;
+        color: #0a3d62;
+        padding-top: 80px; /* GIẢM XUỐNG CÒN 70px hoặc 60px */
+        padding-bottom: 60px;
     }
-    h1, h2 {
-      font-weight: 600;
-      text-align: center;
-      margin-bottom: 30px;
-      color: #007bff;
-    }
-    footer {
-      position: fixed;
-      bottom: 0;
-      left: 0;
-      width: 100%;
-      text-align: center;
-      background: #111;
-      color: #aaa;
-      font-size: 14px;
-      padding: 10px 0;
-      border-top: 1px solid #333;
-      z-index: 1000;
-    }
+
+    /* HOẶC SỬA CÁCH NÀY CHUẨN HƠN */
     .navbar {
-      background-color: #007bff;
-    }
-    .navbar-brand, .nav-link {
-      color: white !important;
-      font-weight: 500;
-    }
-    .table {
-      table-layout: fixed;
-      width: 100%;
-      text-align: center;
-      vertical-align: middle;
-    }
-    .table th {
-      background-color: #007bff;
-      color: white;
-    }
-    .section {
-      margin-bottom: 50px;
+        background-color: #007bff;
+        height: 60px; /* CỐ ĐỊNH CHIỀU CAO NAVBAR */
     }
     
-    /* FIX CHỮ TRÀN TRONG Ô */
-    .table td {
-      word-wrap: break-word;
-      overflow-wrap: break-word;
-      white-space: normal !important; /* CHO PHÉP XUỐNG DÒNG */
-      padding: 10px 5px;
-    }
-    
-    .table th {
-      white-space: nowrap;
-      padding: 12px 5px;
+    body {
+        font-family: 'Be Vietnam Pro', sans-serif;
+        background-color: #f8fbff;
+        color: #0a3d62;
+        padding-top: 60px; /* BẰNG VỚI CHIỀU CAO NAVBAR */
+        padding-bottom: 60px;
     }
 
-    /* RESPONSIVE CHO MOBILE */
-    @media (max-width: 768px) {
-      body {
-        padding-top: 70px;
-        padding-bottom: 70px; /* GIẢM PADDING TRÊN MOBILE */
-      }
-      
-      h1, h2 {
-        font-size: 1.5rem;
-        margin-bottom: 20px;
-      }
-      
-      .table-responsive {
-        overflow-x: auto;
-        -webkit-overflow-scrolling: touch;
-        margin-bottom: 20px;
-      }
-      
-      .table {
-        font-size: 0.8rem;
-        min-width: 600px;
-      }
-      
-      .table th,
-      .table td {
-        padding: 8px 4px;
-      }
-      
-      /* ĐẢM BẢO CHỮ XUỐNG DÒNG TRÊN MOBILE */
-      .table td {
-        word-break: break-word;
-        line-height: 1.3;
-      }
-      
-      .container {
-        padding-left: 10px;
-        padding-right: 10px;
-      }
-      
-      footer {
-        padding: 8px 0;
-        font-size: 12px;
-      }
-    }
-
-    /* THÊM KHOẢNG CÁCH CUỐI TRANG */
+    /* ĐẢM BẢO CONTENT KHÔNG BỊ CHE */
     .container {
-      padding-bottom: 20px;
+        margin-top: 0;
     }
-  </style>
+</style>
 </head>
 <body>
   <!-- Thanh menu -->
