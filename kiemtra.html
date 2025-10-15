@@ -14,9 +14,11 @@
       font-family: 'Be Vietnam Pro', sans-serif;
       background-color: #f8fbff;
       color: #0a3d62;
-      padding-top: 70px; /* GIẢM XUỐNG */
-      padding-bottom: 60px;
+      padding-top: 70px;
+      padding-bottom: 100px; /* TĂNG LÊN ĐỂ KHÔNG BỊ FOOTER CHE */
       margin: 0;
+      min-height: 100vh;
+      position: relative;
     }
     
     .navbar {
@@ -36,7 +38,7 @@
       margin-bottom: 30px;
       color: #007bff;
       margin-top: 0;
-      padding-top: 0;
+      padding-top: 20px;
     }
     
     footer {
@@ -48,8 +50,10 @@
       background: #111;
       color: #aaa;
       font-size: 14px;
-      padding: 10px 0;
+      padding: 12px 0;
       border-top: 1px solid #333;
+      height: 50px;
+      z-index: 1000;
     }
     
     .table {
@@ -67,7 +71,8 @@
     }
     
     .section {
-      margin-bottom: 50px;
+      margin-bottom: 60px; /* TĂNG KHOẢNG CÁCH GIỮA CÁC SECTION */
+      padding-bottom: 20px;
     }
     
     .table th:first-child, .table td:first-child {
@@ -78,17 +83,19 @@
     @media (max-width: 768px) {
       body {
         padding-top: 60px;
-        padding-bottom: 50px;
+        padding-bottom: 120px; /* TĂNG HƠN TRÊN MOBILE */
       }
       
       h1, h2 {
         font-size: 1.5rem;
         margin-bottom: 20px;
+        padding-top: 10px;
       }
       
       .table-responsive {
         overflow-x: auto;
         -webkit-overflow-scrolling: touch;
+        margin-bottom: 20px;
       }
       
       .table {
@@ -101,12 +108,22 @@
         padding: 8px 4px;
         white-space: nowrap;
       }
+      
+      .section {
+        margin-bottom: 40px;
+      }
+      
+      footer {
+        height: 45px;
+        padding: 10px 0;
+      }
     }
 
     /* ĐẢM BẢO CONTENT KHÔNG BỊ CHE */
     .container {
       margin-top: 0;
       padding-top: 0;
+      padding-bottom: 60px; /* THÊM PADDING BOTTOM */
     }
     
     /* FIX LỖI NAVBAR ĐÈ LÊN CONTENT */
@@ -117,6 +134,11 @@
     .container {
       position: relative;
       z-index: 1;
+    }
+    
+    /* ĐẢM BẢO NỘI DUNG CUỐI CÙNG KHÔNG BỊ CHE */
+    .section:last-child {
+      margin-bottom: 80px;
     }
   </style>
 </head>
