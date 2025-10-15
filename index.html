@@ -26,20 +26,20 @@
       border-radius: 16px;
       box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
       transition: 0.3s;
-      height: 140px; /* THẺ NHỎ GỌN */
+      height: 140px;
       min-height: 140px;
       display: flex;
       flex-direction: column;
       justify-content: center;
-      padding: 0.8rem !important; /* GIẢM Ô TRẮNG BÊN TRONG */
+      padding: 0.8rem !important;
     }
     .subject-card:hover {
       transform: translateY(-5px);
       box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
     }
     .subject-card h5 {
-      font-size: 1.2rem; /* CHỮ VỪA PHẢI */
-      margin-bottom: 0.5rem; /* GIẢM KHOẢNG CÁCH */
+      font-size: 1.2rem;
+      margin-bottom: 0.5rem;
       font-weight: 600;
     }
     .btn-test {
@@ -49,9 +49,9 @@
       border: none;
       transition: 0.3s;
       font-size: 1rem;
-      padding: 6px 14px; /* NÚT NHỎ GỌN */
+      padding: 6px 14px;
       font-weight: 500;
-      margin-top: 0.3rem; /* GIẢM KHOẢNG CÁCH TRÊN NÚT */
+      margin-top: 0.3rem;
     }
     .btn-test:hover {
       background-color: #0056b3;
@@ -94,18 +94,72 @@
       width: 80px;
     }
 
+    /* RESPONSIVE CHO MOBILE */
+    @media (max-width: 768px) {
+      body {
+        padding-top: 70px;
+        padding-bottom: 50px;
+      }
+      
+      h1 {
+        font-size: 1.8rem;
+        margin-bottom: 30px;
+      }
+      
+      .col-md-4 {
+        flex: 0 0 100% !important; /* 1 CỘT TRÊN MOBILE */
+        max-width: 100% !important;
+        margin-bottom: 1rem;
+      }
+      
+      .subject-card {
+        height: 120px; /* THẺ NHỎ HƠN TRÊN MOBILE */
+        min-height: 120px;
+        padding: 0.6rem !important;
+        margin: 0 10px; /* THÊM KHOẢNG CÁCH 2 BÊN */
+      }
+      
+      .subject-card h5 {
+        font-size: 1.1rem; /* CHỮ NHỎ HƠN */
+        margin-bottom: 0.4rem;
+      }
+      
+      .btn-test {
+        font-size: 0.9rem;
+        padding: 5px 12px;
+      }
+      
+      .row.g-4 {
+        margin: 0 -5px; /* CÂN CHỈNH KHOẢNG CÁCH */
+      }
+    }
+
+    /* RESPONSIVE CHO TABLET */
+    @media (min-width: 769px) and (max-width: 1024px) {
+      .col-md-4 {
+        flex: 0 0 50% !important; /* 2 CỘT TRÊN TABLET */
+        max-width: 50% !important;
+      }
+    }
+
+    /* DESKTOP */
+    @media (min-width: 1025px) {
+      .col-md-4 {
+        flex: 0 0 30% !important; /* 3 CỘT TRÊN DESKTOP */
+        max-width: 30% !important;
+      }
+    }
+
     /* Đảm bảo các cột có kích thước đồng đều */
     .col-md-4 {
       margin-bottom: 1rem;
-      flex: 0 0 30%; /* ← THÊM DÒNG NÀY - GIẢM CHIỀU NGANG */
-      max-width: 30%; /* ← THÊM DÒNG NÀY */
+      display: flex;
+      justify-content: center;
     }
-
-    /* HOẶC MUỐN NHỎ HƠN NỮA */
-    .col-md-4 {
-      margin-bottom: 1rem;
-      flex: 0 0 28%; /* ← NHỎ HƠN */
-      max-width: 28%; /* ← NHỎ HƠN */
+    
+    .subject-card {
+      width: 100%;
+      max-width: 300px; /* GIỚI HẠN CHIỀU RỘNG TỐI ĐA */
     }
   </style>
 </head>
@@ -173,7 +227,6 @@
           <a href="https://azota.vn/de-thi/jmfx34" class="btn btn-test">AZOTA</a>
         </div>
       </div>
-      <!-- THÊM 2 MÔN MỚI VÀO ĐÂY -->
       <div class="col-md-4">
         <div class="card subject-card text-center">
           <h5>HĐTN CĐ 1</h5>
