@@ -57,7 +57,7 @@
       width: 80px;
     }
 
-    /* RESPONSIVE CHO MOBILE */
+    /* RESPONSIVE CHO MOBILE - FIX TRÀN VIỀN */
     @media (max-width: 768px) {
       body {
         padding-top: 70px;
@@ -72,17 +72,39 @@
       .table-responsive {
         overflow-x: auto;
         -webkit-overflow-scrolling: touch;
+        margin: 0 -15px; /* BÙ LẠI PADDING CỦA CONTAINER */
+        padding: 0 15px; /* GIỮ NỘI DUNG KHÔNG BỊ SÁT VIỀN */
       }
       
       .table {
-        font-size: 0.9rem;
-        min-width: 600px;
+        font-size: 0.85rem;
+        min-width: 650px; /* ĐỦ RỘNG ĐỂ CHỨA BẢNG */
+        width: auto;
+        margin: 0 auto;
       }
       
       .table th,
       .table td {
-        padding: 8px 4px;
+        padding: 10px 8px;
         white-space: nowrap;
+        border: 1px solid #dee2e6;
+      }
+      
+      /* ĐẢM BẢO BẢNG KHÔNG BỊ TRÀN RA NGOÀI CONTAINER */
+      .container {
+        overflow: hidden;
+      }
+      
+      .section {
+        margin-bottom: 40px;
+      }
+    }
+
+    /* FIX CHO BẢNG THỨ 2 */
+    @media (max-width: 768px) {
+      .table.table-bordered.text-center {
+        min-width: 580px;
+        font-size: 0.9rem;
       }
     }
   </style>
@@ -112,10 +134,10 @@
         <table class="table table-bordered">
           <thead>
             <tr>
-              <th>Ngày</th>
-              <th>Môn</th>
-              <th>Hình thức</th>
-              <th>Ghi chú</th>
+              <th style="width: 25%">Ngày</th>
+              <th style="width: 20%">Môn</th>
+              <th style="width: 30%">Hình thức</th>
+              <th style="width: 25%">Ghi chú</th>
             </tr>
           </thead>
           <tbody>
@@ -178,12 +200,12 @@
         <table class="table table-bordered text-center align-middle">
           <thead class="table-primary">
             <tr>
-              <th>Tiết</th>
-              <th>Thứ 2</th>
-              <th>Thứ 3</th>
-              <th>Thứ 4</th>
-              <th>Thứ 5</th>
-              <th>Thứ 6</th>
+              <th style="width: 15%">Tiết</th>
+              <th style="width: 17%">Thứ 2</th>
+              <th style="width: 17%">Thứ 3</th>
+              <th style="width: 17%">Thứ 4</th>
+              <th style="width: 17%">Thứ 5</th>
+              <th style="width: 17%">Thứ 6</th>
             </tr>
           </thead>
           <tbody>
