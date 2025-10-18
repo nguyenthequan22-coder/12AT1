@@ -8,13 +8,64 @@
   <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;600&display=swap" rel="stylesheet">
   <link rel="icon" type="image/png" href="favicon.png?v=2">
   <style>
+    /* Loading Screen */
+    #loading-screen {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(135deg, #e91e63, #ad1457);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      z-index: 9999;
+      color: white;
+      font-family: 'Be Vietnam Pro', sans-serif;
+    }
+    
+    .loading-spinner {
+      width: 60px;
+      height: 60px;
+      border: 4px solid rgba(255, 255, 255, 0.3);
+      border-radius: 50%;
+      border-top: 4px solid white;
+      animation: spin 1s linear infinite;
+      margin-bottom: 20px;
+    }
+    
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+    
+    .loading-text {
+      font-size: 1.3rem;
+      font-weight: 600;
+      margin-bottom: 10px;
+    }
+    
+    .loading-subtext {
+      font-size: 1rem;
+      opacity: 0.8;
+    }
+
+    /* Ẩn toàn bộ nội dung web ban đầu */
     body {
       font-family: 'Be Vietnam Pro', sans-serif;
       background: linear-gradient(135deg, #fff9f9, #fff0f0);
       color: #5d4037;
       padding-top: 80px;
       padding-bottom: 60px;
+      opacity: 0;
+      transition: opacity 0.5s ease-in-out;
     }
+    
+    body.loaded {
+      opacity: 1;
+    }
+    
     h1 {
       font-weight: 600;
       text-align: center;
@@ -337,6 +388,13 @@
   </style>
 </head>
 <body>
+  <!-- Loading Screen -->
+  <div id="loading-screen">
+    <div class="loading-spinner"></div>
+    <div class="loading-text">12AT1 - Chào Mừng 20/10</div>
+    <div class="loading-subtext">Đang tải trang...</div>
+  </div>
+
   <!-- Popup thông báo -->
   <div id="popup" class="popup-overlay" style="display: none;">
     <div class="popup-content">
@@ -383,7 +441,7 @@
   </div>
 
   <!-- Trang chủ -->
-  <div id="home" class="container">
+<div id="home" class="container">
     <div class="row g-4 justify-content-center">
       <div class="col-md-4">
         <div class="card subject-card text-center">
@@ -441,10 +499,32 @@
       </div>
       <div class="col-md-4">
         <div class="card subject-card text-center">
+          <h5>HÓA FULL</h5>
+          <a href="https://azota.vn/de-thi/f28hvi" class="btn btn-test">AZOTA</a>
+        </div>
+      </div>
+
+      <!-- THÊM 3 MÔN MỚI -->
+      <div class="col-md-4">
+        <div class="card subject-card text-center">
+          <h5>HÓA TRẮC NGHIỆM</h5>
+          <a href="https://azota.vn/de-thi/7idtt5" class="btn btn-test">AZOTA</a>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="card subject-card text-center">
+          <h5>HÓA ĐÚNG SAI</h5>
+          <a href="https://azota.vn/de-thi/1y9g7o" class="btn btn-test">AZOTA</a>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="card subject-card text-center">
           <h5>TIN HỌC</h5>
           <a href="https://azota.vn/de-thi/xen50e" class="btn btn-test">AZOTA</a>
         </div>
       </div>
+      <!-- KẾT THÚC THÊM 3 MÔN MỚI -->
+      
     </div>
   </div>
 
@@ -481,14 +561,22 @@
     // Biến để kiểm tra xem có phải truy cập từ bên ngoài không
     let isFirstLoad = true;
 
-    // Hiển thị popup khi trang load (chỉ khi vào từ bên ngoài)
+    // Hiển thị loading screen khi trang load
     document.addEventListener('DOMContentLoaded', function() {
-      // Kiểm tra nếu là lần đầu load trang (truy cập từ bên ngoài)
-      if (isFirstLoad && !sessionStorage.getItem('fromInternal')) {
-        document.getElementById('popup').style.display = 'flex';
-      }
-      sessionStorage.removeItem('fromInternal'); // Xóa sau khi dùng
-      checkAndShowTKB();
+      // Hiển thị loading screen trong 2 giây
+      setTimeout(function() {
+        // Ẩn loading screen
+        document.getElementById('loading-screen').style.display = 'none';
+        // Hiển thị nội dung web với hiệu ứng fade in
+        document.body.classList.add('loaded');
+        
+        // Kiểm tra nếu là lần đầu load trang (truy cập từ bên ngoài)
+        if (isFirstLoad && !sessionStorage.getItem('fromInternal')) {
+          document.getElementById('popup').style.display = 'flex';
+        }
+        sessionStorage.removeItem('fromInternal'); // Xóa sau khi dùng
+        checkAndShowTKB();
+      }, 2000); // 2 giây
     });
 
     // Đánh dấu là chuyển trang nội bộ
