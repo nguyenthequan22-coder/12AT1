@@ -8,64 +8,13 @@
   <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;600&display=swap" rel="stylesheet">
   <link rel="icon" type="image/png" href="favicon.png?v=2">
   <style>
-    /* Loading Screen */
-    #loading-screen {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: linear-gradient(135deg, #e91e63, #ad1457);
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      z-index: 9999;
-      color: white;
-      font-family: 'Be Vietnam Pro', sans-serif;
-    }
-    
-    .loading-spinner {
-      width: 60px;
-      height: 60px;
-      border: 4px solid rgba(255, 255, 255, 0.3);
-      border-radius: 50%;
-      border-top: 4px solid white;
-      animation: spin 1s linear infinite;
-      margin-bottom: 20px;
-    }
-    
-    @keyframes spin {
-      0% { transform: rotate(0deg); }
-      100% { transform: rotate(360deg); }
-    }
-    
-    .loading-text {
-      font-size: 1.3rem;
-      font-weight: 600;
-      margin-bottom: 10px;
-    }
-    
-    .loading-subtext {
-      font-size: 1rem;
-      opacity: 0.8;
-    }
-
-    /* Ẩn toàn bộ nội dung web ban đầu */
     body {
       font-family: 'Be Vietnam Pro', sans-serif;
       background: linear-gradient(135deg, #fff9f9, #fff0f0);
       color: #5d4037;
       padding-top: 80px;
       padding-bottom: 60px;
-      opacity: 0;
-      transition: opacity 0.5s ease-in-out;
     }
-    
-    body.loaded {
-      opacity: 1;
-    }
-    
     h1 {
       font-weight: 600;
       text-align: center;
@@ -89,7 +38,7 @@
       overflow: hidden;
     }
     .subject-card::before {
-      content: "💐";
+      content: "🌸";
       position: absolute;
       top: 5px;
       right: 10px;
@@ -107,7 +56,7 @@
       color: #5d4037;
     }
     .btn-test {
-      background: linear-gradient(135deg, #e91e63, #ad1457);
+      background: linear-gradient(135deg, #d32f2f, #f44336);
       color: white;
       border-radius: 10px;
       border: none;
@@ -116,12 +65,12 @@
       padding: 6px 14px;
       font-weight: 500;
       margin-top: 0.3rem;
-      box-shadow: 0 2px 4px rgba(233, 30, 99, 0.3);
+      box-shadow: 0 2px 4px rgba(211, 47, 47, 0.3);
     }
     .btn-test:hover {
-      background: linear-gradient(135deg, #c2185b, #880e4f);
+      background: linear-gradient(135deg, #b71c1c, #d32f2f);
       transform: scale(1.05);
-      box-shadow: 0 4px 8px rgba(233, 30, 99, 0.4);
+      box-shadow: 0 4px 8px rgba(211, 47, 47, 0.4);
       color: white;
     }
     footer {
@@ -130,15 +79,15 @@
       left: 0;
       width: 100%;
       text-align: center;
-      background: #ff3863;
+      background: #5d4037;
       color: #ffccbc;
       font-size: 14px;
       padding: 10px 0;
       border-top: 1px solid #8d6e63;
     }
     .navbar {
-      background: linear-gradient(135deg, #e91e63, #ad1457);
-      box-shadow: 0 2px 10px rgba(233, 30, 99, 0.3);
+      background: linear-gradient(135deg, #d32f2f, #f44336);
+      box-shadow: 0 2px 10px rgba(211, 47, 47, 0.3);
     }
     .navbar-brand, .nav-link {
       color: white !important;
@@ -163,7 +112,7 @@
       border-color: #e0e0e0;
     }
     .table th {
-      background: linear-gradient(135deg, #e91e63, #ad1457);
+      background: linear-gradient(135deg, #d32f2f, #f44336);
       color: white;
       font-weight: 600;
     }
@@ -182,14 +131,14 @@
       font-weight: 600;
     }
 
-    /* Header đặc biệt cho 20/10 */
+    /* Header đặc biệt cho 20/11 */
     .special-header {
-      background: linear-gradient(135deg, #e91e63, #ad1457);
+      background: linear-gradient(135deg, #d32f2f, #f44336);
       color: white;
       padding: 20px 0;
       border-radius: 0 0 20px 20px;
       margin-bottom: 30px;
-      box-shadow: 0 4px 12px rgba(233, 30, 99, 0.3);
+      box-shadow: 0 4px 12px rgba(211, 47, 47, 0.3);
     }
     .special-header h1 {
       color: white;
@@ -223,7 +172,7 @@
       width: 90%;
       text-align: center;
       position: relative;
-      border: 3px solid #e91e63;
+      border: 3px solid #d32f2f;
     }
     .popup-close {
       position: absolute;
@@ -231,17 +180,17 @@
       right: 15px;
       font-size: 24px;
       cursor: pointer;
-      color: #e91e63;
+      color: #d32f2f;
       font-weight: bold;
       background: none;
       border: none;
     }
     .popup-close:hover {
-      color: #ad1457;
+      color: #b71c1c;
       transform: scale(1.1);
     }
     .popup-title {
-      color: #e91e63;
+      color: #d32f2f;
       font-size: 1.5rem;
       font-weight: 600;
       margin-bottom: 15px;
@@ -263,7 +212,7 @@
       margin-top: 20px;
     }
     .btn-ok {
-      background: linear-gradient(135deg, #e91e63, #ad1457);
+      background: linear-gradient(135deg, #d32f2f, #f44336);
       color: white;
       border: none;
       padding: 10px 30px;
@@ -271,12 +220,12 @@
       font-weight: 600;
       cursor: pointer;
       transition: 0.3s;
-      box-shadow: 0 4px 8px rgba(233, 30, 99, 0.3);
+      box-shadow: 0 4px 8px rgba(211, 47, 47, 0.3);
     }
     .btn-ok:hover {
-      background: linear-gradient(135deg, #c2185b, #880e4f);
+      background: linear-gradient(135deg, #b71c1c, #d32f2f);
       transform: scale(1.05);
-      box-shadow: 0 6px 12px rgba(233, 30, 99, 0.4);
+      box-shadow: 0 6px 12px rgba(211, 47, 47, 0.4);
     }
 
     /* RESPONSIVE CHO MOBILE */
@@ -388,13 +337,6 @@
   </style>
 </head>
 <body>
-  <!-- Loading Screen -->
-  <div id="loading-screen">
-    <div class="loading-spinner"></div>
-    <div class="loading-text">12AT1 - Chào Mừng 20/10</div>
-    <div class="loading-subtext">Đang tải trang...</div>
-  </div>
-
   <!-- Popup thông báo -->
   <div id="popup" class="popup-overlay" style="display: none;">
     <div class="popup-content">
@@ -402,14 +344,13 @@
       <div class="popup-icon"></div>
       <div class="popup-title">💐</div>
       <div class="popup-message">
-        <strong>CHÚC MỪNG NGÀY PHỤ NỮ VIỆT NAM 20/10!</strong><br><br>
       ❗ <strong>Link AZOTA trong web link của lớp</strong><br>
       ❗ <strong>Không phải link của giáo viên bộ môn gửi trong ZALO</strong><br>
       </div>
       <div class="popup-buttons">
         <button class="btn-ok" onclick="closePopup()">OK</button>
       </div>
-      <small style="color: #8d6e63;">Tri ân những người phụ nữ quanh ta</small>
+      <small style="color: #8d6e63;"></small>
     </div>
   </div>
 
@@ -436,7 +377,7 @@
   <!-- Header đặc biệt -->
   <div class="special-header">
     <div class="container text-center">
-      <h1>Chào Mừng Ngày Phụ Nữ Việt Nam 20/10</h1>
+      <h1>Chào Mừng Ngày Nhà Giáo Việt Nam 20/11</h1>
     </div>
   </div>
 
@@ -481,24 +422,6 @@
       </div>
       <div class="col-md-4">
         <div class="card subject-card text-center">
-          <h5></h5>
-          <a href="thằng code chưa làm" class="btn btn-test">AZOTA</a>
-        </div>
-      </div>
-      <div class="col-md-4">
-        <div class="card subject-card text-center">
-          <h5></h5>
-          <a href="thằng code chưa làm" class="btn btn-test">AZOTA</a>
-        </div>
-      </div>
-      <div class="col-md-4">
-        <div class="card subject-card text-center">
-          <h5>#</h5>
-          <a href="thằng code chưa làm" class="btn btn-test">AZOTA</a>
-        </div>
-      </div>
-      <div class="col-md-4">
-        <div class="card subject-card text-center">
           <h5>HÓA FULL</h5>
           <a href="https://azota.vn/de-thi/f28hvi" class="btn btn-test">AZOTA</a>
         </div>
@@ -523,10 +446,6 @@
           <a href="https://azota.vn/de-thi/xen50e" class="btn btn-test">AZOTA</a>
         </div>
       </div>
-      <!-- KẾT THÚC THÊM 3 MÔN MỚI -->
-      
-    </div>
-  </div>
 
   <!-- Trang thời khóa biểu -->
   <div id="tkb" class="container">
@@ -561,22 +480,14 @@
     // Biến để kiểm tra xem có phải truy cập từ bên ngoài không
     let isFirstLoad = true;
 
-    // Hiển thị loading screen khi trang load
+    // Hiển thị popup khi trang load (chỉ khi vào từ bên ngoài)
     document.addEventListener('DOMContentLoaded', function() {
-      // Hiển thị loading screen trong 2 giây
-      setTimeout(function() {
-        // Ẩn loading screen
-        document.getElementById('loading-screen').style.display = 'none';
-        // Hiển thị nội dung web với hiệu ứng fade in
-        document.body.classList.add('loaded');
-        
-        // Kiểm tra nếu là lần đầu load trang (truy cập từ bên ngoài)
-        if (isFirstLoad && !sessionStorage.getItem('fromInternal')) {
-          document.getElementById('popup').style.display = 'flex';
-        }
-        sessionStorage.removeItem('fromInternal'); // Xóa sau khi dùng
-        checkAndShowTKB();
-      }, 2000); // 2 giây
+      // Kiểm tra nếu là lần đầu load trang (truy cập từ bên ngoài)
+      if (isFirstLoad && !sessionStorage.getItem('fromInternal')) {
+        document.getElementById('popup').style.display = 'flex';
+      }
+      sessionStorage.removeItem('fromInternal'); // Xóa sau khi dùng
+      checkAndShowTKB();
     });
 
     // Đánh dấu là chuyển trang nội bộ
@@ -607,7 +518,7 @@
     // Hiệu ứng hoa rơi
     function createFlower() {
       const flower = document.createElement('div');
-      const flowers = ['🌸', '🌺', '💮', '🏵️', '🌼', '🌻', '💐', '🌷'];
+      const flowers = ['🌸', '🌺', '💮', '🏵️', '🌼', '🌻'];
       flower.innerHTML = flowers[Math.floor(Math.random() * flowers.length)];
       flower.classList.add('falling-flower');
       
