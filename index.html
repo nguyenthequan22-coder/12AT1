@@ -13,10 +13,20 @@
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="default">
   <meta name="apple-mobile-web-app-title" content="12AT1">
+  <meta name="description" content="Ứng dụng bài tập lớp 12AT1 - Trường THPT ABC">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="application-name" content="12AT1">
+  <meta name="msapplication-TileColor" content="#d32f2f">
+  <meta name="msapplication-starturl" content="/">
+  
+  <!-- PWA Icons -->
   <link rel="apple-touch-icon" href="icon-192.png">
+  <link rel="apple-touch-icon" sizes="192x192" href="icon-192.png">
+  <link rel="apple-touch-icon" sizes="512x512" href="icon-512.png">
   <link rel="manifest" href="manifest.json">
   
   <style>
+    /* Giữ nguyên toàn bộ CSS của bạn */
     body {
       font-family: 'Be Vietnam Pro', sans-serif;
       background: linear-gradient(135deg, #fff9f9, #fff0f0);
@@ -603,6 +613,12 @@
         deferredPrompt = e;
         showInstallPrompt();
       });
+
+      // PWA: Kiểm tra nếu app đã được cài đặt
+      if (window.matchMedia('(display-mode: standalone)').matches) {
+        console.log('Ứng dụng đang chạy ở chế độ standalone');
+        localStorage.setItem('appInstalled', 'true');
+      }
     });
 
     // Đánh dấu là chuyển trang nội bộ
@@ -726,9 +742,12 @@
         deferredPrompt.prompt();
         deferredPrompt.userChoice.then((choiceResult) => {
           if (choiceResult.outcome === 'accepted') {
+            console.log('Người dùng đã chấp nhận cài đặt');
             localStorage.setItem('appInstalled', 'true');
+            closeInstallPrompt();
+          } else {
+            console.log('Người dùng từ chối cài đặt');
           }
-          closeInstallPrompt();
         });
       }
     }
@@ -738,18 +757,25 @@
       document.getElementById('installPrompt').style.display = 'none';
     }
 
-    // Đăng ký Service Worker (PWA)
+    // Đăng ký Service Worker (PWA) - ĐÃ SỬA ĐƯỜNG DẪN
     if ('serviceWorker' in navigator) {
       window.addEventListener('load', function() {
-        navigator.serviceWorker.register('/sw.js')
+        // Sửa từ '/sw.js' thành 'sw.js'
+        navigator.serviceWorker.register('sw.js')
           .then(function(registration) {
-            console.log('ServiceWorker đã đăng ký thành công');
+            console.log('ServiceWorker đã đăng ký thành công với scope: ', registration.scope);
           })
           .catch(function(error) {
             console.log('ServiceWorker đăng ký thất bại: ', error);
           });
       });
     }
+
+    // PWA: Thêm sự kiện appinstalled
+    window.addEventListener('appinstalled', (evt) => {
+      console.log('Ứng dụng đã được cài đặt thành công');
+      localStorage.setItem('appInstalled', 'true');
+    });
   </script>
 </body>
 </html>
