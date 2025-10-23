@@ -8,22 +8,21 @@
   <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;600&display=swap" rel="stylesheet">
   <link rel="icon" type="image/png" href="favicon.png?v=2">
   
-  <!-- PWA Meta Tags -->
-  <meta name="theme-color" content="#d32f2f">
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="default">
-  <meta name="apple-mobile-web-app-title" content="12AT1">
-  <meta name="description" content="Ứng dụng bài tập lớp 12AT1 - Trường THPT ABC">
-  <meta name="mobile-web-app-capable" content="yes">
-  <meta name="application-name" content="12AT1">
-  <meta name="msapplication-TileColor" content="#d32f2f">
-  <meta name="msapplication-starturl" content="/">
+    <!-- PWA META TAGS NÂNG CẤP -->
+    <meta name="theme-color" content="#d32f2f">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="12AT1">
+    <meta name="description" content="Ứng dụng học tập lớp 12AT1 - Bài tập AZOTA, kiểm tra, thời khóa biểu">
   
-  <!-- PWA Icons -->
-  <link rel="apple-touch-icon" href="icon-192.png">
-  <link rel="apple-touch-icon" sizes="192x192" href="icon-192.png">
-  <link rel="apple-touch-icon" sizes="512x512" href="icon-512.png">
-  <link rel="manifest" href="manifest.json">
+    <!-- ICONS CHO MỌI PLATFORM -->
+    <link rel="icon" type="image/png" href="favicon.png">
+    <link rel="apple-touch-icon" href="icon-192.png">
+    <link rel="apple-touch-icon" sizes="192x192" href="icon-192.png">
+    <link rel="apple-touch-icon" sizes="512x512" href="icon-512.png">
+    <link rel="manifest" href="manifest.json" crossorigin="use-credentials">
+    <!-- PRELOAD QUAN TRỌNG -->
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;600&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
   
   <style>
     /* Giữ nguyên toàn bộ CSS của bạn */
@@ -446,8 +445,8 @@
   <!-- Install Prompt -->
   <div id="installPrompt" class="install-prompt" style="display: none;">
     <p>📱 <strong>Cài đặt ứng dụng 12AT1</strong></p>
-    <p>Để truy cập nhanh hơn, cài đặt ứng dụng này lên thiết bị của bạn!</p>
-    <button class="btn-test" onclick="installApp()">Cài đặt ngay</button>
+    <p>Để nhận thông báo, cài đặt ứng dụng !</p>
+    <button class="btn-test" onclick="installApp()">INSTALL</button>
     <button class="btn-ok" onclick="closeInstallPrompt()" style="margin-left: 10px; background: #666;">Để sau</button>
   </div>
 
@@ -757,18 +756,22 @@
       document.getElementById('installPrompt').style.display = 'none';
     }
 
-    // Đăng ký Service Worker (PWA) - ĐÃ SỬA ĐƯỜNG DẪN
+    // ĐĂNG KÝ SERVICE WORKER THÔNG MINH
     if ('serviceWorker' in navigator) {
-      window.addEventListener('load', function() {
-        // Sửa từ '/sw.js' thành 'sw.js'
-        navigator.serviceWorker.register('sw.js')
-          .then(function(registration) {
-            console.log('ServiceWorker đã đăng ký thành công với scope: ', registration.scope);
-          })
-          .catch(function(error) {
-            console.log('ServiceWorker đăng ký thất bại: ', error);
-          });
-      });
+        window.addEventListener('load', function() {
+            navigator.serviceWorker.register('sw.js')
+                .then(function(registration) {
+                    console.log('✅ Service Worker registered: ', registration);
+        
+                    // Kiểm tra update mỗi giờ
+                    setInterval(() => {
+                     registration.update();
+                    }, 60 * 60 * 1000);
+                })
+                .catch(function(error) {
+                    console.log('❌ Service Worker failed: ', error);
+                    });
+                });
     }
 
     // PWA: Thêm sự kiện appinstalled
