@@ -11,22 +11,21 @@ self.addEventListener('install', event => {
 
 // KÍCH HOẠT SERVICE WORKER - CHỈ XÓA CACHE CŨ, GIỮ APP
 self.addEventListener('activate', event => {
-  console.log('🎯 12AT1 Service Worker activated - KEEPING APP...');
+  console.log('🎯 Force updating app...');
   event.waitUntil(
     caches.keys().then(cacheNames => {
       return Promise.all(
         cacheNames.map(cacheName => {
-          // CHỈ XÓA CACHE CŨ, GIỮ LẠI CÁC FILE APP
-          if (cacheName.includes('12at1') && cacheName !== CACHE_NAME) {
-            console.log('🗑️ Deleting old cache:', cacheName);
-            return caches.delete(cacheName);
-          }
-          return Promise.resolve();
+          // XÓA TẤT CẢ CACHE CŨ
+          console.log('🗑️ Deleting cache:', cacheName);
+          return caches.delete(cacheName);
         })
       );
     }).then(() => {
-      console.log('✅ Cache cleanup completed - APP PRESERVED');
-      return self.clients.claim();
+      // FORCE UPDATE APP
+      return self.clients.matchAll().then(clients => {
+        clients.forEach(client => client.navigate(client.url));
+      });
     })
   );
 });
