@@ -5,23 +5,27 @@ self.addEventListener('install', event => {
   console.log('🚀 12AT1 Service Worker installing (NO CACHE)...');
   self.skipWaiting();
   
-  // KHÔNG cache gì cả, bỏ qua cache.addAll
+  // KHÔNG cache gì cả
   event.waitUntil(Promise.resolve());
 });
 
-// KÍCH HOẠT SERVICE WORKER - XÓA TẤT CẢ CACHE CŨ
+// KÍCH HOẠT SERVICE WORKER - CHỈ XÓA CACHE CŨ, GIỮ APP
 self.addEventListener('activate', event => {
-  console.log('🎯 12AT1 Service Worker activated - DELETING ALL CACHE...');
+  console.log('🎯 12AT1 Service Worker activated - KEEPING APP...');
   event.waitUntil(
     caches.keys().then(cacheNames => {
       return Promise.all(
         cacheNames.map(cacheName => {
-          console.log('🗑️ Deleting ALL cache:', cacheName);
-          return caches.delete(cacheName); // XÓA TẤT CẢ CACHE
+          // CHỈ XÓA CACHE CŨ, GIỮ LẠI CÁC FILE APP
+          if (cacheName.includes('12at1') && cacheName !== CACHE_NAME) {
+            console.log('🗑️ Deleting old cache:', cacheName);
+            return caches.delete(cacheName);
+          }
+          return Promise.resolve();
         })
       );
     }).then(() => {
-      console.log('✅ ALL Cache deleted');
+      console.log('✅ Cache cleanup completed - APP PRESERVED');
       return self.clients.claim();
     })
   );
