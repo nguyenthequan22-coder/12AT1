@@ -7,29 +7,210 @@
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;600&display=swap" rel="stylesheet">
   
-  <!-- THAY THẾ TOÀN BỘ STYLE BẰNG FILE CSS -->
-  <link rel="stylesheet" href="assets/css/style.css">
-  
-  <!-- PWA META TAGS -->
-  <meta name="theme-color" content="#d32f2f">
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-  <meta name="apple-mobile-web-app-title" content="12AT1">
-  <meta name="description" content="Ứng dụng học tập lớp 12AT1 - Bài tập AZOTA, kiểm tra, thời khóa biểu">
-  <link rel="manifest" href="manifest.json" crossorigin="use-credentials">
-  
-  <!-- ICONS -->
-  <link rel="icon" type="image/png" href="assets/icons/favicon.png">
-  <link rel="apple-touch-icon" href="assets/icons/icon-180.png">
-  <link rel="apple-touch-icon" sizes="192x192" href="assets/icons/icon-192.png">
-  <link rel="apple-touch-icon" sizes="512x512" href="assets/icons/icon-512.png">
+  <style>
+    body {
+      font-family: 'Be Vietnam Pro', sans-serif;
+      background: linear-gradient(135deg, #fff9f9, #fff0f0);
+      color: #5d4037;
+      padding-top: 80px;
+      padding-bottom: 60px;
+    }
+    h1, h2 {
+      font-weight: 600;
+      text-align: center;
+      margin-bottom: 40px;
+      color: #d32f2f;
+      text-shadow: 1px 1px 3px rgba(0,0,0,0.1);
+    }
+    footer {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      text-align: center;
+      background: #5d4037;
+      color: #ffccbc;
+      font-size: 14px;
+      padding: 10px 0;
+      border-top: 1px solid #8d6e63;
+    }
+    .navbar {
+      background: linear-gradient(135deg, #d32f2f, #f44336);
+      box-shadow: 0 2px 10px rgba(211, 47, 47, 0.3);
+    }
+    .navbar-brand, .nav-link {
+      color: white !important;
+      font-weight: 500;
+    }
+    .nav-link:hover {
+      color: #ffccbc !important;
+    }
+    .nav-link.active {
+      color: #ffccbc !important;
+      font-weight: 600;
+    }
+    .card {
+      border: none;
+      border-radius: 15px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      margin-bottom: 20px;
+    }
+    .card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    }
+    .subject-card {
+      background: linear-gradient(135deg, #ffffff, #fafafa);
+      padding: 20px;
+      text-align: center;
+    }
+    .subject-card h5 {
+      color: #d32f2f;
+      margin-bottom: 15px;
+      font-weight: 600;
+    }
+    .btn-test {
+      background: linear-gradient(135deg, #d32f2f, #f44336);
+      color: white;
+      border: none;
+      padding: 10px 25px;
+      border-radius: 25px;
+      font-weight: 600;
+      text-decoration: none;
+      display: inline-block;
+      transition: all 0.3s ease;
+    }
+    .btn-test:hover {
+      background: linear-gradient(135deg, #b71c1c, #d32f2f);
+      color: white;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 8px rgba(211, 47, 47, 0.3);
+    }
+    .special-header {
+      background: linear-gradient(135deg, #d32f2f, #f44336);
+      color: white;
+      padding: 20px 0;
+      border-radius: 0 0 20px 20px;
+      margin-bottom: 30px;
+      box-shadow: 0 4px 12px rgba(211, 47, 47, 0.3);
+    }
+    .special-header h1 {
+      color: white;
+      margin-bottom: 0;
+    }
+    .table {
+      width: 100%;
+      border-collapse: collapse;
+      background: white;
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+    .table th {
+      background: linear-gradient(135deg, #d32f2f, #f44336);
+      color: white;
+      font-weight: 600;
+      padding: 15px;
+      text-align: center;
+    }
+    .table td {
+      padding: 12px 15px;
+      border-bottom: 1px solid #e0e0e0;
+      text-align: center;
+    }
+    .table tbody tr:hover {
+      background-color: #ffebee;
+    }
+
+    /* Popup thông báo */
+    .popup-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.5);
+      display: none;
+      justify-content: center;
+      align-items: center;
+      z-index: 9999;
+    }
+    .popup-content {
+      background: white;
+      padding: 30px;
+      border-radius: 20px;
+      max-width: 400px;
+      width: 90%;
+      text-align: center;
+      position: relative;
+    }
+    .popup-close {
+      position: absolute;
+      top: 15px;
+      right: 15px;
+      background: none;
+      border: none;
+      font-size: 24px;
+      cursor: pointer;
+      color: #5d4037;
+    }
+    .popup-title {
+      font-size: 24px;
+      font-weight: 600;
+      margin-bottom: 15px;
+      color: #d32f2f;
+    }
+    .popup-message {
+      margin-bottom: 20px;
+      line-height: 1.6;
+    }
+    .btn-ok {
+      background: linear-gradient(135deg, #d32f2f, #f44336);
+      color: white;
+      border: none;
+      padding: 10px 25px;
+      border-radius: 25px;
+      cursor: pointer;
+      font-weight: 600;
+    }
+
+    /* Hiệu ứng hoa rơi */
+    .falling-flower {
+      position: fixed;
+      top: -50px;
+      z-index: -1;
+      animation: fall linear forwards;
+      font-size: 20px;
+    }
+    @keyframes fall {
+      to {
+        transform: translateY(100vh) rotate(360deg);
+      }
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      body {
+        padding-top: 70px;
+        padding-bottom: 50px;
+      }
+      .table-responsive {
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+      }
+      .table {
+        font-size: 0.85rem;
+        min-width: 600px;
+      }
+    }
+  </style>
 </head>
 <body>
-  <!-- Popup thông báo -->
-  <div id="popup" class="popup-overlay" style="display: none;">
+  <!-- Popup thông báo AZOTA -->
+  <div id="popup" class="popup-overlay">
     <div class="popup-content">
       <button class="popup-close" onclick="closePopup()">×</button>
-      <div class="popup-icon"></div>
       <div class="popup-title">💐</div>
       <div class="popup-message">
       ❗ <strong>Link AZOTA trong web link của lớp</strong><br>
@@ -39,15 +220,7 @@
       <div class="popup-buttons">
         <button class="btn-ok" onclick="closePopup()">OK</button>
       </div>
-      <small style="color: #8d6e63;"></small>
     </div>
-  </div>
-
-  <!-- Thông báo bài mới -->
-  <div id="newContentNotification" class="new-content-notification" style="display: none;">
-    <strong>📚 Có bài tập mới!</strong>
-    <p id="newSubjectsList"></p>
-    <button class="btn-ok" onclick="closeNewNotification()" style="padding: 5px 15px; font-size: 0.9rem;">Đã hiểu</button>
   </div>
 
   <!-- Hiệu ứng hoa rơi -->
@@ -56,7 +229,7 @@
   <!-- Thanh menu -->
   <nav class="navbar navbar-expand-lg fixed-top">
     <div class="container">
-      <a class="navbar-brand" href="#">12AT1 <span id="newBadge" class="new-content-badge" style="display: none;">!</span></a>
+      <a class="navbar-brand" href="#">12AT1</a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
         <span class="navbar-toggler-icon"></span>
       </button>
@@ -64,7 +237,7 @@
         <ul class="navbar-nav ms-auto">
           <li class="nav-item"><a class="nav-link active" href="#" onclick="showPage('home')">Bài Tập</a></li>
           <li class="nav-item"><a class="nav-link" href="#" onclick="showPage('tkb')">Thời Khóa Biểu</a></li>
-          <li class="nav-item"><a class="nav-link" href="kiemtra.html" onclick="setFromInternal()">Kiểm Tra</a></li>
+          <li class="nav-item"><a class="nav-link" href="kiemtra.html">Kiểm Tra</a></li>
         </ul>
       </div>
     </div>
@@ -79,82 +252,75 @@
 
   <!-- Trang chủ -->
   <div id="home" class="container">
-    <div class="row g-4 justify-content-center">
-      <!-- Cột 1 -->
+    <div class="row">
       <div class="col-lg-4 col-md-6">
-        <div class="card subject-card text-center">
+        <div class="card subject-card">
           <h5>ĐỊA LÍ FULL</h5>
           <a href="https://azota.vn/de-thi/udtjm5" class="btn btn-test">AZOTA</a>
         </div>
       </div>
       <div class="col-lg-4 col-md-6">
-        <div class="card subject-card text-center">
+        <div class="card subject-card">
           <h5>ĐỊA TRẮC NGHIỆM</h5>
           <a href="https://azota.vn/de-thi/vdbmen" class="btn btn-test">AZOTA</a>
         </div>
       </div>
       <div class="col-lg-4 col-md-6">
-        <div class="card subject-card text-center">
+        <div class="card subject-card">
           <h5>ĐỊA ĐÚNG SAI</h5>
           <a href="https://azota.vn/de-thi/dpqhqm" class="btn btn-test">AZOTA</a>
         </div>
       </div>
-
-      <!-- Cột 2 -->
       <div class="col-lg-4 col-md-6">
-        <div class="card subject-card text-center">
+        <div class="card subject-card">
           <h5>VẬT LÍ FULL</h5>
           <a href="https://azota.vn/de-thi/ggjlzj" class="btn btn-test">AZOTA</a>
         </div>
       </div>
       <div class="col-lg-4 col-md-6">
-        <div class="card subject-card text-center">
+        <div class="card subject-card">
           <h5>VẬT LÍ ĐÚNG SAI</h5>
           <a href="https://azota.vn/de-thi/1fbzpn" class="btn btn-test">AZOTA</a>
         </div>
       </div>
       <div class="col-lg-4 col-md-6">
-        <div class="card subject-card text-center">
+        <div class="card subject-card">
           <h5>VẬT LÍ TRẮC NGHIỆM</h5>
           <a href="https://azota.vn/de-thi/siqx3v" class="btn btn-test">AZOTA</a>
         </div>
       </div>
-
-      <!-- Cột 3 -->
       <div class="col-lg-4 col-md-6">
-        <div class="card subject-card text-center">
+        <div class="card subject-card">
           <h5>HÓA FULL</h5>
           <a href="https://azota.vn/de-thi/f28hvi" class="btn btn-test">AZOTA</a>
         </div>
       </div>
       <div class="col-lg-4 col-md-6">
-        <div class="card subject-card text-center">
+        <div class="card subject-card">
           <h5>HÓA TRẮC NGHIỆM</h5>
           <a href="https://azota.vn/de-thi/7idtt5" class="btn btn-test">AZOTA</a>
         </div>
       </div>
       <div class="col-lg-4 col-md-6">
-        <div class="card subject-card text-center">
+        <div class="card subject-card">
           <h5>HÓA ĐÚNG SAI</h5>
           <a href="https://azota.vn/de-thi/1y9g7o" class="btn btn-test">AZOTA</a>
         </div>
       </div>
-
-      <!-- Các môn khác -->
       <div class="col-lg-4 col-md-6">
-        <div class="card subject-card text-center">
+        <div class="card subject-card">
           <h5>SỬ TRẮC NGHIỆM</h5>
           <a href="https://azota.vn/de-thi/ivkjn0" class="btn btn-test">AZOTA</a>
         </div>
       </div>
       <div class="col-lg-4 col-md-6">
-        <div class="card subject-card text-center">
+        <div class="card subject-card">
           <h5>SỬ ĐÚNG SAI</h5>
           <a href="https://azota.vn/de-thi/zd9tsp" class="btn btn-test">AZOTA</a>
         </div>
       </div>
       <div class="col-lg-4 col-md-6">
-        <div class="card subject-card text-center">
+        <div class="card subject-card">
           <h5>TIN HỌC</h5>
           <a href="https://azota.vn/de-thi/xen50e" class="btn btn-test">AZOTA</a>
         </div>
@@ -191,6 +357,65 @@
   <footer>12AT1</footer>
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-  <script src="assets/js/app.js"></script>
+  <script>
+    let currentPage = 'home';
+
+    // Hiển thị popup sau 2 giây
+    setTimeout(() => {
+      document.getElementById('popup').style.display = 'flex';
+    }, 2000);
+
+    function closePopup() {
+      document.getElementById('popup').style.display = 'none';
+    }
+
+    function showPage(page) {
+      // Ẩn tất cả các trang
+      document.getElementById('home').style.display = 'none';
+      document.getElementById('tkb').style.display = 'none';
+      
+      // Cập nhật menu active
+      document.querySelectorAll('.nav-link').forEach(link => {
+        link.classList.remove('active');
+      });
+      
+      // Hiển thị trang được chọn
+      if (page === 'home') {
+        document.getElementById('home').style.display = 'block';
+        document.querySelector('.nav-link[onclick="showPage(\'home\')"]').classList.add('active');
+        currentPage = 'home';
+      } else if (page === 'tkb') {
+        document.getElementById('tkb').style.display = 'block';
+        document.querySelector('.nav-link[onclick="showPage(\'tkb\')"]').classList.add('active');
+        currentPage = 'tkb';
+      }
+    }
+
+    // Hiệu ứng hoa rơi
+    function createFlower() {
+      const flower = document.createElement('div');
+      const flowers = ['🌸', '🌺', '💮', '🏵️', '🌼', '🌻'];
+      flower.innerHTML = flowers[Math.floor(Math.random() * flowers.length)];
+      flower.classList.add('falling-flower');
+      
+      const left = Math.random() * 100;
+      flower.style.left = left + 'vw';
+      
+      const size = Math.random() * 20 + 15;
+      flower.style.fontSize = size + 'px';
+      
+      const duration = Math.random() * 10 + 5;
+      flower.style.animationDuration = duration + 's';
+      
+      document.getElementById('flowers-container').appendChild(flower);
+      
+      setTimeout(() => {
+        flower.remove();
+      }, duration * 1000);
+    }
+
+    // Tạo hoa liên tục
+    setInterval(createFlower, 500);
+  </script>
 </body>
 </html>
