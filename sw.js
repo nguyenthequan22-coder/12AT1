@@ -93,7 +93,7 @@ self.addEventListener('fetch', event => {
             }
             
             // Fallback cho các request khác
-            return new Response('📚 12AT1 - Bạn đang offline! Vui lòng kết nối internet để sử dụng đầy đủ tính năng.', {
+            return new Response('Bạn đang offline! Vui lòng kết nối internet để sử dụng.', {
               status: 503,
               headers: { 'Content-Type': 'text/plain; charset=utf-8' }
             });
