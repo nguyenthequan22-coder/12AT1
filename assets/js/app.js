@@ -1,247 +1,303 @@
-// TOÀN BỘ JAVASCRIPT CỦA BẠN ĐƯỢC CHUYỂN VÀO ĐÂY
+// app.js - 12AT1 Application
+console.log('🚀 12AT1 App.js loaded');
 
-let isFirstLoad = true;
+// Biến toàn cục
 let deferredPrompt;
+let currentPage = 'home';
 
+// Khởi tạo ứng dụng khi DOM ready
 document.addEventListener('DOMContentLoaded', function() {
-  if (isFirstLoad && !sessionStorage.getItem('fromInternal')) {
-    document.getElementById('popup').style.display = 'flex';
-  }
-  sessionStorage.removeItem('fromInternal');
-  checkAndShowTKB();
-  checkNewContent();
-  
-  window.addEventListener('beforeinstallprompt', (e) => {
-    e.preventDefault();
-    deferredPrompt = e;
-    showInstallPrompt();
-  });
-
-  if (window.matchMedia('(display-mode: standalone)').matches) {
-    console.log('Ứng dụng đang chạy ở chế độ standalone');
-    localStorage.setItem('appInstalled', 'true');
-  }
-  
-  // Thêm iOS support
-  showIOSInstallGuide();
+    console.log('📚 12AT1 App Initializing...');
+    
+    // Khởi tạo các chức năng
+    initApp();
+    registerServiceWorker();
+    setupEventListeners();
+    checkNewContent();
+    
+    // Kiểm tra nếu cần hiển thị TKB từ trang chủ
+    if (localStorage.getItem('showTKB') === 'true') {
+        showPage('tkb');
+        localStorage.removeItem('showTKB');
+    }
 });
 
-function setFromInternal() {
-  sessionStorage.setItem('fromInternal', 'true');
+// Khởi tạo ứng dụng
+function initApp() {
+    console.log('🎯 Initializing app...');
+    
+    // Hiển thị trang mặc định
+    showPage('home');
+    
+    // Hiển thị popup thông báo sau 2 giây
+    setTimeout(showPopup, 2000);
+    
+    // Khởi tạo hiệu ứng hoa rơi
+    initFlowerEffect();
+    
+    console.log('✅ App initialized successfully');
 }
 
-function closePopup() {
-  document.getElementById('popup').style.display = 'none';
-  isFirstLoad = false;
-}
-
-function checkAndShowTKB() {
-  if (localStorage.getItem('showTKB') === 'true') {
-    showPage('tkb');
-    localStorage.removeItem('showTKB');
-  }
-}
-
-function showPage(page) {
-  document.getElementById('home').style.display = 'none';
-  document.getElementById('tkb').style.display = 'none';
-  document.getElementById(page).style.display = 'block';
-}
-
-function createFlower() {
-  const flower = document.createElement('div');
-  const flowers = ['🌸', '🌺', '💮', '🏵️', '🌼', '🌻'];
-  flower.innerHTML = flowers[Math.floor(Math.random() * flowers.length)];
-  flower.classList.add('falling-flower');
-  
-  const left = Math.random() * 100;
-  flower.style.left = left + 'vw';
-  
-  const size = Math.random() * 20 + 15;
-  flower.style.fontSize = size + 'px';
-  
-  const duration = Math.random() * 10 + 5;
-  flower.style.animationDuration = duration + 's';
-  
-  document.getElementById('flowers-container').appendChild(flower);
-  
-  setTimeout(() => {
-    flower.remove();
-  }, duration * 1000);
-}
-
-setInterval(createFlower, 500);
-showPage('home');
-
-function checkNewContent() {
-  const lastVisit = localStorage.getItem('lastVisit');
-  const currentTime = new Date().getTime();
-  
-  const newSubjects = [
-    'HÓA FULL',
-    'HÓA TRẮC NGHIỆM', 
-    'HÓA ĐÚNG SAI',
-    'SỬ TRẮC NGHIỆM',
-    'SỬ ĐÚNG SAI'
-  ];
-  
-  if (!lastVisit || (currentTime - lastVisit) > 24 * 60 * 60 * 1000) {
-    if (newSubjects.length > 0) {
-      showNewContentNotification(newSubjects);
+// Đăng ký Service Worker
+function registerServiceWorker() {
+    if ('serviceWorker' in navigator) {
+        navigator.serviceWorker.register('/sw.js')
+            .then(function(registration) {
+                console.log('✅ Service Worker registered with scope:', registration.scope);
+            })
+            .catch(function(error) {
+                console.log('❌ Service Worker registration failed:', error);
+            });
+    } else {
+        console.log('❌ Service Worker not supported');
     }
-  }
-  
-  localStorage.setItem('lastVisit', currentTime);
 }
 
-function showNewContentNotification(subjects) {
-  const notification = document.getElementById('newContentNotification');
-  const badge = document.getElementById('newBadge');
-  const subjectsList = document.getElementById('newSubjectsList');
-  
-  subjectsList.textContent = `Môn mới: ${subjects.slice(0, 3).join(', ')}${subjects.length > 3 ? '...' : ''}`;
-  notification.style.display = 'block';
-  badge.style.display = 'inline-flex';
-  
-  setTimeout(() => {
-    if (notification.style.display !== 'none') {
-      closeNewNotification();
+// Thiết lập event listeners
+function setupEventListeners() {
+    // Lắng nghe sự kiện beforeinstallprompt cho PWA
+    window.addEventListener('beforeinstallprompt', (e) => {
+        console.log('🚀 beforeinstallprompt event fired');
+        e.preventDefault();
+        deferredPrompt = e;
+        
+        // Hiển thị prompt cài đặt sau 5 giây
+        setTimeout(showInstallPrompt, 5000);
+    });
+
+    // Lắng nghe sự kiện app installed
+    window.addEventListener('appinstalled', (evt) => {
+        console.log('✅ PWA was installed successfully');
+        hideInstallPrompt();
+    });
+
+    // Kiểm tra nếu app đã chạy ở chế độ standalone
+    if (window.matchMedia('(display-mode: standalone)').matches) {
+        console.log('📱 App running in standalone mode');
+        hideInstallPrompt();
     }
-  }, 10000);
 }
 
-function closeNewNotification() {
-  document.getElementById('newContentNotification').style.display = 'none';
-  document.getElementById('newBadge').style.display = 'none';
-}
-
-// PWA INSTALL PROMPT MỚI
+// Hiển thị prompt cài đặt PWA
 function showInstallPrompt() {
-  if (!localStorage.getItem('appInstalled') && !isIOS()) {
-    setTimeout(() => {
-      const prompt = document.getElementById('installPrompt');
-      if (prompt) {
-        prompt.style.display = 'block';
+    const installPrompt = document.getElementById('installPrompt');
+    if (installPrompt && deferredPrompt) {
+        installPrompt.style.display = 'block';
+        console.log('📱 Showing install prompt');
+    }
+}
+
+// Ẩn prompt cài đặt
+function hideInstallPrompt() {
+    const installPrompt = document.getElementById('installPrompt');
+    if (installPrompt) {
+        installPrompt.style.display = 'none';
+    }
+}
+
+// Cài đặt ứng dụng
+function installApp() {
+    if (!deferredPrompt) {
+        console.log('❌ No deferred prompt available');
+        return;
+    }
+
+    console.log('📱 Installing app...');
+    deferredPrompt.prompt();
+    
+    deferredPrompt.userChoice.then((choiceResult) => {
+        if (choiceResult.outcome === 'accepted') {
+            console.log('✅ User accepted the install prompt');
+        } else {
+            console.log('❌ User dismissed the install prompt');
+        }
+        deferredPrompt = null;
+        hideInstallPrompt();
+    });
+}
+
+// Đóng prompt cài đặt
+function closeInstallPrompt() {
+    console.log('📱 Install prompt closed');
+    hideInstallPrompt();
+}
+
+// Hiển thị popup thông báo
+function showPopup() {
+    const popup = document.getElementById('popup');
+    if (popup) {
+        popup.style.display = 'flex';
+        console.log('💡 Showing info popup');
+    }
+}
+
+// Đóng popup thông báo
+function closePopup() {
+    const popup = document.getElementById('popup');
+    if (popup) {
+        popup.style.display = 'none';
+        console.log('💡 Info popup closed');
+    }
+}
+
+// Kiểm tra nội dung mới
+function checkNewContent() {
+    const lastVisit = localStorage.getItem('lastVisit');
+    const now = new Date().getTime();
+    const newContentBadge = document.getElementById('newBadge');
+    
+    if (!lastVisit || (now - lastVisit) > 6 * 60 * 60 * 1000) { // 6 giờ
+        showNewContentNotification();
+        if (newContentBadge) {
+            newContentBadge.style.display = 'inline';
+        }
+    }
+    
+    localStorage.setItem('lastVisit', now);
+}
+
+// Hiển thị thông báo nội dung mới
+function showNewContentNotification() {
+    const notification = document.getElementById('newContentNotification');
+    const subjectsList = document.getElementById('newSubjectsList');
+    
+    if (notification && subjectsList) {
+        subjectsList.textContent = 'Có bài tập mới các môn: Địa lý, Vật lý, Hóa học';
+        notification.style.display = 'block';
+        console.log('📢 Showing new content notification');
+    }
+}
+
+// Đóng thông báo nội dung mới
+function closeNewNotification() {
+    const notification = document.getElementById('newContentNotification');
+    if (notification) {
+        notification.style.display = 'none';
+        console.log('📢 New content notification closed');
+    }
+}
+
+// Chuyển trang
+function showPage(page) {
+    console.log('🔄 Switching to page:', page);
+    
+    // Ẩn tất cả các trang
+    const homePage = document.getElementById('home');
+    const tkbPage = document.getElementById('tkb');
+    
+    if (homePage) homePage.style.display = 'none';
+    if (tkbPage) tkbPage.style.display = 'none';
+    
+    // Cập nhật menu active
+    updateActiveMenu(page);
+    
+    // Hiển thị trang được chọn
+    switch(page) {
+        case 'home':
+            if (homePage) homePage.style.display = 'block';
+            currentPage = 'home';
+            break;
+        case 'tkb':
+            if (tkbPage) tkbPage.style.display = 'block';
+            currentPage = 'tkb';
+            break;
+        default:
+            if (homePage) homePage.style.display = 'block';
+            currentPage = 'home';
+    }
+    
+    console.log('✅ Page switched to:', page);
+}
+
+// Cập nhật menu active
+function updateActiveMenu(activePage) {
+    const navLinks = document.querySelectorAll('.nav-link');
+    navLinks.forEach(link => {
+        link.classList.remove('active');
+        
+        if (activePage === 'home' && link.textContent === 'Bài Tập') {
+            link.classList.add('active');
+        } else if (activePage === 'tkb' && link.textContent === 'Thời Khóa Biểu') {
+            link.classList.add('active');
+        } else if (activePage === 'kiemtra' && link.getAttribute('href') === 'kiemtra.html') {
+            link.classList.add('active');
+        }
+    });
+}
+
+// Chuyển đến trang TKB từ menu
+function goToTKB() {
+    console.log('📅 Redirecting to schedule page');
+    localStorage.setItem('showTKB', 'true');
+}
+
+// Đánh dấu chuyển trang nội bộ
+function setFromInternal() {
+    sessionStorage.setItem('fromInternal', 'true');
+    console.log('🔗 Internal navigation marked');
+}
+
+// Khởi tạo hiệu ứng hoa rơi
+function initFlowerEffect() {
+    console.log('🌸 Initializing flower effect');
+    // Hiệu ứng hoa sẽ được tạo tự động bởi setInterval
+}
+
+// Tạo hiệu ứng hoa rơi
+function createFlower() {
+    const flower = document.createElement('div');
+    const flowers = ['🌸', '🌺', '💮', '🏵️', '🌼', '🌻'];
+    flower.innerHTML = flowers[Math.floor(Math.random() * flowers.length)];
+    flower.classList.add('falling-flower');
+    
+    const left = Math.random() * 100;
+    flower.style.left = left + 'vw';
+    
+    const size = Math.random() * 20 + 15;
+    flower.style.fontSize = size + 'px';
+    
+    const duration = Math.random() * 10 + 5;
+    flower.style.animationDuration = duration + 's';
+    
+    const flowersContainer = document.getElementById('flowers-container');
+    if (flowersContainer) {
+        flowersContainer.appendChild(flower);
         
         setTimeout(() => {
-          if (prompt.style.display !== 'none') {
-            closeInstallPrompt();
-          }
-        }, 15000);
-      }
-    }, 4000);
-  }
+            if (flower.parentNode) {
+                flower.remove();
+            }
+        }, duration * 1000);
+    }
 }
 
-function installApp() {
-  if (deferredPrompt) {
-    deferredPrompt.prompt();
-    deferredPrompt.userChoice.then((choiceResult) => {
-      if (choiceResult.outcome === 'accepted') {
-        console.log('🎉 Người dùng đã cài đặt ứng dụng');
-        localStorage.setItem('appInstalled', 'true');
-        showInstallSuccess();
-      }
-      closeInstallPrompt();
-    });
-  } else {
-    alert('📱 Mở menu trình duyệt và chọn "Thêm vào màn hình chính"');
-    closeInstallPrompt();
-  }
-}
+// Tạo hoa liên tục
+setInterval(createFlower, 500);
 
-function closeInstallPrompt() {
-  const prompt = document.getElementById('installPrompt');
-  if (prompt) prompt.style.display = 'none';
-  localStorage.setItem('lastPromptTime', new Date().getTime());
-}
-
-function showInstallSuccess() {
-  const notification = document.createElement('div');
-  notification.innerHTML = `
-    <div style="
-      position: fixed;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      background: #4CAF50;
-      color: white;
-      padding: 20px;
-      border-radius: 15px;
-      box-shadow: 0 8px 25px rgba(0,0,0,0.3);
-      z-index: 10000;
-      text-align: center;
-      animation: fadeIn 0.5s;
-    ">
-      <div style="font-size: 2rem; margin-bottom: 10px;">🎉</div>
-      <strong>Cài đặt Thành công!</strong><br>
-      <small>Ứng dụng đã được thêm vào màn hình chính</small>
-    </div>
-  `;
-  document.body.appendChild(notification);
-  
-  setTimeout(() => {
-    notification.remove();
-  }, 3000);
-}
-
-// IOS SUPPORT
-function isIOS() {
-  return /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
-}
-
-function showIOSInstallGuide() {
-  if (isIOS() && !localStorage.getItem('iosGuideShown')) {
-    const iosGuide = `
-      <div id="iosGuide" style="
-        position: fixed; top: 0; left: 0; width: 100%; height: 100%; 
-        background: rgba(0,0,0,0.8); z-index: 10000; 
-        display: flex; align-items: center; justify-content: center;
-      ">
-        <div style="
-          background: white; padding: 25px; border-radius: 15px; 
-          max-width: 300px; text-align: center; margin: 20px;
-        ">
-          <h5 style="color: #d32f2f; margin-bottom: 15px;">📱 Thêm vào Màn hình chính</h5>
-          <p style="margin-bottom: 20px; font-size: 14px;">
-            <strong>Bước 1:</strong> Chọn <span style="color: #007AFF">⎋</span> (Share)<br>
-            <strong>Bước 2:</strong> Chọn "Thêm vào Màn hình chính"<br>
-            <strong>Bước 3:</strong> Nhấn "Thêm"
-          </p>
-          <button onclick="closeIOSGuide()" style="
-            background: #d32f2f; color: white; border: none; 
-            padding: 10px 20px; border-radius: 20px; font-weight: 600;
-          ">Đã hiểu</button>
-        </div>
-      </div>
-    `;
-    document.body.insertAdjacentHTML('beforeend', iosGuide);
-    localStorage.setItem('iosGuideShown', 'true');
-  }
-}
-
-function closeIOSGuide() {
-  const guide = document.getElementById('iosGuide');
-  if (guide) guide.remove();
-}
-
-// SERVICE WORKER
-if ('serviceWorker' in navigator) {
-  window.addEventListener('load', function() {
-    navigator.serviceWorker.register('sw.js')
-      .then(function(registration) {
-        console.log('✅ Service Worker registered: ', registration);
-        setInterval(() => {
-          registration.update();
-        }, 60 * 60 * 1000);
-      })
-      .catch(function(error) {
-        console.log('❌ Service Worker failed: ', error);
-      });
-  });
-}
-
-window.addEventListener('appinstalled', (evt) => {
-  console.log('Ứng dụng đã được cài đặt thành công');
-  localStorage.setItem('appInstalled', 'true');
+// Xử lý lỗi toàn cục
+window.addEventListener('error', function(e) {
+    console.error('🚨 Global error:', e.error);
 });
+
+// Debug info
+function debugInfo() {
+    const debugData = {
+        currentPage: currentPage,
+        deferredPrompt: !!deferredPrompt,
+        serviceWorker: 'serviceWorker' in navigator,
+        standalone: window.matchMedia('(display-mode: standalone)').matches,
+        userAgent: navigator.userAgent
+    };
+    console.log('🔍 Debug Info:', debugData);
+    return debugData;
+}
+
+// Export functions for global use (nếu cần)
+window.app = {
+    showPage,
+    installApp,
+    closeInstallPrompt,
+    debugInfo
+};
+
+console.log('✅ app.js loaded completely');
