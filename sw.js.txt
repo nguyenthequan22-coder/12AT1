@@ -1,0 +1,12 @@
+// sw.js - Đơn giản nhất
+self.addEventListener('install', function(event) {
+  console.log('🚀 12AT1 Service Worker installed');
+});
+
+self.addEventListener('fetch', function(event) {
+  event.respondWith(
+    fetch(event.request).catch(function() {
+      return new Response('12AT1 - Bạn đang offline!');
+    })
+  );
+});
