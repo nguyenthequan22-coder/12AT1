@@ -3,14 +3,13 @@ const urlsToCache = [
   './',
   './index.html',
   './kiemtra.html',
-  './favicon.png',
-  './icon-192.png',
-  './icon-512.png',
-  './manifest.json'
-];
-
-// CACHE CÁC FILE CDN QUAN TRỌNG
-const externalResources = [
+  './assets/icons/favicon.png',
+  './assets/icons/icon-192.png',
+  './assets/icons/icon-512.png',
+  './assets/icons/icon-180.png',
+  './manifest.json',
+  './assets/css/style.css',
+  './assets/js/app.js',
   'https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css',
   'https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;600&display=swap',
   'https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js'
@@ -51,23 +50,17 @@ self.addEventListener('activate', event => {
 
 // FETCH - CACHE STRATEGY THÔNG MINH
 self.addEventListener('fetch', event => {
-  // Bỏ qua các request không phải HTTP
   if (!event.request.url.startsWith('http')) return;
 
   event.respondWith(
     caches.match(event.request)
       .then(response => {
-        // Trả về cached response nếu có
         if (response) {
-          console.log('📂 Serving from cache:', event.request.url);
           return response;
         }
 
-        // Không có trong cache → fetch từ network
-        console.log('🌐 Fetching from network:', event.request.url);
         return fetch(event.request)
           .then(networkResponse => {
-            // Cache response mới nếu thành công
             if (networkResponse && networkResponse.status === 200) {
               const responseToCache = networkResponse.clone();
               caches.open(CACHE_NAME)
@@ -78,7 +71,6 @@ self.addEventListener('fetch', event => {
             return networkResponse;
           })
           .catch(error => {
-            // Fallback khi offline
             if (event.request.destination === 'document') {
               return caches.match('./index.html');
             }
@@ -89,11 +81,4 @@ self.addEventListener('fetch', event => {
           });
       })
   );
-});
-
-// BACKGROUND SYNC (TÍNH NĂNG NÂNG CAO)
-self.addEventListener('sync', event => {
-  if (event.tag === 'background-sync') {
-    console.log('🔄 Background sync triggered');
-  }
 });

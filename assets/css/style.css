@@ -1,4 +1,5 @@
-/* === BASE STYLES === */
+/* TOÀN BỘ CSS CỦA BẠN ĐƯỢC CHUYỂN VÀO ĐÂY */
+
 body {
   font-family: 'Be Vietnam Pro', sans-serif;
   background: linear-gradient(135deg, #fff9f9, #fff0f0);
@@ -15,7 +16,6 @@ h1 {
   text-shadow: 1px 1px 3px rgba(0,0,0,0.1);
 }
 
-/* === SUBJECT CARDS === */
 .subject-card {
   border: none;
   border-radius: 16px;
@@ -53,7 +53,6 @@ h1 {
   color: #5d4037;
 }
 
-/* === BUTTONS === */
 .btn-test {
   background: linear-gradient(135deg, #d32f2f, #f44336);
   color: white;
@@ -74,6 +73,160 @@ h1 {
   color: white;
 }
 
+footer {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  text-align: center;
+  background: #5d4037;
+  color: #ffccbc;
+  font-size: 14px;
+  padding: 10px 0;
+  border-top: 1px solid #8d6e63;
+}
+
+.navbar {
+  background: linear-gradient(135deg, #d32f2f, #f44336);
+  box-shadow: 0 2px 10px rgba(211, 47, 47, 0.3);
+}
+
+.navbar-brand, .nav-link {
+  color: white !important;
+  font-weight: 500;
+}
+
+.nav-link:hover {
+  color: #ffccbc !important;
+}
+
+#tkb {
+  display: none;
+}
+
+.table {
+  table-layout: fixed;
+  width: 100%;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.table th, .table td {
+  text-align: center;
+  vertical-align: middle;
+  border-color: #e0e0e0;
+}
+
+.table th {
+  background: linear-gradient(135deg, #d32f2f, #f44336);
+  color: white;
+  font-weight: 600;
+}
+
+.table tbody tr:nth-child(even) {
+  background-color: #fff9f9;
+}
+
+.table tbody tr:hover {
+  background-color: #ffebee;
+}
+
+.table th:first-child,
+.table td:first-child {
+  width: 80px;
+  background-color: #ffebee;
+  font-weight: 600;
+}
+
+.special-header {
+  background: linear-gradient(135deg, #d32f2f, #f44336);
+  color: white;
+  padding: 20px 0;
+  border-radius: 0 0 20px 20px;
+  margin-bottom: 30px;
+  box-shadow: 0 4px 12px rgba(211, 47, 47, 0.3);
+}
+
+.special-header h1 {
+  color: white;
+  margin-bottom: 10px;
+}
+
+.special-header p {
+  margin: 0;
+  font-size: 1.1rem;
+  opacity: 0.9;
+}
+
+.popup-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.7);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+}
+
+.popup-content {
+  background: white;
+  padding: 30px;
+  border-radius: 15px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+  max-width: 500px;
+  width: 90%;
+  text-align: center;
+  position: relative;
+  border: 3px solid #d32f2f;
+}
+
+.popup-close {
+  position: absolute;
+  top: 10px;
+  right: 15px;
+  font-size: 24px;
+  cursor: pointer;
+  color: #d32f2f;
+  font-weight: bold;
+  background: none;
+  border: none;
+}
+
+.popup-close:hover {
+  color: #b71c1c;
+  transform: scale(1.1);
+}
+
+.popup-title {
+  color: #d32f2f;
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin-bottom: 15px;
+}
+
+.popup-message {
+  color: #5d4037;
+  font-size: 1.1rem;
+  line-height: 1.5;
+  margin-bottom: 20px;
+}
+
+.popup-icon {
+  font-size: 3rem;
+  margin-bottom: 15px;
+}
+
+.popup-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  margin-top: 20px;
+}
+
 .btn-ok {
   background: linear-gradient(135deg, #d32f2f, #f44336);
   color: white;
@@ -92,35 +245,46 @@ h1 {
   box-shadow: 0 6px 12px rgba(211, 47, 47, 0.4);
 }
 
-/* === NAVBAR & FOOTER === */
-.navbar {
-  background: linear-gradient(135deg, #d32f2f, #f44336);
-  box-shadow: 0 2px 10px rgba(211, 47, 47, 0.3);
-}
-
-.navbar-brand, .nav-link {
-  color: white !important;
-  font-weight: 500;
-}
-
-.nav-link:hover {
-  color: #ffccbc !important;
-}
-
-footer {
+.new-content-notification {
   position: fixed;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  text-align: center;
-  background: #5d4037;
-  color: #ffccbc;
-  font-size: 14px;
-  padding: 10px 0;
-  border-top: 1px solid #8d6e63;
+  top: 80px;
+  right: 20px;
+  background: #4CAF50;
+  color: white;
+  padding: 15px 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+  z-index: 1000;
+  animation: slideInRight 0.5s ease-out;
+  max-width: 300px;
 }
 
-/* === INSTALL PROMPT === */
+@keyframes slideInRight {
+  from { transform: translateX(100%); opacity: 0; }
+  to { transform: translateX(0); opacity: 1; }
+}
+
+.new-content-badge {
+  background: #ff4444;
+  color: white;
+  border-radius: 50%;
+  width: 20px;
+  height: 20px;
+  font-size: 12px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: 5px;
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.1); }
+  100% { transform: scale(1); }
+}
+
+/* INSTALL PROMPT MỚI ĐẸP HƠN */
 .install-prompt {
   position: fixed;
   bottom: 20px;
@@ -217,11 +381,39 @@ footer {
   background: #f5f5f5;
 }
 
-/* === RESPONSIVE === */
+.install-footer {
+  margin-top: 15px;
+  opacity: 0.7;
+}
+
+.btn-icon {
+  font-size: 1.2rem;
+}
+
+.falling-flower {
+  position: fixed;
+  top: -50px;
+  z-index: -1;
+  animation: fall linear forwards;
+  font-size: 20px;
+}
+
+@keyframes fall {
+  to {
+    transform: translateY(100vh) rotate(360deg);
+  }
+}
+
+/* RESPONSIVE CHO MOBILE */
 @media (max-width: 768px) {
   body {
     padding-top: 70px;
     padding-bottom: 50px;
+  }
+  
+  h1 {
+    font-size: 1.8rem;
+    margin-bottom: 30px;
   }
   
   .col-md-4 {
@@ -237,10 +429,81 @@ footer {
     margin: 0 10px;
   }
   
+  .subject-card h5 {
+    font-size: 1.1rem;
+    margin-bottom: 0.4rem;
+  }
+  
+  .btn-test {
+    font-size: 0.9rem;
+    padding: 5px 12px;
+  }
+  
+  .row.g-4 {
+    margin: 0 -5px;
+  }
+
+  .special-header {
+    padding: 15px 0;
+  }
+  .special-header h1 {
+    font-size: 1.5rem;
+  }
+  .special-header p {
+    font-size: 0.9rem;
+  }
+
+  .popup-content {
+    padding: 20px;
+    margin: 20px;
+  }
+  .popup-title {
+    font-size: 1.3rem;
+  }
+  .popup-message {
+    font-size: 1rem;
+  }
+  .popup-buttons {
+    flex-direction: column;
+    gap: 10px;
+  }
+  
+  .new-content-notification {
+    top: 60px;
+    right: 10px;
+    left: 10px;
+    max-width: none;
+  }
+  
   .install-prompt {
     bottom: 15px;
     padding: 20px;
   }
 }
 
-/* Thêm các styles khác từ code cũ của bạn... */
+/* RESPONSIVE CHO TABLET */
+@media (min-width: 769px) and (max-width: 1024px) {
+  .col-md-4 {
+    flex: 0 0 50% !important;
+    max-width: 50% !important;
+  }
+}
+
+/* DESKTOP */
+@media (min-width: 1025px) {
+  .col-md-4 {
+    flex: 0 0 30% !important;
+    max-width: 30% !important;
+  }
+}
+
+.col-md-4 {
+  margin-bottom: 1rem;
+  display: flex;
+  justify-content: center;
+}
+
+.subject-card {
+  width: 100%;
+  max-width: 300px;
+}

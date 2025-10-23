@@ -6,418 +6,26 @@
   <title>12AT1</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;600&display=swap" rel="stylesheet">
-  <link rel="icon" type="image/png" href="favicon.png?v=2">
   
-    <!-- PWA META TAGS NÂNG CẤP -->
-    <meta name="theme-color" content="#d32f2f">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <meta name="apple-mobile-web-app-title" content="12AT1">
-    <meta name="description" content="Ứng dụng học tập lớp 12AT1 - Bài tập AZOTA, kiểm tra, thời khóa biểu">
+  <!-- THAY THẾ TOÀN BỘ STYLE BẰNG FILE CSS -->
+  <link rel="stylesheet" href="assets/css/style.css">
   
-    <!-- ICONS CHO MỌI PLATFORM -->
-    <link rel="icon" type="image/png" href="favicon.png">
-    <link rel="apple-touch-icon" href="icon-192.png">
-    <link rel="apple-touch-icon" sizes="192x192" href="icon-192.png">
-    <link rel="apple-touch-icon" sizes="512x512" href="icon-512.png">
-    <link rel="manifest" href="manifest.json" crossorigin="use-credentials">
-    <!-- PRELOAD QUAN TRỌNG -->
-    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;600&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  <!-- PWA META TAGS -->
+  <meta name="theme-color" content="#d32f2f">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="12AT1">
+  <meta name="description" content="Ứng dụng học tập lớp 12AT1 - Bài tập AZOTA, kiểm tra, thời khóa biểu">
+  <link rel="manifest" href="manifest.json" crossorigin="use-credentials">
   
-  <style>
-    /* Giữ nguyên toàn bộ CSS của bạn */
-    body {
-      font-family: 'Be Vietnam Pro', sans-serif;
-      background: linear-gradient(135deg, #fff9f9, #fff0f0);
-      color: #5d4037;
-      padding-top: 80px;
-      padding-bottom: 60px;
-    }
-    h1 {
-      font-weight: 600;
-      text-align: center;
-      margin-bottom: 40px;
-      color: #d32f2f;
-      text-shadow: 1px 1px 3px rgba(0,0,0,0.1);
-    }
-    .subject-card {
-      border: none;
-      border-radius: 16px;
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-      transition: 0.3s;
-      height: 140px;
-      min-height: 140px;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      padding: 0.8rem !important;
-      background: white;
-      position: relative;
-      overflow: hidden;
-    }
-    .subject-card::before {
-      content: "🌸";
-      position: absolute;
-      top: 5px;
-      right: 10px;
-      font-size: 1.2rem;
-      opacity: 0.7;
-    }
-    .subject-card:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 8px 16px rgba(211, 47, 47, 0.2);
-    }
-    .subject-card h5 {
-      font-size: 1.2rem;
-      margin-bottom: 0.5rem;
-      font-weight: 600;
-      color: #5d4037;
-    }
-    .btn-test {
-      background: linear-gradient(135deg, #d32f2f, #f44336);
-      color: white;
-      border-radius: 10px;
-      border: none;
-      transition: 0.3s;
-      font-size: 1rem;
-      padding: 6px 14px;
-      font-weight: 500;
-      margin-top: 0.3rem;
-      box-shadow: 0 2px 4px rgba(211, 47, 47, 0.3);
-    }
-    .btn-test:hover {
-      background: linear-gradient(135deg, #b71c1c, #d32f2f);
-      transform: scale(1.05);
-      box-shadow: 0 4px 8px rgba(211, 47, 47, 0.4);
-      color: white;
-    }
-    footer {
-      position: fixed;
-      bottom: 0;
-      left: 0;
-      width: 100%;
-      text-align: center;
-      background: #5d4037;
-      color: #ffccbc;
-      font-size: 14px;
-      padding: 10px 0;
-      border-top: 1px solid #8d6e63;
-    }
-    .navbar {
-      background: linear-gradient(135deg, #d32f2f, #f44336);
-      box-shadow: 0 2px 10px rgba(211, 47, 47, 0.3);
-    }
-    .navbar-brand, .nav-link {
-      color: white !important;
-      font-weight: 500;
-    }
-    .nav-link:hover {
-      color: #ffccbc !important;
-    }
-    #tkb {
-      display: none;
-    }
-    .table {
-      table-layout: fixed;
-      width: 100%;
-      border-radius: 10px;
-      overflow: hidden;
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    }
-    .table th, .table td {
-      text-align: center;
-      vertical-align: middle;
-      border-color: #e0e0e0;
-    }
-    .table th {
-      background: linear-gradient(135deg, #d32f2f, #f44336);
-      color: white;
-      font-weight: 600;
-    }
-    .table tbody tr:nth-child(even) {
-      background-color: #fff9f9;
-    }
-    .table tbody tr:hover {
-      background-color: #ffebee;
-    }
-
-    /* Giảm riêng cột đầu tiên (cột Tiết) */
-    .table th:first-child,
-    .table td:first-child {
-      width: 80px;
-      background-color: #ffebee;
-      font-weight: 600;
-    }
-
-    /* Header đặc biệt cho 20/11 */
-    .special-header {
-      background: linear-gradient(135deg, #d32f2f, #f44336);
-      color: white;
-      padding: 20px 0;
-      border-radius: 0 0 20px 20px;
-      margin-bottom: 30px;
-      box-shadow: 0 4px 12px rgba(211, 47, 47, 0.3);
-    }
-    .special-header h1 {
-      color: white;
-      margin-bottom: 10px;
-    }
-    .special-header p {
-      margin: 0;
-      font-size: 1.1rem;
-      opacity: 0.9;
-    }
-
-    /* Popup thông báo */
-    .popup-overlay {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: rgba(0, 0, 0, 0.7);
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      z-index: 9999;
-    }
-    .popup-content {
-      background: white;
-      padding: 30px;
-      border-radius: 15px;
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-      max-width: 500px;
-      width: 90%;
-      text-align: center;
-      position: relative;
-      border: 3px solid #d32f2f;
-    }
-    .popup-close {
-      position: absolute;
-      top: 10px;
-      right: 15px;
-      font-size: 24px;
-      cursor: pointer;
-      color: #d32f2f;
-      font-weight: bold;
-      background: none;
-      border: none;
-    }
-    .popup-close:hover {
-      color: #b71c1c;
-      transform: scale(1.1);
-    }
-    .popup-title {
-      color: #d32f2f;
-      font-size: 1.5rem;
-      font-weight: 600;
-      margin-bottom: 15px;
-    }
-    .popup-message {
-      color: #5d4037;
-      font-size: 1.1rem;
-      line-height: 1.5;
-      margin-bottom: 20px;
-    }
-    .popup-icon {
-      font-size: 3rem;
-      margin-bottom: 15px;
-    }
-    .popup-buttons {
-      display: flex;
-      justify-content: center;
-      gap: 15px;
-      margin-top: 20px;
-    }
-    .btn-ok {
-      background: linear-gradient(135deg, #d32f2f, #f44336);
-      color: white;
-      border: none;
-      padding: 10px 30px;
-      border-radius: 25px;
-      font-weight: 600;
-      cursor: pointer;
-      transition: 0.3s;
-      box-shadow: 0 4px 8px rgba(211, 47, 47, 0.3);
-    }
-    .btn-ok:hover {
-      background: linear-gradient(135deg, #b71c1c, #d32f2f);
-      transform: scale(1.05);
-      box-shadow: 0 6px 12px rgba(211, 47, 47, 0.4);
-    }
-
-    /* Thông báo bài mới */
-    .new-content-notification {
-      position: fixed;
-      top: 80px;
-      right: 20px;
-      background: #4CAF50;
-      color: white;
-      padding: 15px 20px;
-      border-radius: 10px;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.3);
-      z-index: 1000;
-      animation: slideInRight 0.5s ease-out;
-      max-width: 300px;
-    }
-    
-    @keyframes slideInRight {
-      from { transform: translateX(100%); opacity: 0; }
-      to { transform: translateX(0); opacity: 1; }
-    }
-    
-    .new-content-badge {
-      background: #ff4444;
-      color: white;
-      border-radius: 50%;
-      width: 20px;
-      height: 20px;
-      font-size: 12px;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      margin-left: 5px;
-      animation: pulse 2s infinite;
-    }
-    
-    @keyframes pulse {
-      0% { transform: scale(1); }
-      50% { transform: scale(1.1); }
-      100% { transform: scale(1); }
-    }
-
-    /* Install Prompt */
-    .install-prompt {
-      position: fixed;
-      bottom: 70px;
-      left: 50%;
-      transform: translateX(-50%);
-      background: white;
-      padding: 15px;
-      border-radius: 10px;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.3);
-      z-index: 1000;
-      text-align: center;
-      border: 2px solid #d32f2f;
-      max-width: 90%;
-    }
-
-    /* RESPONSIVE CHO MOBILE */
-    @media (max-width: 768px) {
-      body {
-        padding-top: 70px;
-        padding-bottom: 50px;
-      }
-      
-      h1 {
-        font-size: 1.8rem;
-        margin-bottom: 30px;
-      }
-      
-      .col-md-4 {
-        flex: 0 0 100% !important;
-        max-width: 100% !important;
-        margin-bottom: 1rem;
-      }
-      
-      .subject-card {
-        height: 120px;
-        min-height: 120px;
-        padding: 0.6rem !important;
-        margin: 0 10px;
-      }
-      
-      .subject-card h5 {
-        font-size: 1.1rem;
-        margin-bottom: 0.4rem;
-      }
-      
-      .btn-test {
-        font-size: 0.9rem;
-        padding: 5px 12px;
-      }
-      
-      .row.g-4 {
-        margin: 0 -5px;
-      }
-
-      .special-header {
-        padding: 15px 0;
-      }
-      .special-header h1 {
-        font-size: 1.5rem;
-      }
-      .special-header p {
-        font-size: 0.9rem;
-      }
-
-      .popup-content {
-        padding: 20px;
-        margin: 20px;
-      }
-      .popup-title {
-        font-size: 1.3rem;
-      }
-      .popup-message {
-        font-size: 1rem;
-      }
-      .popup-buttons {
-        flex-direction: column;
-        gap: 10px;
-      }
-      
-      .new-content-notification {
-        top: 60px;
-        right: 10px;
-        left: 10px;
-        max-width: none;
-      }
-    }
-
-    /* RESPONSIVE CHO TABLET */
-    @media (min-width: 769px) and (max-width: 1024px) {
-      .col-md-4 {
-        flex: 0 0 50% !important;
-        max-width: 50% !important;
-      }
-    }
-
-    /* DESKTOP */
-    @media (min-width: 1025px) {
-      .col-md-4 {
-        flex: 0 0 30% !important;
-        max-width: 30% !important;
-      }
-    }
-
-    .col-md-4 {
-      margin-bottom: 1rem;
-      display: flex;
-      justify-content: center;
-    }
-    
-    .subject-card {
-      width: 100%;
-      max-width: 300px;
-    }
-
-    /* Hiệu ứng hoa rơi */
-    .falling-flower {
-      position: fixed;
-      top: -50px;
-      z-index: -1;
-      animation: fall linear forwards;
-      font-size: 20px;
-    }
-
-    @keyframes fall {
-      to {
-        transform: translateY(100vh) rotate(360deg);
-      }
-    }
-  </style>
+  <!-- ICONS -->
+  <link rel="icon" type="image/png" href="assets/icons/favicon.png">
+  <link rel="apple-touch-icon" href="assets/icons/icon-180.png">
+  <link rel="apple-touch-icon" sizes="192x192" href="assets/icons/icon-192.png">
+  <link rel="apple-touch-icon" sizes="512x512" href="assets/icons/icon-512.png">
 </head>
 <body>
+  <!-- GIỮ NGUYÊN TOÀN BỘ HTML CỦA BẠN TỪ ĐÂY -->
   <!-- Popup thông báo -->
   <div id="popup" class="popup-overlay" style="display: none;">
     <div class="popup-content">
@@ -443,13 +51,36 @@
     <button class="btn-ok" onclick="closeNewNotification()" style="padding: 5px 15px; font-size: 0.9rem;">Đã hiểu</button>
   </div>
 
-  <!-- Install Prompt -->
+  <!-- Install Prompt MỚI ĐẸP HƠN -->
   <div id="installPrompt" class="install-prompt" style="display: none;">
-    <p>📱 <strong>Cài đặt ứng dụng 12AT1</strong></p>
-    <p>Để nhận thông báo, cài đặt ứng dụng !</p>
-    <button class="btn-test" onclick="installApp()">INSTALL</button>
-    <button class="btn-ok" onclick="closeInstallPrompt()" style="margin-left: 10px; background: #666;">Để sau</button>
+    <div class="install-header">
+      <div class="install-icon">📱</div>
+      <h5>Nâng cấp trải nghiệm 12AT1</h5>
+    </div>
+    
+    <div class="install-features">
+      <div class="feature">⚡ Truy cập nhanh hơn</div>
+      <div class="feature">📚 Học tập offline</div>
+      <div class="feature">🎯 Thông báo bài mới</div>
+    </div>
+    
+    <div class="install-buttons">
+      <button class="btn-install-primary" onclick="installApp()">
+        <span class="btn-icon">⭐</span>
+        Cài đặt Ngay
+      </button>
+      <button class="btn-install-secondary" onclick="closeInstallPrompt()">
+        Để sau
+      </button>
+    </div>
+    
+    <div class="install-footer">
+      <small>Miễn phí • 2MB • Bảo mật cao</small>
+    </div>
   </div>
+
+  <!-- iOS Install Guide -->
+  <div id="iosGuide" style="display: none;"></div>
 
   <!-- Hiệu ứng hoa rơi -->
   <div id="flowers-container"></div>
@@ -479,7 +110,7 @@
   </div>
 
   <!-- Trang chủ -->
-<div id="home" class="container">
+  <div id="home" class="container">
     <div class="row g-4 justify-content-center">
       <div class="col-md-4">
         <div class="card subject-card text-center">
@@ -561,6 +192,7 @@
       </div>
     </div>
   </div>
+
   <!-- Trang thời khóa biểu -->
   <div id="tkb" class="container">
     <h1>Thời Khóa Biểu</h1>
@@ -589,197 +221,8 @@
 
   <footer>12AT1</footer>
 
+  <!-- THAY THẾ TOÀN BỘ SCRIPT BẰNG FILE JS -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-  <script>
-    // Biến để kiểm tra xem có phải truy cập từ bên ngoài không
-    let isFirstLoad = true;
-    let deferredPrompt;
-
-    // Hiển thị popup khi trang load (chỉ khi vào từ bên ngoài)
-    document.addEventListener('DOMContentLoaded', function() {
-      // Kiểm tra nếu là lần đầu load trang (truy cập từ bên ngoài)
-      if (isFirstLoad && !sessionStorage.getItem('fromInternal')) {
-        document.getElementById('popup').style.display = 'flex';
-      }
-      sessionStorage.removeItem('fromInternal'); // Xóa sau khi dùng
-      checkAndShowTKB();
-      
-      // Kiểm tra bài mới
-      checkNewContent();
-      
-      // PWA: Lắng nghe sự kiện beforeinstallprompt
-      window.addEventListener('beforeinstallprompt', (e) => {
-        e.preventDefault();
-        deferredPrompt = e;
-        showInstallPrompt();
-      });
-
-      // PWA: Kiểm tra nếu app đã được cài đặt
-      if (window.matchMedia('(display-mode: standalone)').matches) {
-        console.log('Ứng dụng đang chạy ở chế độ standalone');
-        localStorage.setItem('appInstalled', 'true');
-      }
-    });
-
-    // Đánh dấu là chuyển trang nội bộ
-    function setFromInternal() {
-      sessionStorage.setItem('fromInternal', 'true');
-    }
-
-    // Đóng popup
-    function closePopup() {
-      document.getElementById('popup').style.display = 'none';
-      isFirstLoad = false;
-    }
-
-    // Kiểm tra và hiển thị TKB nếu cần (khi chuyển từ trang Kiểm tra)
-    function checkAndShowTKB() {
-      if (localStorage.getItem('showTKB') === 'true') {
-        showPage('tkb');
-        localStorage.removeItem('showTKB'); // Xóa sau khi dùng
-      }
-    }
-
-    function showPage(page) {
-      document.getElementById('home').style.display = 'none';
-      document.getElementById('tkb').style.display = 'none';
-      document.getElementById(page).style.display = 'block';
-    }
-
-    // Hiệu ứng hoa rơi
-    function createFlower() {
-      const flower = document.createElement('div');
-      const flowers = ['🌸', '🌺', '💮', '🏵️', '🌼', '🌻'];
-      flower.innerHTML = flowers[Math.floor(Math.random() * flowers.length)];
-      flower.classList.add('falling-flower');
-      
-      const left = Math.random() * 100;
-      flower.style.left = left + 'vw';
-      
-      const size = Math.random() * 20 + 15;
-      flower.style.fontSize = size + 'px';
-      
-      const duration = Math.random() * 10 + 5;
-      flower.style.animationDuration = duration + 's';
-      
-      document.getElementById('flowers-container').appendChild(flower);
-      
-      setTimeout(() => {
-        flower.remove();
-      }, duration * 1000);
-    }
-
-    // Tạo hoa liên tục
-    setInterval(createFlower, 500);
-    
-    // Mặc định hiển thị trang chủ
-    showPage('home');
-
-    // ========== PWA & THÔNG BÁO BÀI MỚI ==========
-    
-    // Kiểm tra bài mới
-    function checkNewContent() {
-      const lastVisit = localStorage.getItem('lastVisit');
-      const currentTime = new Date().getTime();
-      
-      // Danh sách bài mới (bạn có thể cập nhật danh sách này khi thêm bài mới)
-      const newSubjects = [
-        'HÓA FULL',
-        'HÓA TRẮC NGHIỆM', 
-        'HÓA ĐÚNG SAI',
-        'SỬ TRẮC NGHIỆM',
-        'SỬ ĐÚNG SAI'
-      ];
-      
-      // Nếu lần cuối visit > 1 ngày trước hoặc chưa từng visit
-      if (!lastVisit || (currentTime - lastVisit) > 24 * 60 * 60 * 1000) {
-        if (newSubjects.length > 0) {
-          showNewContentNotification(newSubjects);
-        }
-      }
-      
-      // Cập nhật thời gian visit
-      localStorage.setItem('lastVisit', currentTime);
-    }
-
-    // Hiển thị thông báo bài mới
-    function showNewContentNotification(subjects) {
-      const notification = document.getElementById('newContentNotification');
-      const badge = document.getElementById('newBadge');
-      const subjectsList = document.getElementById('newSubjectsList');
-      
-      subjectsList.textContent = `Môn mới: ${subjects.slice(0, 3).join(', ')}${subjects.length > 3 ? '...' : ''}`;
-      notification.style.display = 'block';
-      badge.style.display = 'inline-flex';
-      
-      // Tự động ẩn sau 10 giây
-      setTimeout(() => {
-        if (notification.style.display !== 'none') {
-          closeNewNotification();
-        }
-      }, 10000);
-    }
-
-    // Đóng thông báo bài mới
-    function closeNewNotification() {
-      document.getElementById('newContentNotification').style.display = 'none';
-      document.getElementById('newBadge').style.display = 'none';
-    }
-
-    // PWA: Hiển thị prompt cài đặt
-    function showInstallPrompt() {
-      // Chỉ hiển thị nếu chưa cài đặt
-      if (!localStorage.getItem('appInstalled')) {
-        setTimeout(() => {
-          document.getElementById('installPrompt').style.display = 'block';
-        }, 3000);
-      }
-    }
-
-    // PWA: Cài đặt app
-    function installApp() {
-      if (deferredPrompt) {
-        deferredPrompt.prompt();
-        deferredPrompt.userChoice.then((choiceResult) => {
-          if (choiceResult.outcome === 'accepted') {
-            console.log('Người dùng đã chấp nhận cài đặt');
-            localStorage.setItem('appInstalled', 'true');
-            closeInstallPrompt();
-          } else {
-            console.log('Người dùng từ chối cài đặt');
-          }
-        });
-      }
-    }
-
-    // Đóng prompt cài đặt
-    function closeInstallPrompt() {
-      document.getElementById('installPrompt').style.display = 'none';
-    }
-
-    // ĐĂNG KÝ SERVICE WORKER THÔNG MINH
-    if ('serviceWorker' in navigator) {
-        window.addEventListener('load', function() {
-            navigator.serviceWorker.register('sw.js')
-                .then(function(registration) {
-                    console.log('✅ Service Worker registered: ', registration);
-        
-                    // Kiểm tra update mỗi giờ
-                    setInterval(() => {
-                     registration.update();
-                    }, 60 * 60 * 1000);
-                })
-                .catch(function(error) {
-                    console.log('❌ Service Worker failed: ', error);
-                    });
-                });
-    }
-
-    // PWA: Thêm sự kiện appinstalled
-    window.addEventListener('appinstalled', (evt) => {
-      console.log('Ứng dụng đã được cài đặt thành công');
-      localStorage.setItem('appInstalled', 'true');
-    });
-  </script>
+  <script src="assets/js/app.js"></script>
 </body>
 </html>
