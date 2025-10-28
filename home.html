@@ -1,0 +1,1117 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <!-- THÊM CÁC META TAG CHỐNG CACHE -->
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+  <meta http-equiv="Pragma" content="no-cache">
+  <meta http-equiv="Expires" content="0">
+  
+  <title>12AT1 - Chào Mừng 20/11</title>
+  <link rel="icon" type="image/png" href="favicon.png?v=2">
+  <link rel="apple-touch-icon" href="assets/icons/apple-touch-icon.png?v=2">
+  <link rel="apple-touch-icon" sizes="180x180" href="assets/icons/apple-touch-icon.png?v=2">
+  <!-- THÊM VERSION VÀO CÁC FILE EXTERNAL -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css?version=1" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@300;400;500;600;700&display=swap&version=1" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="manifest" href="manifest.json" crossorigin="use-credentials">
+  <meta name="theme-color" content="#8B5FBF">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="12AT1">
+
+  <style>
+    :root {
+      --primary: #8B5FBF;
+      --primary-light: #9B72D2;
+      --primary-dark: #6A4A8C;
+      --secondary: #FF6B8B;
+      --secondary-light: #FF8FA3;
+      --secondary-dark: #E84566;
+      --accent: #FFD166;
+      --text-light: #f8f9fa;
+      --text-dark: #2D3047;
+      --background: #FFF9FB;
+      --card-bg: #ffffff;
+      --shadow: 0 4px 15px rgba(139, 95, 191, 0.1);
+      --shadow-hover: 0 8px 25px rgba(139, 95, 191, 0.15);
+      --border-radius: 16px;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Be Vietnam Pro', sans-serif;
+      background: linear-gradient(135deg, #FFF9FB 0%, #F8F4FF 100%);
+      color: var(--text-dark);
+      padding-top: 80px;
+      padding-bottom: 60px;
+      transition: all 0.3s ease;
+      line-height: 1.6;
+    }
+
+    h1, h2, h3, h4, h5 {
+      font-weight: 700;
+      color: var(--primary-dark);
+    }
+
+    .navbar {
+      background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+      box-shadow: var(--shadow);
+      padding: 12px 0;
+      transition: all 0.3s ease;
+    }
+
+    .navbar-brand {
+      font-weight: 700;
+      font-size: 1.5rem;
+      display: flex;
+      align-items: center;
+      color: white !important;
+    }
+
+    .navbar-brand i {
+      margin-right: 8px;
+      color: var(--accent) !important;
+    }
+
+    .nav-link {
+      font-weight: 500;
+      position: relative;
+      margin: 0 5px;
+      border-radius: 8px;
+      transition: all 0.3s ease;
+      color: white !important;
+    }
+
+    .nav-link:hover, .nav-link.active {
+      background-color: rgba(255, 255, 255, 0.15);
+      color: white !important;
+      transform: translateY(-2px);
+    }
+
+    .nav-link.active::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 30px;
+      height: 3px;
+      background: var(--accent);
+      border-radius: 2px;
+    }
+
+    .hero-section {
+      background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+      color: white;
+      padding: 40px 0;
+      border-radius: 0 0 30px 30px;
+      margin-bottom: 40px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-section::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="%23ffffff" fill-opacity="0.1" d="M0,96L48,112C96,128,192,160,288,186.7C384,213,480,235,576,213.3C672,192,768,128,864,128C960,128,1056,192,1152,192C1248,192,1344,128,1392,96L1440,64L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path></svg>');
+      background-size: cover;
+      background-position: center;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 1;
+      text-align: center;
+    }
+
+    .hero-title {
+      font-size: 2.5rem;
+      font-weight: 700;
+      margin-bottom: 15px;
+      color: white;
+      text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+    }
+
+    .hero-subtitle {
+      font-size: 1.2rem;
+      opacity: 0.95;
+      margin-bottom: 25px;
+      color: white;
+    }
+
+    .special-date {
+      background: var(--accent);
+      color: var(--text-dark);
+      padding: 8px 20px;
+      border-radius: 50px;
+      font-weight: 600;
+      display: inline-block;
+      margin-bottom: 20px;
+      box-shadow: 0 4px 15px rgba(255, 209, 102, 0.4);
+    }
+
+    /* BẢNG TỔNG HỢP */
+    .summary-table {
+      background: var(--card-bg);
+      border-radius: var(--border-radius);
+      box-shadow: var(--shadow);
+      padding: 25px;
+      margin: 25px auto;
+      max-width: 500px;
+      transition: all 0.3s ease;
+      border: 2px solid var(--primary-light);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .summary-table::before {
+      content: '🎓';
+      position: absolute;
+      top: -10px;
+      right: -10px;
+      font-size: 4rem;
+      opacity: 0.1;
+      transform: rotate(15deg);
+    }
+
+    .summary-table:hover {
+      box-shadow: var(--shadow-hover);
+      transform: translateY(-5px);
+    }
+
+    .table-header {
+      text-align: center;
+      margin-bottom: 20px;
+      padding-bottom: 15px;
+      border-bottom: 3px solid var(--primary-light);
+      position: relative;
+    }
+
+    .table-header h3 {
+      color: var(--primary-dark);
+      font-weight: 700;
+      margin: 0;
+      font-size: 1.3rem;
+    }
+
+    .table-content {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 15px 20px;
+      background: linear-gradient(135deg, rgba(139, 95, 191, 0.05), rgba(255, 107, 139, 0.05));
+      border-radius: 12px;
+    }
+
+    .table-item {
+      text-align: center;
+      flex: 1;
+    }
+
+    .table-item:first-child {
+      border-right: 2px dashed var(--primary-light);
+    }
+
+    .table-label {
+      font-size: 0.85rem;
+      color: var(--primary-dark);
+      margin-bottom: 5px;
+      font-weight: 500;
+    }
+
+    .table-value {
+      font-size: 1.4rem;
+      font-weight: 700;
+      color: var(--primary);
+      margin: 8px 0;
+    }
+
+    .subject-category {
+      margin-bottom: 25px;
+      background: var(--card-bg);
+      border-radius: var(--border-radius);
+      box-shadow: var(--shadow);
+      overflow: hidden;
+      transition: all 0.3s ease;
+      border: 1px solid rgba(139, 95, 191, 0.1);
+    }
+
+    .subject-category:hover {
+      box-shadow: var(--shadow-hover);
+    }
+
+    .category-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 20px 25px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      background: linear-gradient(135deg, var(--primary-light), var(--primary));
+      color: white;
+    }
+
+    .category-header:hover {
+      background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+    }
+
+    .category-header.active {
+      background: linear-gradient(135deg, var(--primary-dark), var(--primary));
+    }
+
+    .category-left {
+      display: flex;
+      align-items: center;
+      flex: 1;
+      min-width: 0;
+    }
+
+    .category-icon {
+      font-size: 1.4rem;
+      margin-right: 15px;
+      color: var(--accent);
+      background: rgba(255, 255, 255, 0.2);
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.3s ease;
+      flex-shrink: 0;
+    }
+
+    .category-header.active .category-icon {
+      transform: scale(1.05);
+    }
+
+    .category-title {
+      font-size: 1.3rem;
+      font-weight: 700;
+      color: white;
+      margin: 0;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .toggle-icon {
+      font-size: 1.1rem;
+      color: var(--accent);
+      transition: all 0.3s ease;
+      flex-shrink: 0;
+    }
+
+    .category-header.active .toggle-icon {
+      transform: rotate(180deg);
+    }
+
+    .category-content {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.4s ease, padding 0.3s ease;
+    }
+
+    .category-content.open {
+      max-height: 1000px;
+      padding: 0 25px 25px;
+    }
+
+    .subject-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 20px;
+      padding-top: 20px;
+    }
+
+    .subject-card {
+      background: var(--card-bg);
+      border-radius: 15px;
+      box-shadow: var(--shadow);
+      padding: 20px;
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+      border: 1px solid rgba(139, 95, 191, 0.1);
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .subject-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 4px;
+      background: linear-gradient(90deg, var(--primary), var(--secondary));
+    }
+
+    .subject-card:hover {
+      transform: translateY(-5px);
+      box-shadow: var(--shadow-hover);
+    }
+
+    .subject-card h5 {
+      font-weight: 600;
+      margin-bottom: 10px;
+      color: var(--primary-dark);
+      font-size: 1.1rem;
+    }
+
+    .subject-card p {
+      color: #6c757d;
+      font-size: 0.9rem;
+      margin-bottom: 15px;
+      flex-grow: 1;
+    }
+
+    .btn-test {
+      background: linear-gradient(135deg, var(--primary), var(--primary-light));
+      color: white;
+      border: none;
+      padding: 8px 16px;
+      border-radius: 50px;
+      font-weight: 600;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 15px rgba(139, 95, 191, 0.3);
+      width: 100%;
+      font-size: 0.85rem;
+    }
+
+    .btn-test i {
+      margin-left: 5px;
+      font-size: 0.75rem;
+    }
+
+    .btn-test:hover {
+      background: linear-gradient(135deg, var(--primary-dark), var(--primary));
+      color: white;
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(139, 95, 191, 0.4);
+    }
+
+    .section-title {
+      text-align: center;
+      margin-bottom: 40px;
+      position: relative;
+      padding-bottom: 15px;
+      font-size: 1.6rem;
+      color: var(--primary-dark);
+    }
+
+    .section-title::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 80px;
+      height: 4px;
+      background: linear-gradient(90deg, var(--primary), var(--secondary));
+      border-radius: 2px;
+    }
+
+    footer {
+      background: linear-gradient(135deg, var(--primary-dark), var(--primary));
+      color: var(--text-light);
+      text-align: center;
+      padding: 30px 0;
+      margin-top: 60px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    footer::before {
+      content: '❤️';
+      position: absolute;
+      top: 10px;
+      left: 10%;
+      font-size: 2rem;
+      opacity: 0.1;
+    }
+
+    footer::after {
+      content: '🌸';
+      position: absolute;
+      bottom: 10px;
+      right: 10%;
+      font-size: 2rem;
+      opacity: 0.1;
+    }
+
+    .footer-content {
+      position: relative;
+      z-index: 1;
+    }
+
+    .footer-logo {
+      font-size: 1.5rem;
+      font-weight: 700;
+      margin-bottom: 10px;
+      color: white;
+    }
+
+    .footer-logo i {
+      color: var(--accent);
+      margin-right: 8px;
+    }
+
+    .footer-content p {
+      font-size: 1rem;
+      margin-bottom: 20px;
+      opacity: 0.9;
+    }
+
+    .footer-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 15px;
+      margin: 20px 0;
+      justify-content: center;
+    }
+
+    .footer-links a {
+      color: var(--text-light);
+      text-decoration: none;
+      transition: all 0.3s ease;
+      font-size: 0.9rem;
+      padding: 8px 16px;
+      border-radius: 20px;
+      background: rgba(255, 255, 255, 0.1);
+    }
+
+    .footer-links a:hover {
+      color: var(--accent);
+      background: rgba(255, 255, 255, 0.2);
+      transform: translateY(-2px);
+    }
+
+    .copyright {
+      margin-top: 15px;
+      font-size: 0.85rem;
+      opacity: 0.8;
+    }
+
+    /* SỬA LẠI RESPONSIVE CHO MOBILE */
+    @media (max-width: 768px) {
+      body {
+        padding-top: 70px;
+        padding-bottom: 50px;
+      }
+      
+      .container {
+        padding-left: 12px;
+        padding-right: 12px;
+      }
+      
+      .hero-section {
+        padding: 30px 0;
+        margin-bottom: 30px;
+        border-radius: 0 0 20px 20px;
+      }
+      
+      .hero-title {
+        font-size: 2rem;
+        margin-bottom: 10px;
+      }
+      
+      .hero-subtitle {
+        font-size: 1rem;
+        margin-bottom: 20px;
+      }
+      
+      .special-date {
+        font-size: 0.9rem;
+        padding: 6px 16px;
+      }
+      
+      /* BẢNG TỔNG HỢP TRÊN MOBILE */
+      .summary-table {
+        padding: 20px;
+        margin: 20px auto;
+        max-width: 100%;
+      }
+      
+      .table-header h3 {
+        font-size: 1.2rem;
+      }
+      
+      .table-content {
+        padding: 12px 15px;
+        flex-direction: column;
+        gap: 15px;
+      }
+      
+      .table-item:first-child {
+        border-right: none;
+        border-bottom: 2px dashed var(--primary-light);
+        padding-bottom: 15px;
+      }
+      
+      .table-value {
+        font-size: 1.3rem;
+      }
+      
+      .table-label {
+        font-size: 0.8rem;
+      }
+      
+      /* CATEGORY HEADER TRÊN MOBILE */
+      .category-header {
+        padding: 15px 20px;
+      }
+      
+      .category-icon {
+        width: 40px;
+        height: 40px;
+        font-size: 1.2rem;
+        margin-right: 12px;
+      }
+      
+      .category-title {
+        font-size: 1.1rem;
+      }
+      
+      .toggle-icon {
+        font-size: 1rem;
+      }
+      
+      .category-content.open {
+        padding: 0 20px 20px;
+      }
+      
+      .subject-grid {
+        grid-template-columns: 1fr;
+        gap: 15px;
+      }
+      
+      /* SUBJECT CARD TRÊN MOBILE */
+      .subject-card {
+        padding: 15px;
+      }
+      
+      .subject-card h5 {
+        font-size: 1rem;
+        margin-bottom: 8px;
+      }
+      
+      .subject-card p {
+        font-size: 0.85rem;
+        margin-bottom: 12px;
+      }
+      
+      .btn-test {
+        padding: 8px 14px;
+        font-size: 0.85rem;
+      }
+      
+      /* SECTION TITLE TRÊN MOBILE */
+      .section-title {
+        font-size: 1.3rem;
+        margin-bottom: 30px;
+        padding-bottom: 12px;
+      }
+      
+      /* NAVBAR TRÊN MOBILE */
+      .navbar-brand {
+        font-size: 1.3rem;
+      }
+      
+      .nav-link {
+        font-size: 0.9rem;
+        padding: 8px 12px;
+      }
+      
+      /* FOOTER TRÊN MOBILE */
+      footer {
+        margin-top: 40px;
+        padding: 25px 0;
+      }
+      
+      .footer-logo {
+        font-size: 1.3rem;
+      }
+      
+      .footer-content p {
+        font-size: 0.9rem;
+      }
+      
+      .footer-links {
+        gap: 10px;
+      }
+      
+      .footer-links a {
+        font-size: 0.85rem;
+        padding: 6px 12px;
+      }
+      
+      .copyright {
+        font-size: 0.8rem;
+      }
+    }
+
+    /* Điều chỉnh cho màn hình rất nhỏ */
+    @media (max-width: 480px) {
+      .hero-title {
+        font-size: 1.6rem;
+      }
+      
+      .hero-subtitle {
+        font-size: 0.9rem;
+      }
+      
+      .section-title {
+        font-size: 1.2rem;
+      }
+      
+      .category-title {
+        font-size: 1rem;
+      }
+      
+      .container {
+        padding-left: 10px;
+        padding-right: 10px;
+      }
+    }
+
+    /* Animation */
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .fade-in {
+      animation: fadeIn 0.6s ease forwards;
+    }
+
+    .delay-1 { animation-delay: 0.1s; }
+    .delay-2 { animation-delay: 0.2s; }
+    .delay-3 { animation-delay: 0.3s; }
+    .delay-4 { animation-delay: 0.4s; }
+
+    /* Scroll to top button */
+    .scroll-to-top {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background: var(--primary);
+      color: white;
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      box-shadow: var(--shadow);
+      transition: all 0.3s ease;
+      z-index: 100;
+      opacity: 0;
+      visibility: hidden;
+    }
+
+    .scroll-to-top.show {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .scroll-to-top:hover {
+      background: var(--primary-dark);
+      transform: translateY(-3px);
+    }
+
+    /* Hiệu ứng trái tim bay */
+    .floating-hearts {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: -1;
+    }
+
+    .heart {
+      position: absolute;
+      font-size: 20px;
+      opacity: 0;
+      animation: float 6s ease-in-out infinite;
+    }
+
+    @keyframes float {
+      0% {
+        transform: translateY(100vh) rotate(0deg);
+        opacity: 0;
+      }
+      10% {
+        opacity: 0.3;
+      }
+      90% {
+        opacity: 0.3;
+      }
+      100% {
+        transform: translateY(-100px) rotate(360deg);
+        opacity: 0;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Hiệu ứng trái tim bay -->
+  <div class="floating-hearts" id="heartsContainer"></div>
+
+  <!-- Thanh menu -->
+  <nav class="navbar navbar-expand-lg fixed-top">
+    <div class="container">
+      <a class="navbar-brand" href="#">
+        <i class="fas fa-graduation-cap"></i>
+        <span>12AT1 - 20/11</span>
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item"><a class="nav-link active" href="index.html"><i class="fas fa-home"></i> Trang Chủ</a></li>
+          <li class="nav-item"><a class="nav-link" href="tkb.html"><i class="fas fa-calendar-alt"></i> Thời Khóa Biểu</a></li>
+          <li class="nav-item"><a class="nav-link" href="#"><i class="fa-solid fa-crown"></i> AZOTA VIP</a></li>
+          <li class="nav-item"><a class="nav-link" href="#"><i class="fas fa-book"></i> Tài Liệu</a></li>
+          <li class="nav-item"><a class="nav-link" href="#"><i class="fas fa-info-circle"></i> Giới Thiệu</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <section class="hero-section">
+    <div class="container hero-content">
+      <div class="special-date">🎉 Chào Mừng 20/11 🎉</div>
+      <h1 class="hero-title">12AT1</h1>
+      <p class="hero-subtitle">AZOTA</p>
+      
+      <!-- BẢNG TỔNG HỢP -->
+      <div class="summary-table fade-in">
+        <div class="table-header">
+          <h3>Tổng Hợp Link Azota</h3>
+        </div>
+        <div class="table-content">
+          <div class="table-item">
+            <div class="table-label">Tổng Số</div>
+            <div class="table-value">5</div>
+            <div class="table-label">Môn Học</div>
+          </div>
+          <div class="table-item">
+            <div class="table-label">Bài Tập</div>
+            <div class="table-value">13</div>
+            <div class="table-label">Link Azota</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Main Content -->
+  <div class="container">
+    <h2 class="section-title">AZOTA Các Môn Học</h2>
+    
+    <!-- Môn Địa Lý -->
+    <div class="subject-category fade-in">
+      <div class="category-header" onclick="toggleCategory('dia-ly')">
+        <div class="category-left">
+          <div class="category-icon">
+            <i class="fas fa-globe-asia"></i>
+          </div>
+          <h3 class="category-title">Địa Lý</h3>
+        </div>
+        <div class="toggle-icon">
+          <i class="fas fa-chevron-down"></i>
+        </div>
+      </div>
+      <div class="category-content" id="dia-ly">
+        <div class="subject-grid">
+          <div class="subject-card">
+            <h5>ĐỊA LÍ FULL</h5>
+            <p>Trắc nghiệm và Đúng sai</p>
+            <a href="https://azota.vn/de-thi/udtjm5" class="btn btn-test">Làm Bài <i class="fas fa-external-link-alt"></i></a>
+          </div>
+          
+          <div class="subject-card">
+            <h5>ĐỊA TRẮC NGHIỆM</h5>
+            <p>Trắc nghiệm</p>
+            <a href="https://azota.vn/de-thi/vdbmen" class="btn btn-test">Làm Bài <i class="fas fa-external-link-alt"></i></a>
+          </div>
+          
+          <div class="subject-card">
+            <h5>ĐỊA ĐÚNG SAI</h5>
+            <p>Đúng sai</p>
+            <a href="https://azota.vn/de-thi/dpqhqm" class="btn btn-test">Làm Bài <i class="fas fa-external-link-alt"></i></a>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Môn Vật Lý -->
+    <div class="subject-category fade-in delay-1">
+      <div class="category-header" onclick="toggleCategory('vat-ly')">
+        <div class="category-left">
+          <div class="category-icon">
+            <i class="fas fa-atom"></i>
+          </div>
+          <h3 class="category-title">Vật Lý</h3>
+        </div>
+        <div class="toggle-icon">
+          <i class="fas fa-chevron-down"></i>
+        </div>
+      </div>
+      <div class="category-content" id="vat-ly">
+        <div class="subject-grid">
+          <div class="subject-card">
+            <h5>VẬT LÍ FULL</h5>
+            <p>Trắc nghiệm và Đúng sai</p>
+            <a href="https://azota.vn/de-thi/ggjlzj" class="btn btn-test">Làm Bài <i class="fas fa-external-link-alt"></i></a>
+          </div>
+          
+          <div class="subject-card">
+            <h5>VẬT LÍ TRẮC NGHIỆM</h5>
+            <p>Trắc nghiệm</p>
+            <a href="https://azota.vn/de-thi/siqx3v" class="btn btn-test">Làm Bài <i class="fas fa-external-link-alt"></i></a>
+          </div>
+          
+          <div class="subject-card">
+            <h5>VẬT LÍ ĐÚNG SAI</h5>
+            <p>Đúng sai</p>
+            <a href="https://azota.vn/de-thi/1fbzpn" class="btn btn-test">Làm Bài <i class="fas fa-external-link-alt"></i></a>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Môn Hóa Học -->
+    <div class="subject-category fade-in delay-2">
+      <div class="category-header" onclick="toggleCategory('hoa-hoc')">
+        <div class="category-left">
+          <div class="category-icon">
+            <i class="fas fa-flask"></i>
+          </div>
+          <h3 class="category-title">Hóa Học</h3>
+        </div>
+        <div class="toggle-icon">
+          <i class="fas fa-chevron-down"></i>
+        </div>
+      </div>
+      <div class="category-content" id="hoa-hoc">
+        <div class="subject-grid">
+          <div class="subject-card">
+            <h5>HÓA FULL</h5>
+            <p>Trắc nghiệm và Đúng sai</p>
+            <a href="https://azota.vn/de-thi/f28hvi" class="btn btn-test">Làm Bài <i class="fas fa-external-link-alt"></i></a>
+          </div>
+          
+          <div class="subject-card">
+            <h5>HÓA TRẮC NGHIỆM</h5>
+            <p>Trắc nghiệm</p>
+            <a href="https://azota.vn/de-thi/7idtt5" class="btn btn-test">Làm Bài <i class="fas fa-external-link-alt"></i></a>
+          </div>
+          
+          <div class="subject-card">
+            <h5>HÓA ĐÚNG SAI</h5>
+            <p>Đúng sai</p>
+            <a href="https://azota.vn/de-thi/1y9g7o" class="btn btn-test">Làm Bài <i class="fas fa-external-link-alt"></i></a>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Môn Lịch Sử -->
+    <div class="subject-category fade-in delay-3">
+      <div class="category-header" onclick="toggleCategory('lich-su')">
+        <div class="category-left">
+          <div class="category-icon">
+            <i class="fas fa-monument"></i>
+          </div>
+          <h3 class="category-title">Lịch Sử</h3>
+        </div>
+        <div class="toggle-icon">
+          <i class="fas fa-chevron-down"></i>
+        </div>
+      </div>
+      <div class="category-content" id="lich-su">
+        <div class="subject-grid">
+          <div class="subject-card">
+            <h5>LỊCH SỬ FULL</h5>
+            <p>Trắc nghiệm và Đúng sai</p>
+            <a href="https://azota.vn/de-thi/qnjmib" class="btn btn-test">Làm Bài <i class="fas fa-external-link-alt"></i></a>
+          </div>
+          
+          <div class="subject-card">
+            <h5>SỬ TRẮC NGHIỆM</h5>
+            <p>Trắc nghiệm</p>
+            <a href="https://azota.vn/de-thi/ivkjn0" class="btn btn-test">Làm Bài <i class="fas fa-external-link-alt"></i></a>
+          </div>
+          
+          <div class="subject-card">
+            <h5>SỬ ĐÚNG SAI</h5>
+            <p>Đúng sai</p>
+            <a href="https://azota.vn/de-thi/zd9tsp" class="btn btn-test">Làm Bài <i class="fas fa-external-link-alt"></i></a>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Môn Tin Học -->
+    <div class="subject-category fade-in delay-4">
+      <div class="category-header" onclick="toggleCategory('tin-hoc')">
+        <div class="category-left">
+          <div class="category-icon">
+            <i class="fas fa-laptop-code"></i>
+          </div>
+          <h3 class="category-title">Tin Học</h3>
+        </div>
+        <div class="toggle-icon">
+          <i class="fas fa-chevron-down"></i>
+        </div>
+      </div>
+      <div class="category-content" id="tin-hoc">
+        <div class="subject-grid">
+          <div class="subject-card">
+            <h5>TIN HỌC</h5>
+            <p>Trắc nghiệm và Đúng sai</p>
+            <a href="https://azota.vn/de-thi/gprlqe" class="btn btn-test">Làm Bài <i class="fas fa-external-link-alt"></i></a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container footer-content">
+      <div class="footer-logo">
+        <i class="fas fa-graduation-cap"></i>
+        12AT1
+      </div>
+      <p>12AT1</p>
+      <div class="footer-links">
+        <a href="index.html"><i class="fas fa-home"></i> Trang Chủ</a>
+        <a href="tkb.html"><i class="fas fa-calendar-alt"></i> Thời Khóa Biểu</a>
+        <a href="#"><i class="fas fa-clipboard-check"></i> Kiểm Tra</a>
+        <a href="#"><i class="fas fa-book"></i> Tài Liệu</a>
+        <a href="#"><i class="fas fa-info-circle"></i> Giới Thiệu</a>
+      </div>
+      <div class="copyright">
+        © DESIGNED & MANUFACTURED By HuIt DatViet 2025 ALL RIGHTS RESERVED
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scroll to top button -->
+  <div class="scroll-to-top">
+    <i class="fas fa-chevron-up"></i>
+  </div>
+
+  <!-- Scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+    // Hiệu ứng trái tim bay
+    function createHearts() {
+      const container = document.getElementById('heartsContainer');
+      const hearts = ['❤️', '💖', '💝', '🌸', '🎓', '📚'];
+      
+      for (let i = 0; i < 12; i++) {
+        const heart = document.createElement('div');
+        heart.className = 'heart';
+        heart.textContent = hearts[Math.floor(Math.random() * hearts.length)];
+        heart.style.left = Math.random() * 100 + 'vw';
+        heart.style.animationDelay = Math.random() * 6 + 's';
+        heart.style.fontSize = (Math.random() * 15 + 12) + 'px';
+        container.appendChild(heart);
+      }
+    }
+
+    // Function to toggle category open/close
+    function toggleCategory(categoryId) {
+      const categoryContent = document.getElementById(categoryId);
+      const categoryHeader = categoryContent.previousElementSibling;
+      
+      if (categoryContent.classList.contains('open')) {
+        categoryContent.classList.remove('open');
+        categoryHeader.classList.remove('active');
+      } else {
+        categoryContent.classList.add('open');
+        categoryHeader.classList.add('active');
+      }
+    }
+
+    // Scroll to top functionality
+    const scrollToTopBtn = document.querySelector('.scroll-to-top');
+    
+    window.addEventListener('scroll', () => {
+      if (window.pageYOffset > 300) {
+        scrollToTopBtn.classList.add('show');
+      } else {
+        scrollToTopBtn.classList.remove('show');
+      }
+    });
+    
+    scrollToTopBtn.addEventListener('click', () => {
+      window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+      });
+    });
+
+    // Navbar scroll effect
+    window.addEventListener('scroll', function() {
+      const navbar = document.querySelector('.navbar');
+      if (window.scrollY > 50) {
+        navbar.style.padding = '8px 0';
+        navbar.style.boxShadow = '0 4px 12px rgba(0, 0, 0, 0.15)';
+      } else {
+        navbar.style.padding = '12px 0';
+        navbar.style.boxShadow = 'var(--shadow)';
+      }
+    });
+
+    // Animation on scroll
+    const observerOptions = {
+      threshold: 0.1,
+      rootMargin: '0px 0px -50px 0px'
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('fade-in');
+        }
+      });
+    }, observerOptions);
+
+    // Observe all subject categories
+    document.querySelectorAll('.subject-category').forEach(category => {
+      observer.observe(category);
+    });
+
+    // Khởi tạo hiệu ứng trái tim
+    document.addEventListener('DOMContentLoaded', function() {
+      createHearts();
+    });
+  </script>
+</body>
+</html>
