@@ -666,8 +666,7 @@
         font-size: 0.8rem;
       }
     }
-
-    /* Điều chỉnh cho màn hình rất nhỏ */
+
     @media (max-width: 480px) {
       .hero-title {
         font-size: 1.6rem;
@@ -690,8 +689,7 @@
         padding-right: 10px;
       }
     }
-
-    /* Animation */
+
     @keyframes fadeIn {
       from { opacity: 0; transform: translateY(20px); }
       to { opacity: 1; transform: translateY(0); }
@@ -736,8 +734,7 @@
       background: var(--primary-dark);
       transform: translateY(-3px);
     }
-
-    /* Hiệu ứng trái tim bay */
+
     .floating-hearts {
       position: fixed;
       top: 0;
@@ -773,11 +770,9 @@
     }
   </style>
 </head>
-<body>
-  <!-- Hiệu ứng trái tim bay -->
+<body>
   <div class="floating-hearts" id="heartsContainer"></div>
 
-  <!-- Thanh menu -->
   <nav class="navbar navbar-expand-lg fixed-top">
     <div class="container">
       <a class="navbar-brand" href="#">
@@ -798,15 +793,13 @@
       </div>
     </div>
   </nav>
-
-  <!-- Hero Section -->
+
   <section class="hero-section">
     <div class="container hero-content">
       <div class="special-date">🎉 Chào Mừng 20/11 🎉</div>
       <h1 class="hero-title">12AT1</h1>
       <p class="hero-subtitle">AZOTA</p>
-      
-      <!-- BẢNG TỔNG HỢP -->
+      
       <div class="summary-table fade-in">
         <div class="table-header">
           <h3>Tổng Hợp Link Azota</h3>
@@ -826,12 +819,10 @@
       </div>
     </div>
   </section>
-
-  <!-- Main Content -->
+
   <div class="container">
     <h2 class="section-title">AZOTA Các Môn Học</h2>
-    
-    <!-- Môn Địa Lý -->
+    
     <div class="subject-category fade-in">
       <div class="category-header" onclick="toggleCategory('dia-ly')">
         <div class="category-left">
@@ -866,8 +857,7 @@
         </div>
       </div>
     </div>
-    
-    <!-- Môn Vật Lý -->
+    
     <div class="subject-category fade-in delay-1">
       <div class="category-header" onclick="toggleCategory('vat-ly')">
         <div class="category-left">
