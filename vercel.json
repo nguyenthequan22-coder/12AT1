@@ -1,0 +1,35 @@
+{
+  "version": 2,
+  "builds": [
+    {
+      "src": "**/*.html",
+      "use": "@vercel/static"
+    }
+  ],
+  "routes": [
+    {
+      "src": "/trang-chu",
+      "dest": "/index.html"
+    },
+    {
+      "src": "/home", 
+      "dest": "/index.html"
+    },
+    {
+      "src": "/thoi-khoa-bieu",
+      "dest": "/tkb.html"
+    },
+    {
+      "src": "/lich-hoc",
+      "dest": "/tkb.html"
+    },
+    {
+      "src": "/timetable",
+      "dest": "/tkb.html"
+    },
+    {
+      "src": "/",
+      "dest": "/index.html"
+    }
+  ]
+}

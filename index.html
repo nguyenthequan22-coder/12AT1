@@ -1,0 +1,1085 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>12AT1 - Trang chủ</title>
+  <link rel="icon" type="image/png" href="favicon.png">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #C62828;
+      --primary-light: #EF5350;
+      --primary-dark: #B71C1C;
+      --secondary: #FFD54F;
+      --accent: #4CAF50;
+      --light: #FFF8E1;
+      --dark: #212529;
+      --gray: #6C757D;
+      --bg-gradient: linear-gradient(135deg, #FFEBEE 0%, #FFF8E1 50%, #E8F5E8 100%);
+      --card-bg: rgba(255, 255, 255, 0.98);
+      --shadow: 0 4px 15px rgba(198, 40, 40, 0.1);
+      --shadow-hover: 0 8px 25px rgba(198, 40, 40, 0.15);
+      --border-radius: 14px;
+      --transition: all 0.3s ease;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: var(--bg-gradient);
+      color: var(--dark);
+      line-height: 1.5;
+      overflow-x: hidden;
+      min-height: 100vh;
+      position: relative;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 1rem;
+    }
+
+    /* Header */
+    .header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      background: rgba(255, 255, 255, 0.98);
+      backdrop-filter: blur(10px);
+      z-index: 1000;
+      padding: 0.6rem 0;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      border-bottom: 2px solid var(--secondary);
+    }
+
+    .nav-container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 1rem;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-weight: 700;
+      font-size: 1.1rem;
+      color: var(--primary);
+      text-decoration: none;
+    }
+
+    .logo-icon {
+      width: 36px;
+      height: 36px;
+      background: linear-gradient(135deg, var(--primary), var(--primary-light));
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 1rem;
+    }
+
+    /* Desktop Navigation */
+    .desktop-nav {
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+    }
+
+    .desktop-nav .nav-link {
+      color: var(--dark);
+      text-decoration: none;
+      font-weight: 500;
+      font-size: 0.9rem;
+      padding: 0.5rem 1rem;
+      border-radius: 8px;
+      transition: var(--transition);
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .desktop-nav .nav-link:hover,
+    .desktop-nav .nav-link.active {
+      color: var(--primary);
+      background: rgba(198, 40, 40, 0.1);
+    }
+
+    .desktop-nav .vip-link {
+      color: var(--primary);
+      font-weight: 600;
+    }
+
+    .desktop-nav .vip-link i {
+      color: #FFB74D;
+    }
+
+    /* Dropdown Menu Styles (Mobile) */
+    .dropdown-menu {
+      display: none;
+      position: relative;
+    }
+
+    .menu-toggle {
+      background: none;
+      border: 2px solid var(--primary);
+      font-size: 1rem;
+      color: var(--primary);
+      cursor: pointer;
+      padding: 0.5rem 1rem;
+      border-radius: 8px;
+      transition: var(--transition);
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-weight: 600;
+    }
+
+    .menu-toggle:hover {
+      background: rgba(198, 40, 40, 0.1);
+      transform: translateY(-2px);
+    }
+
+    .menu-toggle i {
+      font-size: 1.1rem;
+      transition: var(--transition);
+    }
+
+    .menu-toggle.active i {
+      transform: rotate(180deg);
+    }
+
+    .dropdown-content {
+      position: absolute;
+      top: 100%;
+      right: 0;
+      background: white;
+      min-width: 200px;
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+      border-radius: 12px;
+      padding: 0.5rem 0;
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(-10px);
+      transition: var(--transition);
+      z-index: 1001;
+      border: 2px solid var(--secondary);
+    }
+
+    .dropdown-content.active {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0);
+    }
+
+    .nav-links {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+
+    .nav-link {
+      color: var(--dark);
+      text-decoration: none;
+      font-weight: 500;
+      font-size: 0.9rem;
+      padding: 0.8rem 1.2rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      transition: var(--transition);
+      border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+    }
+
+    .nav-link:last-child {
+      border-bottom: none;
+    }
+
+    .nav-link:hover,
+    .nav-link.active {
+      color: var(--primary);
+      background: rgba(198, 40, 40, 0.1);
+    }
+
+    .vip-link {
+      color: var(--primary);
+      font-weight: 600;
+    }
+
+    .vip-link i {
+      color: #FFB74D;
+    }
+
+    /* Hero Section */
+    .hero {
+      padding: 5rem 1rem 2rem;
+      text-align: center;
+      width: 100%;
+    }
+
+    .hero-title {
+      font-size: 2rem;
+      font-weight: 800;
+      background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 0.5rem;
+      line-height: 1.2;
+    }
+
+    .hero-subtitle {
+      font-size: 1.1rem;
+      color: var(--primary);
+      margin-bottom: 1.5rem;
+      font-weight: 600;
+    }
+
+    .festive-elements {
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      margin: 2rem 0;
+      flex-wrap: wrap;
+    }
+
+    .festive-element {
+      width: 45px;
+      height: 45px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.2rem;
+      background: white;
+      box-shadow: var(--shadow);
+      animation: float 6s ease-in-out infinite;
+      border: 2px solid var(--secondary);
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0px); }
+      50% { transform: translateY(-8px); }
+    }
+
+    /* Summary Cards */
+    .summary-section {
+      margin: 0 auto 2.5rem;
+      width: 100%;
+    }
+
+    .summary-cards {
+      display: flex;
+      justify-content: center;
+      gap: 1.5rem;
+      width: 100%;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    .summary-card {
+      background: var(--card-bg);
+      border-radius: var(--border-radius);
+      padding: 1.2rem 1.5rem;
+      box-shadow: var(--shadow);
+      transition: var(--transition);
+      text-align: center;
+      border: 2px solid var(--secondary);
+      flex: 1;
+      min-width: 0;
+      max-width: 280px;
+      min-height: 120px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .summary-card:hover {
+      transform: translateY(-5px);
+      box-shadow: var(--shadow-hover);
+    }
+
+    .summary-icon {
+      width: 45px;
+      height: 45px;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 0.6rem;
+      font-size: 1.2rem;
+      color: white;
+    }
+
+    .summary-icon.primary {
+      background: linear-gradient(135deg, var(--primary), var(--primary-light));
+    }
+
+    .summary-icon.secondary {
+      background: linear-gradient(135deg, var(--secondary), #FFB74D);
+    }
+
+    .summary-number {
+      font-size: 2.2rem;
+      font-weight: 800;
+      margin-bottom: 0.2rem;
+      background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      line-height: 1;
+    }
+
+    .summary-label {
+      color: var(--primary);
+      font-weight: 600;
+      font-size: 1rem;
+      line-height: 1.2;
+    }
+
+    /* Subjects Section */
+    .subjects-section {
+      margin: 0 auto 2.5rem;
+      width: 100%;
+      max-width: 800px;
+    }
+
+    .section-title {
+      text-align: center;
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: var(--primary);
+      margin-bottom: 1.5rem;
+      position: relative;
+    }
+
+    .section-title::after {
+      content: '';
+      display: block;
+      width: 60px;
+      height: 4px;
+      background: var(--secondary);
+      margin: 0.5rem auto;
+      border-radius: 2px;
+    }
+
+    .subject-cards {
+      display: flex;
+      flex-direction: column;
+      gap: 1.2rem;
+    }
+
+    .subject-card {
+      background: var(--card-bg);
+      border-radius: var(--border-radius);
+      box-shadow: var(--shadow);
+      overflow: hidden;
+      transition: var(--transition);
+      border: 2px solid var(--secondary);
+    }
+
+    .subject-card:hover {
+      transform: translateY(-3px);
+      box-shadow: var(--shadow-hover);
+    }
+
+    .subject-header {
+      padding: 1.2rem 1.5rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      cursor: pointer;
+      background: white;
+    }
+
+    .subject-title {
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+      font-weight: 600;
+      color: var(--primary);
+      font-size: 1.1rem;
+    }
+
+    .subject-icon {
+      width: 40px;
+      height: 40px;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(135deg, var(--primary), var(--primary-light));
+      color: white;
+      font-size: 1rem;
+    }
+
+    .toggle-icon {
+      transition: var(--transition);
+      color: var(--primary);
+    }
+
+    .subject-card.active .toggle-icon {
+      transform: rotate(180deg);
+    }
+
+    .subject-content {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      background: rgba(255, 255, 255, 0.7);
+    }
+
+    .subject-card.active .subject-content {
+      max-height: 500px;
+    }
+
+    .subject-links {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1rem;
+      padding: 1.5rem;
+    }
+
+    .subject-link {
+      background: white;
+      border-radius: 10px;
+      padding: 1rem;
+      text-align: center;
+      text-decoration: none;
+      color: var(--dark);
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+      transition: var(--transition);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.5rem;
+      border: 1px solid rgba(198, 40, 40, 0.1);
+    }
+
+    .subject-link:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+      color: var(--primary);
+    }
+
+    .link-icon {
+      width: 35px;
+      height: 35px;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(135deg, var(--secondary), #FFB74D);
+      color: white;
+      font-size: 0.9rem;
+    }
+
+    .link-text {
+      font-weight: 500;
+      font-size: 0.9rem;
+    }
+
+    /* Footer */
+    .footer {
+      background: linear-gradient(135deg, var(--primary) 0%, #343A40 100%);
+      color: white;
+      padding: 2.5rem 0 1.5rem;
+      margin-top: 3rem;
+      width: 100%;
+    }
+
+    .footer-content {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 1rem;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 2rem;
+    }
+
+    .footer-section {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .footer-logo {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-weight: 700;
+      font-size: 1.2rem;
+      color: var(--secondary);
+      margin-bottom: 0.8rem;
+    }
+
+    .footer-description {
+      color: rgba(255, 255, 255, 0.85);
+      line-height: 1.5;
+      font-size: 0.9rem;
+      margin-bottom: 1rem;
+    }
+
+    .footer-links {
+      display: flex;
+      flex-direction: column;
+      gap: 0.8rem;
+    }
+
+    .footer-link {
+      color: rgba(255, 255, 255, 0.85);
+      text-decoration: none;
+      transition: var(--transition);
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.9rem;
+    }
+
+    .footer-link:hover {
+      color: var(--secondary);
+    }
+
+    .footer-heading {
+      font-size: 1.1rem;
+      font-weight: 600;
+      margin-bottom: 1rem;
+      color: var(--secondary);
+    }
+
+    .social-links {
+      display: flex;
+      gap: 1rem;
+      margin-top: 1rem;
+    }
+
+    .social-link {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.1);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      text-decoration: none;
+      transition: var(--transition);
+    }
+
+    .social-link:hover {
+      background: var(--secondary);
+      color: var(--primary);
+      transform: translateY(-3px);
+    }
+
+    .footer-bottom {
+      max-width: 1200px;
+      margin: 2rem auto 0;
+      padding: 1.5rem 1rem 0;
+      border-top: 1px solid rgba(255, 255, 255, 0.2);
+      text-align: center;
+      color: rgba(255, 255, 255, 0.7);
+      font-size: 0.8rem;
+    }
+
+    /* Scroll to top button */
+    .scroll-top {
+      position: fixed;
+      bottom: 1rem;
+      right: 1rem;
+      width: 45px;
+      height: 45px;
+      background: var(--primary);
+      color: white;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      box-shadow: var(--shadow);
+      transition: var(--transition);
+      z-index: 100;
+      opacity: 0;
+      visibility: hidden;
+      font-size: 1rem;
+    }
+
+    .scroll-top.show {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    /* Animation classes */
+    .fade-in {
+      opacity: 0;
+      transform: translateY(20px);
+      animation: fadeIn 0.6s ease forwards;
+    }
+
+    @keyframes fadeIn {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .delay-1 { animation-delay: 0.1s; }
+    .delay-2 { animation-delay: 0.2s; }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+      .desktop-nav {
+        display: none;
+      }
+      
+      .dropdown-menu {
+        display: block;
+      }
+      
+      .hero-title {
+        font-size: 1.8rem;
+      }
+      
+      .summary-cards {
+        flex-direction: column;
+        align-items: center;
+      }
+      
+      .summary-card {
+        max-width: 100%;
+        width: 100%;
+      }
+      
+      .subject-links {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Header -->
+  <header class="header">
+    <div class="nav-container">
+      <a href="/trang-chu" class="logo">
+        <div class="logo-icon">
+          <i class="fa-solid fa-graduation-cap"></i>
+        </div>
+        <span>12AT1</span>
+      </a>
+      
+      <!-- Desktop Navigation -->
+      <nav class="desktop-nav">
+        <a href="/trang-chu" class="nav-link active">
+          <i class="fas fa-home"></i>
+          Trang Chủ
+        </a>
+        <a href="/thoi-khoa-bieu" class="nav-link">
+          <i class="fas fa-calendar-alt"></i>
+          Thời Khóa Biểu
+        </a>
+        <a href="https://forms.gle/AevGB7tZLqBAFxuGA" class="nav-link vip-link" target="_blank">
+          <i class="fas fa-crown"></i>
+          Đăng Ký VIP
+        </a>
+      </nav>
+      
+      <!-- Dropdown Menu (Mobile) -->
+      <div class="dropdown-menu">
+        <button class="menu-toggle" id="menuToggle">
+          <i class="fas fa-bars"></i>
+          Menu
+        </button>
+        <div class="dropdown-content" id="dropdownContent">
+          <ul class="nav-links">
+            <li><a href="/trang-chu" class="nav-link active">
+              <i class="fas fa-home"></i>
+              Trang Chủ
+            </a></li>
+            <li><a href="/thoi-khoa-bieu" class="nav-link">
+              <i class="fas fa-calendar-alt"></i>
+              Thời Khóa Biểu
+            </a></li>
+            <li><a href="https://forms.gle/AevGB7tZLqBAFxuGA" class="nav-link vip-link" target="_blank">
+              <i class="fas fa-crown"></i>
+              Đăng Ký VIP
+            </a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="hero container">
+    <h1 class="hero-title fade-in">Cuối Học Kì 1</h1>
+    <p class="hero-subtitle fade-in delay-1">12AT1</p>
+    
+    <div class="festive-elements">
+      <div class="festive-element">🏮</div>
+      <div class="festive-element">🎋</div>
+      <div class="festive-element">🧧</div>
+      <div class="festive-element">🎊</div>
+      <div class="festive-element">🎉</div>
+    </div>
+  </section>
+
+  <!-- Summary Section -->
+  <section class="summary-section container">
+    <div class="summary-cards">
+      <div class="summary-card fade-in delay-1">
+        <div class="summary-icon primary">
+          <i class="fas fa-book-open"></i>
+        </div>
+        <div class="summary-number">5</div>
+        <div class="summary-label">Môn Học</div>
+      </div>
+      
+      <div class="summary-card fade-in delay-2">
+        <div class="summary-icon secondary">
+          <i class="fas fa-link"></i>
+        </div>
+        <div class="summary-number">5</div>
+        <div class="summary-label">Link Azota</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="subjects-section container">
+    <h2 class="section-title fade-in">Môn Học</h2>
+    
+    <div class="subject-cards">
+      <div class="subject-card fade-in delay-1" id="math-card">
+        <div class="subject-header">
+          <div class="subject-title">
+            <div class="subject-icon">
+              <i class="fas fa-globe-asia"></i>
+            </div>
+            <span>Địa Lý</span>
+          </div>
+          <div class="toggle-icon">
+            <i class="fas fa-chevron-down"></i>
+          </div>
+        </div>
+        <div class="subject-content">
+          <div class="subject-links">
+            <a href="https://azota.vn/de-thi/skhj3w" class="subject-link">
+              <div class="link-icon">
+                <i class="fas fa-file-alt"></i>
+              </div>
+              <div class="link-text">30 Câu đầu</div>
+            </a>
+            <a href="#" class="subject-link">
+              <div class="link-icon">
+                <i class="fas fa-file-alt"></i>
+              </div>
+              <div class="link-text">Load...</div>
+            </a>
+            <a href="#" class="subject-link">
+              <div class="link-icon">
+                <i class="fas fa-file-alt"></i>
+              </div>
+              <div class="link-text">Load...</div>
+            </a>
+          </div>
+        </div>
+      </div>
+      
+      <div class="subject-card fade-in delay-1" id="literature-card">
+        <div class="subject-header">
+          <div class="subject-title">
+            <div class="subject-icon">
+              <i class="fa-solid fa-vial"></i>
+            </div>
+            <span>Hóa Học</span>
+          </div>
+          <div class="toggle-icon">
+            <i class="fas fa-chevron-down"></i>
+          </div>
+        </div>
+        <div class="subject-content">
+          <div class="subject-links">
+            <a href="#" class="subject-link">
+              <div class="link-icon">
+                <i class="fas fa-file-alt"></i>
+              </div>
+              <div class="link-text">Load...</div>
+            </a>
+            <a href="#" class="subject-link">
+              <div class="link-icon">
+                <i class="fas fa-file-alt"></i>
+              </div>
+              <div class="link-text">Load...</div>
+            </a>
+            <a href="#" class="subject-link">
+              <div class="link-icon">
+                <i class="fas fa-file-alt"></i>
+              </div>
+              <div class="link-text">Load...</div>
+            </a>
+          </div>
+        </div>
+      </div>
+      
+      <div class="subject-card fade-in delay-2" id="english-card">
+        <div class="subject-header">
+          <div class="subject-title">
+            <div class="subject-icon">
+              <i class="fas fa-book"></i>
+            </div>
+            <span>Lịch Sử</span>
+          </div>
+          <div class="toggle-icon">
+            <i class="fas fa-chevron-down"></i>
+          </div>
+        </div>
+        <div class="subject-content">
+          <div class="subject-links">
+            <a href="#" class="subject-link">
+              <div class="link-icon">
+                <i class="fas fa-file-alt"></i>
+              </div>
+              <div class="link-text">Load...</div>
+            </a>
+            <a href="#" class="subject-link">
+              <div class="link-icon">
+                <i class="fas fa-file-alt"></i>
+              </div>
+              <div class="link-text">Load...</div>
+            </a>
+            <a href="#" class="subject-link">
+              <div class="link-icon">
+                <i class="fas fa-file-alt"></i>
+              </div>
+              <div class="link-text">Load...</div>
+            </a>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Lý -->
+      <div class="subject-card fade-in delay-2" id="physics-card">
+        <div class="subject-header">
+          <div class="subject-title">
+            <div class="subject-icon">
+              <i class="fas fa-lightbulb"></i>
+            </div>
+            <span>Vật Lí</span>
+          </div>
+          <div class="toggle-icon">
+            <i class="fas fa-chevron-down"></i>
+          </div>
+        </div>
+        <div class="subject-content">
+          <div class="subject-links">
+            <a href="https://azota.vn/de-thi/jyglps" class="subject-link">
+              <div class="link-icon">
+                <i class="fas fa-file-alt"></i>
+              </div>
+              <div class="link-text">TN + ĐS</div>
+            </a>
+            <a href="https://azota.vn/de-thi/so5if2" class="subject-link">
+              <div class="link-icon">
+                <i class="fas fa-file-alt"></i>
+              </div>
+              <div class="link-text">Trắc nghiệm</div>
+            </a>
+            <a href="https://azota.vn/de-thi/mkw7zf" class="subject-link">
+              <div class="link-icon">
+                <i class="fas fa-file-alt"></i>
+              </div>
+              <div class="link-text">Đúng sai</div>
+            </a>
+          </div>
+        </div>
+      </div>
+      
+      <!-- TIN HỌC -->
+      <div class="subject-card fade-in delay-2" id="chemistry-card">
+        <div class="subject-header">
+          <div class="subject-title">
+            <div class="subject-icon">
+              <i class="fa-solid fa-laptop-code"></i>
+            </div>
+            <span>Tin Học</span>
+          </div>
+          <div class="toggle-icon">
+            <i class="fas fa-chevron-down"></i>
+          </div>
+        </div>
+        <div class="subject-content">
+          <div class="subject-links">
+            <a href="https://azota.vn/de-thi/xajqyu" class="subject-link">
+              <div class="link-icon">
+                <i class="fas fa-file-alt"></i>
+              </div>
+              <div class="link-text">Ôn tập KT 1 Tiết</div>
+            </a>
+            <a href="#" class="subject-link">
+              <div class="link-icon">
+                <i class="fas fa-file-alt"></i>
+              </div>
+              <div class="link-text">Load...</div>
+            </a>
+            <a href="#" class="subject-link">
+              <div class="link-icon">
+                <i class="fas fa-file-alt"></i>
+              </div>
+              <div class="link-text">Load...</div>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-content">
+      <div class="footer-section">
+        <div class="footer-logo">
+          <div class="logo-icon">
+            <i class="fa-solid fa-graduation-cap"></i>
+          </div>
+          <span>12AT1</span>
+        </div>
+        <p class="footer-description">
+          CUỐI HỌC KÌ 1
+        </p>
+      </div>
+      
+      <div class="footer-section">
+        <h3 class="footer-heading">Liên kết nhanh</h3>
+        <div class="footer-links">
+          <a href="/trang-chu" class="footer-link">
+            <i class="fas fa-home"></i>
+            Trang chủ
+          </a>
+          <a href="/thoi-khoa-bieu" class="footer-link">
+            <i class="fas fa-calendar-alt"></i>
+            Thời khóa biểu
+          </a>
+          <a href="https://forms.gle/AevGB7tZLqBAFxuGA" class="footer-link" target="_blank">
+            <i class="fas fa-crown"></i>
+            Đăng ký VIP
+          </a>
+        </div>
+      </div>
+      
+      <div class="footer-section">
+        <h3 class="footer-heading">Liên hệ</h3>
+        <div class="footer-links">
+          <a href="mailto:lienhe@12at1.edu.vn" class="footer-link">
+            <i class="fas fa-envelope"></i>
+            huitdatviet@gmail.com
+          </a>
+        </div>
+      </div>
+    </div>
+    
+    <div class="footer-bottom">
+      <p>&copy; PRODUCTION MANAGEMENT By HuIt Dat Viet 2025</p>
+    </div>
+  </footer>
+
+  <div class="scroll-top">
+    <i class="fas fa-chevron-up"></i>
+  </div>
+
+  <script>
+    const menuToggle = document.getElementById('menuToggle');
+    const dropdownContent = document.getElementById('dropdownContent');
+
+    menuToggle.addEventListener('click', (e) => {
+      e.stopPropagation();
+      dropdownContent.classList.toggle('active');
+      menuToggle.classList.toggle('active');
+    });
+
+    document.addEventListener('click', (e) => {
+      if (!dropdownContent.contains(e.target) && !menuToggle.contains(e.target)) {
+        dropdownContent.classList.remove('active');
+        menuToggle.classList.remove('active');
+      }
+    });
+
+    document.querySelectorAll('.nav-link').forEach(link => {
+      link.addEventListener('click', () => {
+        dropdownContent.classList.remove('active');
+        menuToggle.classList.remove('active');
+      });
+    });
+
+    // Subject card toggle functionality with minimal auto scroll
+    document.querySelectorAll('.subject-header').forEach(header => {
+      header.addEventListener('click', function() {
+        const card = this.parentElement;
+        const isActive = card.classList.contains('active');
+        
+        document.querySelectorAll('.subject-card').forEach(otherCard => {
+          if (otherCard !== card) {
+            otherCard.classList.remove('active');
+          }
+        });
+        
+        card.classList.toggle('active');
+        
+        // Auto scroll to the card if it's being opened
+        if (!isActive) {
+          // Calculate the scroll position - chỉ scroll một chút thôi
+          const cardRect = card.getBoundingClientRect();
+          const absoluteCardTop = cardRect.top + window.pageYOffset;
+          const headerHeight = document.querySelector('.header').offsetHeight;
+          
+          // Chỉ scroll xuống một chút, vừa đủ để hiển thị nội dung mở ra
+          const scrollOffset = 10; // Rất nhỏ
+          
+          // Tính toán vị trí scroll mục tiêu
+          const targetScroll = absoluteCardTop - headerHeight - scrollOffset;
+          
+          // Chỉ scroll nếu card không nằm trong viewport
+          if (cardRect.top < headerHeight || cardRect.bottom > window.innerHeight) {
+            window.scrollTo({
+              top: targetScroll,
+              behavior: 'smooth'
+            });
+          }
+        }
+      });
+    });
+
+    // Scroll to top functionality
+    const scrollTopBtn = document.querySelector('.scroll-top');
+    
+    window.addEventListener('scroll', () => {
+      if (window.pageYOffset > 300) {
+        scrollTopBtn.classList.add('show');
+      } else {
+        scrollTopBtn.classList.remove('show');
+      }
+    });
+    
+    scrollTopBtn.addEventListener('click', () => {
+      window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+      });
+    });
+
+    // Prevent horizontal scroll
+    document.addEventListener('DOMContentLoaded', function() {
+      document.body.style.overflowX = 'hidden';
+    });
+  </script>
+</body>
+</html>
