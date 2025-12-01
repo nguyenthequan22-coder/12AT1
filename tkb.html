@@ -691,43 +691,8 @@
 
     <div class="schedule-container fade-in delay-2">
       <div id="exam-content">
-        <div class="table-responsive">
-          <table class="exam-table">
-            <thead>
-              <tr>
-                <th>Thứ</th>
-                <th>Ngày</th>
-                <th>Môn</th>
-                <th>Ghi chú</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td class="exam-day">Thứ 3</td>
-                <td class="exam-date">02/12/2024</td>
-                <td class="exam-subject">KT HÓA</td>
-                <td></td>
-              </tr>
-              <tr>
-                <td class="exam-day">Thứ 4</td>
-                <td class="exam-date">03/12/2024</td>
-                <td class="exam-subject">KT TOÁN</td>
-                <td></td>
-              </tr>
-              <tr>
-                <td class="exam-day">Thứ 5</td>
-                <td class="exam-date">04/12/2024</td>
-                <td class="exam-subject">KT TOÁN</td>
-                <td></td>
-              </tr>
-              <tr>
-                <td class="exam-day">Thứ 6</td>
-                <td class="exam-date">05/12/2024</td>
-                <td class="exam-subject">KT TIN</td>
-                <td></td>
-              </tr>
-            </tbody>
-          </table>
+        <div class="loading">
+          <i class="fas fa-spinner fa-spin"></i> Đang tải lịch kiểm tra từ Google Sheets...
         </div>
       </div>
     </div>
@@ -787,6 +752,80 @@
   </div>
 
   <script>
+    // Google Sheets Integration
+    async function loadExamScheduleFromGoogleSheets() {
+      try {
+        const sheetId = '2PACX-1vTC9a79tRZsWhkRwb4p70Zk0Xfewv9ny8ny8bDVp-fqURTSytgZ_gWuauTcIbm-5LlVbRe0erZ_OuBx';
+        const url = `https://docs.google.com/spreadsheets/d/e/${sheetId}/pub?output=tsv`;
+        
+        const response = await fetch(url);
+        const tsvData = await response.text();
+        
+        const rows = tsvData.split('\n').map(row => row.split('\t'));
+        displayExamSchedule(rows);
+        
+        // Cập nhật thời gian
+        document.getElementById('last-updated').textContent = `(Cập nhật: ${new Date().toLocaleTimeString('vi-VN')})`;
+        
+      } catch (error) {
+        console.error('Lỗi tải dữ liệu:', error);
+        document.getElementById('exam-content').innerHTML = 
+          '<div class="loading">❌ Lỗi tải dữ liệu. Vui lòng thử lại.</div>';
+      }
+    }
+
+    function displayExamSchedule(rows) {
+      const container = document.getElementById('exam-content');
+      
+      if (!rows || rows.length === 0) {
+        container.innerHTML = '<div class="loading">📭 Không có dữ liệu lịch kiểm tra</div>';
+        return;
+      }
+
+      let html = `
+        <div class="table-responsive">
+          <table class="exam-table">
+            <thead>
+              <tr>
+                <th>Thứ</th>
+                <th>Ngày</th>
+                <th>Môn</th>
+                <th>Ghi chú</th>
+              </tr>
+            </thead>
+            <tbody>
+      `;
+      
+      // Bắt đầu từ dòng 1 (bỏ qua header)
+      for (let i = 1; i < rows.length; i++) {
+        if (!rows[i] || rows[i].length < 3) continue;
+        
+        const day = rows[i][0]?.trim();
+        const date = rows[i][1]?.trim();
+        const subject = rows[i][2]?.trim();
+        const note = rows[i][3]?.trim() || '';
+        
+        if (day && date && subject) {
+          html += `
+            <tr>
+              <td class="exam-day">${day}</td>
+              <td class="exam-date">${date}</td>
+              <td class="exam-subject">${subject}</td>
+              <td>${note}</td>
+            </tr>
+          `;
+        }
+      }
+      
+      html += `</tbody></table></div>`;
+      
+      if (html === `<div class="table-responsive"><table class="exam-table"><thead><tr><th>Thứ</th><th>Ngày</th><th>Môn</th><th>Ghi chú</th></tr></thead><tbody></tbody></table></div>`) {
+        container.innerHTML = '<div class="loading">📭 Không có dữ liệu lịch kiểm tra</div>';
+      } else {
+        container.innerHTML = html;
+      }
+    }
+
     // Menu functionality
     const menuToggle = document.getElementById('menuToggle');
     const dropdownContent = document.getElementById('dropdownContent');
@@ -829,8 +868,12 @@
       });
     });
 
-    // Cập nhật thời gian
-    document.getElementById('last-updated').textContent = `(Cập nhật: ${new Date().toLocaleTimeString('vi-VN')})`;
+    // Load data khi trang load
+    document.addEventListener('DOMContentLoaded', function() {
+      loadExamScheduleFromGoogleSheets();
+      // Tự động refresh mỗi 5 phút
+      setInterval(loadExamScheduleFromGoogleSheets, 300000);
+    });
 
     // Prevent horizontal scroll
     document.body.style.overflowX = 'hidden';
