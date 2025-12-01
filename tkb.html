@@ -32,12 +32,13 @@
     }
 
     body {
-      font-family: 'Inter', sans-serif;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
       background: var(--bg-gradient);
       color: var(--dark);
       line-height: 1.5;
       overflow-x: hidden;
       min-height: 100vh;
+      position: relative;
     }
 
     .container {
@@ -127,7 +128,7 @@
       color: #FFB74D;
     }
 
-    /* Dropdown Menu Styles (Mobile) */
+    /* Dropdown Menu Styles (Mobile) - ĐÃ TỐI ƯU */
     .dropdown-menu {
       display: none;
       position: relative;
@@ -135,7 +136,7 @@
 
     .menu-toggle {
       background: none;
-      border: none;
+      border: 2px solid var(--primary);
       font-size: 1rem;
       color: var(--primary);
       cursor: pointer;
@@ -146,11 +147,10 @@
       align-items: center;
       gap: 0.5rem;
       font-weight: 600;
-      background: rgba(198, 40, 40, 0.1);
     }
 
     .menu-toggle:hover {
-      background: rgba(198, 40, 40, 0.2);
+      background: rgba(198, 40, 40, 0.1);
       transform: translateY(-2px);
     }
 
@@ -451,10 +451,10 @@
     /* Scroll to top button */
     .scroll-top {
       position: fixed;
-      bottom: 1.5rem;
-      right: 1.5rem;
-      width: 40px;
-      height: 40px;
+      bottom: 1rem;
+      right: 1rem;
+      width: 45px;
+      height: 45px;
       background: var(--primary);
       color: white;
       border-radius: 50%;
@@ -467,7 +467,7 @@
       z-index: 100;
       opacity: 0;
       visibility: hidden;
-      font-size: 0.8rem;
+      font-size: 1rem;
     }
 
     .scroll-top.show {
@@ -826,7 +826,7 @@
       }
     }
 
-    // Menu functionality
+    // Menu functionality - ĐÃ SỬA: giống trang chủ
     const menuToggle = document.getElementById('menuToggle');
     const dropdownContent = document.getElementById('dropdownContent');
 
@@ -876,7 +876,9 @@
     });
 
     // Prevent horizontal scroll
-    document.body.style.overflowX = 'hidden';
+    document.addEventListener('DOMContentLoaded', function() {
+      document.body.style.overflowX = 'hidden';
+    });
   </script>
 </body>
 </html>
