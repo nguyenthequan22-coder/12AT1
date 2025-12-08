@@ -1,26 +1,67 @@
 {
-  "name": "12AT1 APP",
-  "short_name": "12AT1", 
-  "description": "APP 12AT1",
-  "start_url": "/?v=1.2",
+  "name": "12AT1 - Học Tập",
+  "short_name": "12AT1",
+  "description": "Ứng dụng học tập lớp 12AT1 - Ôn thi cuối kỳ",
+  "start_url": "/",
   "scope": "/",
   "display": "standalone",
-  "background_color": "#ffffff",
-  "theme_color": "#d32f2f",
-  "orientation": "portrait-primary",
-  "categories": ["education", "productivity"],
+  "orientation": "portrait",
+  "background_color": "#FFEBEE",
+  "theme_color": "#C62828",
   "icons": [
     {
-      "src": "assets/icons/icon-192.png?v=2",
+      "src": "/assets/icons/icon-72x72.png",
+      "sizes": "72x72",
+      "type": "image/png"
+    },
+    {
+      "src": "/assets/icons/icon-96x96.png",
+      "sizes": "96x96",
+      "type": "image/png"
+    },
+    {
+      "src": "/assets/icons/icon-128x128.png",
+      "sizes": "128x128",
+      "type": "image/png"
+    },
+    {
+      "src": "/assets/icons/icon-144x144.png",
+      "sizes": "144x144",
+      "type": "image/png"
+    },
+    {
+      "src": "/assets/icons/icon-152x152.png",
+      "sizes": "152x152",
+      "type": "image/png"
+    },
+    {
+      "src": "/assets/icons/icon-192x192.png",
       "sizes": "192x192",
       "type": "image/png",
       "purpose": "any maskable"
     },
     {
-      "src": "assets/icons/icon-512.png?v=2",
-      "sizes": "512x512", 
+      "src": "/assets/icons/icon-384x384.png",
+      "sizes": "384x384",
+      "type": "image/png"
+    },
+    {
+      "src": "/assets/icons/icon-512x512.png",
+      "sizes": "512x512",
       "type": "image/png",
       "purpose": "any maskable"
     }
-  ]
+  ],
+  "screenshots": [
+    {
+      "src": "/assets/screenshots/screenshot1.png",
+      "sizes": "1280x720",
+      "type": "image/png",
+      "form_factor": "wide"
+    }
+  ],
+  "categories": ["education", "productivity"],
+  "lang": "vi",
+  "dir": "ltr",
+  "prefer_related_applications": false
 }

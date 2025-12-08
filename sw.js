@@ -1,53 +1,96 @@
-const CACHE_NAME = '12at1-no-cache';
+// Service Worker cho 12AT1 PWA
+const CACHE_NAME = '12at1-pwa-v2.0';
+const urlsToCache = [
+  '/',
+  '/index.html',
+  '/manifest.json',
+  '/assets/icons/icon-192x192.png',
+  '/assets/icons/icon-512x512.png',
+  'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css'
+];
 
-// CÀI ĐẶT SERVICE WORKER - KHÔNG CACHE GÌ CẢ
-self.addEventListener('install', event => {
-  console.log('🚀 12AT1 Service Worker installing (NO CACHE)...');
-  self.skipWaiting();
-  
-  // KHÔNG cache gì cả
-  event.waitUntil(Promise.resolve());
+// INSTALL - Cache resources khi cài đặt
+self.addEventListener('install', (event) => {
+  console.log('[ServiceWorker] Install');
+  event.waitUntil(
+    caches.open(CACHE_NAME)
+      .then((cache) => {
+        console.log('[ServiceWorker] Caching app shell');
+        return cache.addAll(urlsToCache);
+      })
+      .then(() => {
+        console.log('[ServiceWorker] Skip waiting on install');
+        return self.skipWaiting();
+      })
+  );
 });
 
-// KÍCH HOẠT SERVICE WORKER - CHỈ XÓA CACHE CŨ, GIỮ APP
-self.addEventListener('activate', event => {
-  console.log('🎯 Force updating app...');
+// ACTIVATE - Xóa cache cũ
+self.addEventListener('activate', (event) => {
+  console.log('[ServiceWorker] Activate');
   event.waitUntil(
-    caches.keys().then(cacheNames => {
+    caches.keys().then((cacheNames) => {
       return Promise.all(
-        cacheNames.map(cacheName => {
-          // XÓA TẤT CẢ CACHE CŨ
-          console.log('🗑️ Deleting cache:', cacheName);
-          return caches.delete(cacheName);
+        cacheNames.map((cacheName) => {
+          if (cacheName !== CACHE_NAME) {
+            console.log('[ServiceWorker] Deleting old cache:', cacheName);
+            return caches.delete(cacheName);
+          }
         })
       );
     }).then(() => {
-      // FORCE UPDATE APP
-      return self.clients.matchAll().then(clients => {
-        clients.forEach(client => client.navigate(client.url));
-      });
+      console.log('[ServiceWorker] Claiming clients');
+      return self.clients.claim();
     })
   );
 });
 
-// XỬ LÝ FETCH REQUESTS - LUÔN TẢI TỪ MẠNG
-self.addEventListener('fetch', event => {
-  // Bỏ qua các request không phải HTTP
+// FETCH - Serve từ cache hoặc network
+self.addEventListener('fetch', (event) => {
+  // Bỏ qua các request không phải HTTP(S)
   if (!event.request.url.startsWith('http')) return;
   
-  // LUÔN TẢI TỪ MẠNG, KHÔNG BAO GIỜ DÙNG CACHE
   event.respondWith(
-    fetch(event.request)
-      .then(networkResponse => {
-        return networkResponse;
-      })
-      .catch(error => {
-        // Chỉ fallback khi mất mạng hoàn toàn
-        console.log('📡 Network error, no cache available');
-        return new Response('Bạn đang offline! Vui lòng kết nối internet.', {
-          status: 503,
-          headers: { 'Content-Type': 'text/plain; charset=utf-8' }
-        });
+    caches.match(event.request)
+      .then((response) => {
+        // Cache hit - return response
+        if (response) {
+          console.log('[ServiceWorker] Fetch from cache:', event.request.url);
+          return response;
+        }
+
+        // Clone request vì nó là stream và chỉ dùng được 1 lần
+        const fetchRequest = event.request.clone();
+
+        return fetch(fetchRequest)
+          .then((response) => {
+            // Kiểm tra response hợp lệ
+            if (!response || response.status !== 200 || response.type !== 'basic') {
+              return response;
+            }
+
+            // Clone response vì nó là stream và chỉ dùng được 1 lần
+            const responseToCache = response.clone();
+
+            caches.open(CACHE_NAME)
+              .then((cache) => {
+                cache.put(event.request, responseToCache);
+                console.log('[ServiceWorker] Caching new resource:', event.request.url);
+              });
+
+            return response;
+          })
+          .catch(() => {
+            // Fallback cho offline
+            if (event.request.headers.get('accept').includes('text/html')) {
+              return caches.match('/');
+            }
+          });
       })
   );
+});
+
+// BACKGROUND SYNC (nếu cần)
+self.addEventListener('sync', (event) => {
+  console.log('[ServiceWorker] Background sync:', event.tag);
 });

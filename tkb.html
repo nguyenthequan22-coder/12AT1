@@ -608,6 +608,53 @@
 
     .delay-1 { animation-delay: 0.1s; }
     .delay-2 { animation-delay: 0.2s; }
+
+/* Social Media Styles */
+.social-media-section {
+  margin-top: 1.5rem;
+}
+
+.social-icons {
+  display: flex;
+  gap: 0.8rem;
+  flex-wrap: wrap;
+}
+
+.social-icon-link {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  text-decoration: none;
+  transition: var(--transition);
+  font-size: 1rem;
+}
+
+.social-icon-link:hover {
+  transform: translateY(-3px);
+  background: var(--secondary);
+  color: var(--primary);
+}
+
+/* Màu sắc riêng cho từng mạng xã hội khi hover */
+.social-icon-link:nth-child(1):hover { background: #5865F2; } /* Discord */
+
+/* Responsive cho social icons */
+@media (max-width: 768px) {
+  .social-icons {
+    gap: 0.6rem;
+  }
+  
+  .social-icon-link {
+    width: 36px;
+    height: 36px;
+    font-size: 0.9rem;
+  }
+}
   </style>
 </head>
 <body>
@@ -698,7 +745,7 @@
     </div>
   </section>
 
-  <!-- Footer -->
+<!-- Footer -->
   <footer class="footer">
     <div class="footer-content">
       <div class="footer-section">
@@ -709,8 +756,18 @@
           <span>12AT1</span>
         </div>
         <p class="footer-description">
-          CUỐI HỌC KỲ 1
+          12AT1 - Tổng hợp đề thi, tài liệu ôn tập cuối học kì 1
         </p>
+        
+        <!-- Social Media Links -->
+        <div class="social-media-section">
+          <h4 style="color: var(--secondary); margin-bottom: 10px; font-size: 1rem;">Nơi học tập</h4>
+          <div class="social-icons">
+            <a href="https://discord.gg/YJ9w76xgcA" target="_blank" class="social-icon-link" title="Discord">
+              <i class="fab fa-discord"></i>
+            </a>
+          </div>
+        </div>
       </div>
       
       <div class="footer-section">
@@ -722,7 +779,11 @@
           </a>
           <a href="/lich-kiem-tra" class="footer-link">
             <i class="fas fa-calendar-alt"></i>
-            Lịch kiểm tra
+            Lịch Kiểm Tra
+          </a>
+          <a href="https://docs.google.com/document/d/1eM1IuNrx50mFL8mMFqKgoXRZE19r33fWZtWbqHs8G9Y/edit?usp=sharing" class="footer-link" target="_blank">
+            <i class="fa-solid fa-book"></i>
+            Hướng dẫn
           </a>
           <a href="https://forms.gle/AevGB7tZLqBAFxuGA" class="footer-link" target="_blank">
             <i class="fas fa-crown"></i>
@@ -738,12 +799,21 @@
             <i class="fas fa-envelope"></i>
             huitdatviet@gmail.com
           </a>
+          <div class="contact-note" style="margin-top: 15px; padding: 10px; background: rgba(255,255,255,0.1); border-radius: 8px;">
+            <p style="font-size: 0.8rem; color: rgba(255,255,255,0.8); margin: 0;">
+              <i class="fas fa-info-circle" style="color: var(--secondary);"></i>
+              Liên hệ để báo lỗi đáp án
+            </p>
+          </div>
         </div>
       </div>
     </div>
     
     <div class="footer-bottom">
-      <p>&copy; PRODUCTION MANAGEMENT By HuIt Dat Viet 2025</p>
+      <p>&copy; 2025 PRODUCTION MANAGEMENT By HuIt Dat Viet.</p>
+      <p style="font-size: 0.75rem; margin-top: 5px; opacity: 0.7;">
+        Website chỉ phục vụ mục đích học tập | Đáp án có thể cần kiểm tra lại
+      </p>
     </div>
   </footer>
 
