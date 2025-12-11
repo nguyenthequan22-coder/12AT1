@@ -1225,14 +1225,16 @@
       });
     });
 
-    // Subject card toggle functionality FIXED
+    // Subject card toggle functionality - CHỈ AUTO SCROLL KHI MỞ
     document.querySelectorAll('.subject-header').forEach(header => {
       header.addEventListener('click', function() {
         const card = this.parentElement;
         const content = card.querySelector('.subject-content');
         const isActive = card.classList.contains('active');
+        const headerHeight = document.querySelector('.header').offsetHeight;
+        const cardRect = card.getBoundingClientRect();
+        const cardTop = window.pageYOffset + cardRect.top;
         
-        // Tính toán chiều cao thực của nội dung
         if (!isActive) {
           // Đóng tất cả card khác trước
           document.querySelectorAll('.subject-card').forEach(otherCard => {
@@ -1248,23 +1250,34 @@
           const scrollHeight = content.scrollHeight;
           content.style.maxHeight = scrollHeight + 'px';
           
-          // Scroll nhẹ để hiển thị
+          // CHỈ auto scroll khi mở card
           setTimeout(() => {
-            const cardRect = card.getBoundingClientRect();
-            const headerHeight = document.querySelector('.header').offsetHeight;
-            const offset = 10;
+            const contentRect = content.getBoundingClientRect();
             
+            // Tính toán để card mở ra vừa đủ trong viewport
             if (cardRect.top < headerHeight) {
+              // Card ở phía trên, scroll lên một chút để thấy header card
               window.scrollTo({
-                top: window.pageYOffset + cardRect.top - headerHeight - offset,
+                top: cardTop - headerHeight - 5,
+                behavior: 'smooth'
+              });
+            } else if (cardRect.bottom + scrollHeight > window.innerHeight) {
+              // Card mở ra sẽ vượt quá màn hình
+              // Scroll thêm một chút để hiển thị đầy đủ
+              const scrollNeeded = (cardRect.bottom + scrollHeight) - window.innerHeight;
+              window.scrollTo({
+                top: window.pageYOffset + scrollNeeded + 20,
                 behavior: 'smooth'
               });
             }
+            // Nếu card đã hiển thị đầy đủ thì không cần scroll
           }, 50);
+          
         } else {
-          // Đóng card này
+          // Đóng card này - KHÔNG auto scroll
           card.classList.remove('active');
           content.style.maxHeight = null;
+          // KHÔNG có scroll khi đóng card
         }
       });
     });
@@ -1316,6 +1329,17 @@
     // Chạy khi tải trang và khi thay đổi kích thước
     window.addEventListener('load', adjustSubjectLinksGrid);
     window.addEventListener('resize', adjustSubjectLinksGrid);
+    
+    // Đảm bảo khi resize màn hình, các card đang mở sẽ tính lại chiều cao
+    window.addEventListener('resize', function() {
+      document.querySelectorAll('.subject-card.active').forEach(card => {
+        const content = card.querySelector('.subject-content');
+        if (content) {
+          const scrollHeight = content.scrollHeight;
+          content.style.maxHeight = scrollHeight + 'px';
+        }
+      });
+    });
   </script>
 </body>
 </html>
