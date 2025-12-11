@@ -2,7 +2,7 @@
 <html lang="vi">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
   <title>12AT1 - Trang chủ</title>
   <link rel="icon" type="image/png" href="favicon.png">
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
@@ -30,14 +30,22 @@
       box-sizing: border-box;
     }
 
+    html, body {
+      width: 100%;
+      overflow-x: hidden;
+      position: relative;
+    }
+
     body {
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
       background: var(--bg-gradient);
       color: var(--dark);
       line-height: 1.5;
-      overflow-x: hidden;
       min-height: 100vh;
-      position: relative;
+      -webkit-text-size-adjust: 100%;
+      -moz-text-size-adjust: 100%;
+      -ms-text-size-adjust: 100%;
+      text-size-adjust: 100%;
     }
 
     .container {
@@ -177,6 +185,8 @@
       transition: var(--transition);
       z-index: 1001;
       border: 2px solid var(--secondary);
+      max-height: 80vh;
+      overflow-y: auto;
     }
 
     .dropdown-content.active {
@@ -202,6 +212,7 @@
       gap: 0.5rem;
       transition: var(--transition);
       border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+      white-space: nowrap;
     }
 
     .nav-link:last-child {
@@ -238,6 +249,7 @@
       -webkit-text-fill-color: transparent;
       margin-bottom: 0.5rem;
       line-height: 1.2;
+      word-wrap: break-word;
     }
 
     .hero-subtitle {
@@ -245,6 +257,7 @@
       color: var(--primary);
       margin-bottom: 1.5rem;
       font-weight: 600;
+      word-wrap: break-word;
     }
 
     .festive-elements {
@@ -363,6 +376,7 @@
       color: var(--primary);
       margin-bottom: 1.5rem;
       position: relative;
+      word-wrap: break-word;
     }
 
     .section-title::after {
@@ -388,6 +402,7 @@
       overflow: hidden;
       transition: var(--transition);
       border: 2px solid var(--secondary);
+      width: 100%;
     }
 
     .subject-card:hover {
@@ -402,6 +417,7 @@
       align-items: center;
       cursor: pointer;
       background: white;
+      -webkit-tap-highlight-color: transparent;
     }
 
     .subject-title {
@@ -411,6 +427,8 @@
       font-weight: 600;
       color: var(--primary);
       font-size: 1.1rem;
+      flex: 1;
+      min-width: 0;
     }
 
     .subject-icon {
@@ -423,11 +441,13 @@
       background: linear-gradient(135deg, var(--primary), var(--primary-light));
       color: white;
       font-size: 1rem;
+      flex-shrink: 0;
     }
 
     .toggle-icon {
       transition: var(--transition);
       color: var(--primary);
+      flex-shrink: 0;
     }
 
     .subject-card.active .toggle-icon {
@@ -442,7 +462,7 @@
     }
 
     .subject-card.active .subject-content {
-      max-height: 500px;
+      max-height: 1000px;
     }
 
     .subject-links {
@@ -466,6 +486,11 @@
       align-items: center;
       gap: 0.5rem;
       border: 1px solid rgba(198, 40, 40, 0.1);
+      word-break: break-word;
+      hyphens: auto;
+      -webkit-hyphens: auto;
+      height: 100%;
+      min-height: 90px;
     }
 
     .subject-link:hover {
@@ -484,11 +509,14 @@
       background: linear-gradient(135deg, var(--secondary), #FFB74D);
       color: white;
       font-size: 0.9rem;
+      flex-shrink: 0;
     }
 
     .link-text {
       font-weight: 500;
       font-size: 0.9rem;
+      line-height: 1.3;
+      width: 100%;
     }
 
     /* Footer */
@@ -545,6 +573,7 @@
       align-items: center;
       gap: 0.5rem;
       font-size: 0.9rem;
+      word-break: break-word;
     }
 
     .footer-link:hover {
@@ -652,6 +681,7 @@
       opacity: 0;
       visibility: hidden;
       font-size: 1rem;
+      -webkit-tap-highlight-color: transparent;
     }
 
     .scroll-top.show {
@@ -676,7 +706,7 @@
     .delay-1 { animation-delay: 0.1s; }
     .delay-2 { animation-delay: 0.2s; }
 
-    /* Responsive Design */
+    /* Responsive Design - ĐÃ SỬA LẠI */
     @media (max-width: 768px) {
       .desktop-nav {
         display: none;
@@ -693,6 +723,7 @@
       .summary-cards {
         flex-direction: column;
         align-items: center;
+        gap: 1rem;
       }
       
       .summary-card {
@@ -701,7 +732,9 @@
       }
       
       .subject-links {
-        grid-template-columns: 1fr;
+        grid-template-columns: 1fr !important;
+        gap: 0.8rem;
+        padding: 1rem;
       }
       
       .social-icons {
@@ -712,6 +745,87 @@
         width: 36px;
         height: 36px;
         font-size: 0.9rem;
+      }
+      
+      .subject-card.active .subject-content {
+        max-height: 2000px !important;
+      }
+      
+      .subject-link {
+        min-height: auto;
+        padding: 0.8rem;
+      }
+      
+      .link-text {
+        font-size: 0.85rem;
+      }
+      
+      .footer-content {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+      }
+      
+      .container {
+        padding: 0 0.8rem;
+      }
+      
+      .nav-container {
+        padding: 0 0.8rem;
+      }
+      
+      .subject-header {
+        padding: 1rem;
+      }
+      
+      .subject-title {
+        font-size: 1rem;
+      }
+      
+      .subject-icon {
+        width: 36px;
+        height: 36px;
+        font-size: 0.9rem;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .hero {
+        padding: 4.5rem 0.5rem 1.5rem;
+      }
+      
+      .hero-title {
+        font-size: 1.6rem;
+      }
+      
+      .hero-subtitle {
+        font-size: 1rem;
+      }
+      
+      .section-title {
+        font-size: 1.5rem;
+      }
+      
+      .summary-number {
+        font-size: 2rem;
+      }
+      
+      .summary-label {
+        font-size: 0.9rem;
+      }
+      
+      .link-text {
+        font-size: 0.8rem;
+      }
+      
+      .footer {
+        padding: 2rem 0 1rem;
+      }
+    }
+
+    /* Điều chỉnh grid cho tablet */
+    @media (min-width: 769px) and (max-width: 992px) {
+      .subject-links {
+        grid-template-columns: repeat(2, 1fr);
       }
     }
   </style>
@@ -1111,40 +1225,46 @@
       });
     });
 
-    // Subject card toggle functionality with minimal auto scroll
+    // Subject card toggle functionality FIXED
     document.querySelectorAll('.subject-header').forEach(header => {
       header.addEventListener('click', function() {
         const card = this.parentElement;
+        const content = card.querySelector('.subject-content');
         const isActive = card.classList.contains('active');
         
-        document.querySelectorAll('.subject-card').forEach(otherCard => {
-          if (otherCard !== card) {
-            otherCard.classList.remove('active');
-          }
-        });
-        
-        card.classList.toggle('active');
-        
-        // Auto scroll to the card if it's being opened
+        // Tính toán chiều cao thực của nội dung
         if (!isActive) {
-          // Calculate the scroll position - chỉ scroll một chút thôi
-          const cardRect = card.getBoundingClientRect();
-          const absoluteCardTop = cardRect.top + window.pageYOffset;
-          const headerHeight = document.querySelector('.header').offsetHeight;
+          // Đóng tất cả card khác trước
+          document.querySelectorAll('.subject-card').forEach(otherCard => {
+            if (otherCard !== card && otherCard.classList.contains('active')) {
+              const otherContent = otherCard.querySelector('.subject-content');
+              otherCard.classList.remove('active');
+              otherContent.style.maxHeight = null;
+            }
+          });
           
-          // Chỉ scroll xuống một chút, vừa đủ để hiển thị nội dung mở ra
-          const scrollOffset = 10; // Rất nhỏ
+          // Mở card này với chiều cao thực
+          card.classList.add('active');
+          const scrollHeight = content.scrollHeight;
+          content.style.maxHeight = scrollHeight + 'px';
           
-          // Tính toán vị trí scroll mục tiêu
-          const targetScroll = absoluteCardTop - headerHeight - scrollOffset;
-          
-          // Chỉ scroll nếu card không nằm trong viewport
-          if (cardRect.top < headerHeight || cardRect.bottom > window.innerHeight) {
-            window.scrollTo({
-              top: targetScroll,
-              behavior: 'smooth'
-            });
-          }
+          // Scroll nhẹ để hiển thị
+          setTimeout(() => {
+            const cardRect = card.getBoundingClientRect();
+            const headerHeight = document.querySelector('.header').offsetHeight;
+            const offset = 10;
+            
+            if (cardRect.top < headerHeight) {
+              window.scrollTo({
+                top: window.pageYOffset + cardRect.top - headerHeight - offset,
+                behavior: 'smooth'
+              });
+            }
+          }, 50);
+        } else {
+          // Đóng card này
+          card.classList.remove('active');
+          content.style.maxHeight = null;
         }
       });
     });
@@ -1167,10 +1287,35 @@
       });
     });
 
-    // Prevent horizontal scroll
+    // Ngăn horizontal scroll và fix mobile
     document.addEventListener('DOMContentLoaded', function() {
       document.body.style.overflowX = 'hidden';
+      
+      // Fix cho iOS
+      if (/iPhone|iPad|iPod/i.test(navigator.userAgent)) {
+        document.body.style.WebkitOverflowScrolling = 'touch';
+      }
     });
+
+    // Fix cho màn hình nhỏ - tự động điều chỉnh grid
+    function adjustSubjectLinksGrid() {
+      const subjectLinks = document.querySelectorAll('.subject-links');
+      const screenWidth = window.innerWidth;
+      
+      subjectLinks.forEach(container => {
+        if (screenWidth <= 768) {
+          container.style.gridTemplateColumns = '1fr';
+        } else if (screenWidth <= 992) {
+          container.style.gridTemplateColumns = 'repeat(2, 1fr)';
+        } else {
+          container.style.gridTemplateColumns = 'repeat(3, 1fr)';
+        }
+      });
+    }
+    
+    // Chạy khi tải trang và khi thay đổi kích thước
+    window.addEventListener('load', adjustSubjectLinksGrid);
+    window.addEventListener('resize', adjustSubjectLinksGrid);
   </script>
 </body>
 </html>
