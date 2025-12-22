@@ -35,81 +35,92 @@
             font-style: normal;
         }
 
-        /* ===== SPLASH SCREEN - GIẢM 20% ===== */
-.splash-screen {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(135deg, #4361EE 0%, #3A0CA3 100%);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    z-index: 9999;
-    opacity: 1;
-    visibility: visible;
-    transition: opacity 0.4s ease, visibility 0.4s ease;
-}
+        /* ===== SPLASH SCREEN - CHỈ HIỂN THỊ KHI LOAD ===== */
+        #splashScreen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #4361EE 0%, #3A0CA3 100%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+            opacity: 1;
+            visibility: visible;
+            transition: opacity 0.3s ease, visibility 0.3s ease;
+        }
 
-.splash-screen.hidden {
-    opacity: 0;
-    visibility: hidden;
-}
+        #splashScreen.hidden {
+            opacity: 0;
+            visibility: hidden;
+        }
 
-.splash-logo {
-    width: 152px;
-    height: 152px;
-    background: white;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-bottom: 40px;
-    box-shadow: 0 20px 56px rgba(0, 0, 0, 0.3);
-    animation: logoPulse 1.2s ease-in-out infinite; /* ĐÃ SỬA: 2s → 1.2s */
+        .splash-logo {
+            width: 240px;
+            height: 240px;
+            background: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 24px;
+            box-shadow: 0 16px 40px rgba(0, 0, 0, 0.25);
+            overflow: hidden;
+            padding: 10px;
+        }
+
+        .splash-logo-placeholder {
+            font-size: 2rem;
+            font-weight: 800;
+            color: #4361EE;
+            font-family: "Geom", sans-serif;
+            letter-spacing: 1px;
+        }
+
+.loading-bar {
+    width: 200px;
+    height: 4px;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 2px;
     overflow: hidden;
-}
-
-@keyframes logoPulse {
-    0%, 100% { 
-        transform: scale(1) rotate(0deg);
-        box-shadow: 0 20px 56px rgba(0, 0, 0, 0.3);
-    }
-    50% { 
-        transform: scale(1.064) rotate(6.4deg);
-        box-shadow: 0 28px 72px rgba(0, 0, 0, 0.4);
-    }
+    margin-top: 20px;
 }
 
 .loading-progress {
-    width: 0%;
+    width: 100%; /* Luôn 100% */
     height: 100%;
     background: white;
-    border-radius: 2.4px;
-    animation: loadingAnimation 1s ease-in-out forwards; /* ĐÃ SỬA: 2.5s → 1s */
+    border-radius: 2px;
+    transform: translateX(-100%); /* Bắt đầu từ -100% */
+    animation: loadingAnimation 1.5s cubic-bezier(0.4, 0, 0.2, 1) forwards;
 }
 
+/* ANIMATION SIÊU MƯỢT - Dùng transform thay vì width */
 @keyframes loadingAnimation {
-    0% { width: 0%; }
-    20% { width: 30%; }
-    40% { width: 60%; }
-    60% { width: 80%; }
-    80% { width: 95%; }
-    100% { width: 100%; }
+    0% { 
+        transform: translateX(-100%); 
+    }
+    20% { 
+        transform: translateX(-80%); 
+    }
+    40% { 
+        transform: translateX(-60%); 
+    }
+    60% { 
+        transform: translateX(-40%); 
+    }
+    80% { 
+        transform: translateX(-20%); 
+    }
+    100% { 
+        transform: translateX(0); 
+    }
 }
 
-        @keyframes loadingAnimation {
-            0% { width: 0%; }
-            20% { width: 30%; }
-            40% { width: 60%; }
-            60% { width: 80%; }
-            80% { width: 95%; }
-            100% { width: 100%; }
-        }
-
-        /* ===== VARIABLES - GIẢM 20% ===== */
+        /* ===== VARIABLES ===== */
         :root {
             --primary: #4361EE;
             --primary-light: #4895EF;
@@ -182,12 +193,6 @@
             line-height: 1.7;
             overflow-x: hidden;
             position: relative;
-            opacity: 0;
-            animation: fadeInBody 0.5s ease 2.5s forwards;
-        }
-
-        @keyframes fadeInBody {
-            to { opacity: 1; }
         }
 
         body::before {
@@ -203,11 +208,14 @@
             z-index: -1;
         }
 
+        @keyframes blobFloat {
+            0%, 100% { transform: translate(0, 0) rotate(0deg); }
+            33% { transform: translate(32px, -48px) rotate(120deg); }
+            66% { transform: translate(-20px, 20px) rotate(240deg); }
+        }
+
         /* ===== FONT DISTRIBUTION ===== */
-        /* GEOM: Tiêu đề chính, logo, số liệu nổi bật */
-        h1, h2, h3, h4, h5, h6,
         .logo,
-        .splash-title,
         .hero-title,
         .section-title,
         .subject-name,
@@ -221,20 +229,16 @@
             font-family: "Geom", sans-serif;
         }
 
-        /* NUNITO: Văn bản mềm mại, mô tả */
         .hero-subtitle,
         .subject-description,
         .link-type,
         .footer-description,
         .footer-link,
         .stat-label,
-        .splash-subtitle,
-        .loading-text,
         .hero-alert {
             font-family: "Nunito", sans-serif;
         }
 
-        /* LEXEND DECA: Nội dung chính, dễ đọc */
         .link-title,
         .footer-bottom p,
         body,
@@ -281,12 +285,6 @@
             font-weight: 400;
         }
 
-        @keyframes blobFloat {
-            0%, 100% { transform: translate(0, 0) rotate(0deg); }
-            33% { transform: translate(32px, -48px) rotate(120deg); }
-            66% { transform: translate(-20px, 20px) rotate(240deg); }
-        }
-
         /* ===== LAYOUT ===== */
         .container {
             max-width: 1120px;
@@ -300,7 +298,7 @@
             z-index: 1;
         }
 
-        /* ===== HEADER - GIẢM 20% ===== */
+        /* ===== HEADER ===== */
         .header {
             position: fixed;
             top: 0;
@@ -438,21 +436,11 @@
             z-index: 1001;
         }
 
-        /* ===== HERO - GIẢM 20% ===== */
+        /* ===== HERO ===== */
         .hero {
             padding-top: 112px;
             padding-bottom: var(--space-xl);
             text-align: center;
-            opacity: 0;
-            transform: translateY(20px);
-            animation: fadeInUp 0.8s ease 2.8s forwards;
-        }
-
-        @keyframes fadeInUp {
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
         }
 
         .hero-badge {
@@ -505,9 +493,6 @@
             gap: 1.04rem;
             max-width: 680px;
             margin: 2rem auto 0;
-            opacity: 0;
-            transform: translateY(20px);
-            animation: fadeInUp 0.8s ease 3s forwards;
         }
 
         .stat-card {
@@ -539,7 +524,7 @@
             color: var(--gray);
         }
 
-        /* ===== SUBJECTS ACCORDION - GIẢM 20% ===== */
+        /* ===== SUBJECTS ACCORDION ===== */
         .subjects-container {
             background: rgba(255, 255, 255, 0.85);
             backdrop-filter: blur(20px);
@@ -547,9 +532,6 @@
             padding: 1.76rem;
             box-shadow: var(--shadow-md);
             border: 1.6px solid rgba(255, 255, 255, 0.4);
-            opacity: 0;
-            transform: translateY(20px);
-            animation: fadeInUp 0.8s ease 3.2s forwards;
             position: relative;
         }
 
@@ -785,13 +767,10 @@
             transform: translateX(4px);
         }
 
-        /* ===== CTA - GIẢM 20% ===== */
+        /* ===== CTA ===== */
         .cta {
             text-align: center;
             padding: 2rem 0;
-            opacity: 0;
-            transform: translateY(20px);
-            animation: fadeInUp 0.8s ease 3.4s forwards;
         }
 
         .cta-content {
@@ -866,15 +845,12 @@
             box-shadow: 0 12px 44px rgba(247, 37, 133, 0.4);
         }
 
-        /* ===== FOOTER - GIẢM 20% ===== */
+        /* ===== FOOTER ===== */
         .footer {
             background: linear-gradient(135deg, var(--dark) 0%, #0F172A 100%);
             color: var(--white);
             position: relative;
             overflow: hidden;
-            opacity: 0;
-            transform: translateY(20px);
-            animation: fadeInUp 0.8s ease 3.6s forwards;
         }
 
         .footer::before {
@@ -1002,7 +978,7 @@
             z-index: 1;
         }
 
-        /* ===== SCROLL TO TOP - GIẢM 20% ===== */
+        /* ===== SCROLL TO TOP ===== */
         .scroll-top {
             position: fixed;
             bottom: 1.6rem;
@@ -1034,29 +1010,6 @@
         .scroll-top:hover {
             transform: translateY(-4px) scale(1.1) rotate(14.4deg);
             box-shadow: 0 16px 48px rgba(247, 37, 133, 0.45);
-        }
-
-        /* ===== FONT LOADING FALLBACK ===== */
-        /* Đảm bảo font hiển thị ngay cả khi chưa load xong */
-        .font-loading {
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-        }
-
-        /* PC-specific fixes */
-        @media (min-width: 769px) {
-            /* Fallback cho PC nếu font Geom không load */
-            .hero-title {
-                font-family: "Geom", "Arial Rounded MT Bold", "Segoe UI", sans-serif;
-            }
-            
-            /* Tăng độ đậm cho Lexend Deca trên PC */
-            body {
-                font-weight: 400;
-            }
-            
-            .link-title {
-                font-weight: 500;
-            }
         }
 
         /* ===== RESPONSIVE ===== */
@@ -1145,16 +1098,6 @@
                 width: 100%;
                 max-width: 304px;
             }
-
-            .splash-title {
-                font-size: 33.6px;
-            }
-
-            .splash-logo {
-                width: 136px;
-                height: 136px;
-                margin-bottom: 36px;
-            }
         }
 
         @media (max-width: 480px) {
@@ -1181,46 +1124,31 @@
             .subject-link {
                 padding: var(--space-md);
             }
-            
-            .splash-title {
-                font-size: 28px;
-            }
-            
-            .splash-logo {
-                width: 120px;
-                height: 120px;
-            }
-            
-            .splash-subtitle {
-                font-size: 16px;
-            }
         }
+            .splash-logo-image {
+                width: 240px;
+                height: 240px;
+                object-fit: contain;
+            }
     </style>
 </head>
 <body>
-    <!-- Splash Screen -->
-    <div class="splash-screen" id="splashScreen">
+    <!-- Splash Screen - CHỈ HIỂN THỊ KHI LOAD -->
+    <div id="splashScreen">
         <div class="splash-logo">
+            <!-- ⭐⭐⭐ THAY LOGO CỦA BẠN VÀO ĐÂY ⭐⭐⭐ -->
             <div class="splash-logo-placeholder">
-                12AT1
+                <img src="assets/icons/loading.png" alt="Loading">
             </div>
         </div>
         
-        <div class="splash-text">
-            <h1 class="splash-title">12AT1</h1>
-            <p class="splash-subtitle">HuIt DatViet</p>
-        </div>
-        
-        <div class="loading-container">
-            <div class="loading-text">Load...</div>
-            <div class="loading-bar">
-                <div class="loading-progress"></div>
-            </div>
+        <div class="loading-bar">
+            <div class="loading-progress"></div>
         </div>
     </div>
 
     <!-- Main Content -->
-    <div id="mainContent" style="opacity: 0;">
+    <div id="mainContent">
         <!-- Header -->
         <header class="header" id="header">
             <div class="container">
@@ -1271,7 +1199,7 @@
                 
                 <div class="hero-alert">
                     <i class="fas fa-exclamation-circle"></i>
-                    Azota đang bảo trì / reset hệ thống nên giờ cao điểm có thể sập ngắn hạn, tải lại sau vài giây hoặc vài phút sẽ vào được !
+                    Có thể sập ngắn hạn, tải lại sau vài giây hoặc vài phút sẽ vào được !
                 </div>
 
                 <div class="stats">
@@ -1692,7 +1620,6 @@
 
                 <div class="footer-bottom">
                     <p>&copy; 2025 12AT1 - HuIt DatViet. All rights reserved.</p>
-                    </p>
                 </div>
             </div>
         </footer>
@@ -1705,15 +1632,25 @@
 
     <script>
         // ===== SPLASH SCREEN HANDLER =====
-        const splashScreen = document.getElementById('splashScreen');
-        const mainContent = document.getElementById('mainContent');
-
-        setTimeout(() => {
-            splashScreen.classList.add('hidden');
+        // Hiển thị logo trong 1.5 giây rồi vào trang
+        document.addEventListener('DOMContentLoaded', function() {
+            const splashScreen = document.getElementById('splashScreen');
+            const mainContent = document.getElementById('mainContent');
+            
+            // Chặn scroll khi đang load
+            document.body.style.overflow = 'hidden';
+            
+            // Hiển thị splash screen trong 1.5 giây
             setTimeout(() => {
-                mainContent.style.opacity = '1';
-            }, 200);
-        }, 500);
+                splashScreen.classList.add('hidden');
+                
+                // Cho phép scroll lại
+                setTimeout(() => {
+                    document.body.style.overflow = '';
+                }, 300);
+                
+            }, 1500); // 1.5 giây
+        });
 
         // ===== MOBILE MENU =====
         const menuToggle = document.getElementById('menuToggle');
@@ -1824,42 +1761,6 @@
                 link.style.transform = '';
             });
         });
-
-        // ===== FONT LOADING FIX FOR PC =====
-        document.addEventListener('DOMContentLoaded', function() {
-            // Kiểm tra font Geom đã load chưa
-            const checkFontLoaded = () => {
-                const testText = 'Font Test';
-                const canvas = document.createElement('canvas');
-                const ctx = canvas.getContext('2d');
-                
-                // Test với font mặc định
-                ctx.font = '16px Arial';
-                const defaultWidth = ctx.measureText(testText).width;
-                
-                // Test với font Geom
-                ctx.font = '16px "Geom", Arial';
-                const geomWidth = ctx.measureText(testText).width;
-                
-                // Nếu width bằng nhau -> font Geom không load được
-                if (defaultWidth === geomWidth) {
-                    console.log('Font Geom not loaded, applying fallback');
-                    // Thêm fallback class cho các tiêu đề
-                    document.querySelectorAll('.hero-title, .section-title, .subject-name, .cta-title').forEach(el => {
-                        el.style.fontFamily = '"Segoe UI", "Arial Rounded MT Bold", "Arial", sans-serif';
-                    });
-                }
-            };
-            
-            // Chờ font load
-            setTimeout(checkFontLoaded, 1500);
-        });
-
-        // ===== PREVENT SCROLL DURING SPLASH SCREEN =====
-        document.body.style.overflow = 'hidden';
-        setTimeout(() => {
-            document.body.style.overflow = '';
-        }, 2500);
     </script>
 </body>
 </html>
