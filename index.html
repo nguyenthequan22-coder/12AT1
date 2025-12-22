@@ -95,7 +95,7 @@
     background: white;
     border-radius: 2px;
     transform: translateX(-100%); /* Bắt đầu từ -100% */
-    animation: loadingAnimation 1.5s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+    animation: loadingAnimation 0.5s cubic-bezier(0.4, 0, 0.2, 1) forwards;
 }
 
 /* ANIMATION SIÊU MƯỢT - Dùng transform thay vì width */
@@ -1631,8 +1631,7 @@
     </div>
 
     <script>
-        // ===== SPLASH SCREEN HANDLER =====
-        // Hiển thị logo trong 1.5 giây rồi vào trang
+        // ===== MÀN HÌNH LOAD LOGO =====
         document.addEventListener('DOMContentLoaded', function() {
             const splashScreen = document.getElementById('splashScreen');
             const mainContent = document.getElementById('mainContent');
@@ -1640,7 +1639,6 @@
             // Chặn scroll khi đang load
             document.body.style.overflow = 'hidden';
             
-            // Hiển thị splash screen trong 1.5 giây
             setTimeout(() => {
                 splashScreen.classList.add('hidden');
                 
@@ -1649,7 +1647,7 @@
                     document.body.style.overflow = '';
                 }, 300);
                 
-            }, 1500); // 1.5 giây
+            }, 500);
         });
 
         // ===== MOBILE MENU =====
